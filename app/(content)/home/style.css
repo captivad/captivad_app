@@ -1,0 +1,30 @@
+/* Keyframe untuk pergerakan gambar */
+@keyframes smoothScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(
+      -50%
+    ); /* Hanya geser setengah lebar untuk seamless looping */
+  }
+}
+
+/* Wrapper gambar dengan lebar fleksibel */
+.image-slider-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Flexbox untuk menempatkan semua gambar secara horizontal */
+.image-slider {
+  display: flex;
+  width: 200%; /* Pastikan dua kali lebar agar bisa looping */
+  animation: smoothScroll 20s linear infinite; /* Animasi 20 detik dengan perpindahan halus */
+}
+
+.image-slider div {
+  width: 240px;
+  flex-shrink: 0; /* Setiap gambar tidak boleh mengecil */
+}
