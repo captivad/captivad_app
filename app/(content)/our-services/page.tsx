@@ -137,18 +137,26 @@ export default function OurServices() {
       <motion.section
         ref={sectionRefs.accordion}
         id="section-accordion"
-        className="w-full h-auto bg-black p-[10%] lg:p-20 flex flex-col justify-center gap-2 md:gap-6"
+        className="w-full h-auto bg-black p-[10%] lg:p-20 flex flex-col justify-center gap-1 md:gap-6"
       >
         {visibleSections.accordion &&
           listAccordion.map((item, index) => (
             <motion.div
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 1,
+                ease: "easeOut",
+                delay: 0.4 + index / 5,
+              }}
               key={index}
               className="collapse collapse-arrow "
             >
-              <input type="radio" name="my-accordion-2" defaultChecked />
+              <input
+                type="radio"
+                name="my-accordion-2"
+                defaultChecked={index === 0}
+              />
               <div className="collapse-title bg-transparent border-b-2 border-white font-bold">
                 <h3>{item.title}</h3>
               </div>
