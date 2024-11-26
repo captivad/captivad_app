@@ -1,6 +1,9 @@
+import { Navbar } from "@/components/navbar";
 import { Menu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import CaptivadLogo from "@/public/LogoCaptivAd-02.svg";
+import CaptivadLogoFooter from "@/public/LogoCaptivAd-black.svg";
 
 export default function LayoutContent({
   children,
@@ -9,39 +12,22 @@ export default function LayoutContent({
 }>) {
   return (
     <div className="relative w-full h-full flex justify-between flex-col overflow-scroll">
-      <header className="h-20 px-[5%] py-10 items-center sticky w-full top-0 z-50 bg-foreground/20">
-        <div className="relative h-16 lg:h-24 flex items-center w-full rounded-full bg-white/10 backdrop-blur-sm border-white border-[1px] border-opacity-30">
+      <header className="h-20 px-[5%] py-10 items-center fixed w-full top-0 z-50 bg-foreground/20">
+        <div className="relative h-16 lg:h-24 flex items-center w-full rounded-full bg-white/10 backdrop-blur-md border-white border-[1px] border-opacity-30">
           <nav className="flex flex-row-reverse lg:flex-row w-full justify-between px-[5%]">
             <div className="h-12 w-28 lg:w-32 lg:h-28 overflow-hidden">
               <Image
                 width={500}
                 height={500}
-                src="LogoCaptivAd-02.svg"
+                src={CaptivadLogo}
                 className="w-full h-full object-cover"
                 alt="captivad"
               />
             </div>
             <div className="hidden lg:flex gap-6 text-foreground items-center">
-              <a href="#" className="font-bold text-xl">
-                Home
-              </a>
-              <a href="#" className="text-xl">
-                Our Services
-              </a>
-              <a href="#" className="text-xl">
-                Pricing
-              </a>
-              <a href="#" className="text-xl">
-                Our Work
-              </a>
-              <a href="#" className="text-xl">
-                Contact Us
-              </a>
+              <Navbar mediaQuery="desktop" />
             </div>
             <div className="lg:hidden flex items-center">
-              {/* <button className="btn btn-square btn-ghost">
-                <Menu className="w-6 md:w-12 aspect-square" />
-              </button> */}
               <div className=" navbar-center">
                 <div className="dropdown">
                   <div
@@ -53,20 +39,9 @@ export default function LayoutContent({
                   </div>
                   <ul
                     tabIndex={0}
-                    className="menu menu-md dropdown-content bg-base-100/90 backdrop-blur-sm rounded-box z-[1] min-w-36 mt-3 p-2 shadow"
+                    className="menu menu-md dropdown-content bg-background border-[1px] border-white backdrop-blur-sm rounded-box z-[1] min-w-36 mt-3 p-2 shadow"
                   >
-                    <li>
-                      <a>Home</a>
-                    </li>
-                    <li>
-                      <a>Our Services</a>
-                    </li>
-                    <li>
-                      <a>Our Work</a>
-                    </li>
-                    <li>
-                      <a>Contact Us</a>
-                    </li>
+                    <Navbar mediaQuery="mobile" />
                   </ul>
                 </div>
               </div>
@@ -76,12 +51,7 @@ export default function LayoutContent({
       </header>
       <main>{children}</main>
       <footer className=" h-full w-full bg-foreground px-[5%] py-10 md:px-20">
-        <Image
-          src="LogoCaptivAd-black.svg"
-          alt="logo"
-          width={240}
-          height={137}
-        />
+        <Image src={CaptivadLogoFooter} alt="logo" width={240} height={137} />
         <div className="flex flex-wrap justify-between items-center gap-4">
           <div className="text-primary">
             <h6 className=" font-bold">CaptivAd Office</h6>
