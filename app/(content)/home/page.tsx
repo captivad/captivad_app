@@ -8,6 +8,7 @@ import Image from "next/image";
 import "./style.css";
 import FormCustomer from "@/components/form-customer";
 import HeroGift from "@/public/Hero.gif";
+import ImgPerson from "@/public/img-person.svg";
 
 export default function Home() {
   const [visibleSections, setVisibleSections] = React.useState({
@@ -97,12 +98,14 @@ export default function Home() {
         }}
         initial="hidden"
         animate="show"
-        className="relative w-full h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
+        className="relative w-full min-h-[75vh] xl:h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
       >
         <Image
-          width={500}
-          height={500}
+          // width={500}
+          // height={500}
           src={HeroGift}
+          fill
+          objectFit="cover"
           alt="Hero"
           className="absolute z-0 top-0 left-0 w-full h-dvh object-cover"
         />
@@ -139,7 +142,7 @@ export default function Home() {
       <motion.section
         id="section-testimony"
         ref={sectionRefs.testimony}
-        className="relative w-full h-[400px] lg:h-full overflow-hidden bg-background lg:pt-40"
+        className="relative w-full h-[400px] sm:h-[600px] md:h-[800px] xl:h-full overflow-hidden bg-background lg:pt-40"
       >
         {visibleSections.testimony && (
           <>
@@ -180,14 +183,14 @@ export default function Home() {
                 />
               </motion.div>
             </div>
-            <div className="relative h-full scale-100 overflow-hidden lg:pl-96">
+            <div className="relative h-full scale-100 overflow-hidden w-full lg:pl-96">
               <motion.img
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
                 src="home-section-3.svg"
                 alt=""
-                className="z-0 w-full h-full object-fill"
+                className="z-0 w-full h-full object-cover"
               />
               <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-background from-30% lg:from-20%  to-transparent z-10"></div>
             </div>
@@ -336,24 +339,31 @@ export default function Home() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-        className="relative h-[400px] lg:h-[600px] w-full bg-foreground px-[10%] lg:px-0 overflow-hidden lg:overflow-visible"
+        className="relative h-[400px] lg:h-[600px] px-[10%] w-full bg-foreground xl:px-0 overflow-hidden lg:overflow-visible"
       >
+        <Image
+          fill
+          objectFit="cover"
+          src={ImgPerson}
+          alt="Image-Person"
+          className="opacity-20 xl:hidden"
+        />
         {visibleSections.greeting && (
           <>
-            <div className="w-full lg:w-[52%] h-full flex justify-center flex-col gap-10 lg:pl-20 text-primary">
-              <motion.h2
+            <div className="w-full xl:w-[52%] h-full flex justify-center flex-col gap-10 xl:pl-20 text-primary">
+              <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-                className="font-bold"
+                className="font-bold text-center xl:text-left"
               >
                 Welcome to CaptivAd
-              </motion.h2>
+              </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-                className="text-[14px] lg:text-[24px]"
+                className=" text-center xl:text-left"
               >
                 is your ultimate partner for dynamic advertising success. With
                 cutting-edge tools and expert media guidance, we handle daily ad
@@ -368,15 +378,15 @@ export default function Home() {
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-              className="absolute -right-10 lg:right-20 -bottom-20 md:top-0 lg:-top-16 overflow-hidden rounded-3xl"
+              className="hidden xl:block absolute -right-10 lg:right-20 -bottom-20 md:top-0 lg:-top-16 overflow-hidden rounded-3xl"
             >
               <Image
                 // width={602}
                 width={mediaQuery ? 602 : 602}
                 height={mediaQuery ? 602 : 602}
-                src="img-person.svg"
+                src={ImgPerson.src}
                 alt="Image-Person"
-                className="opacity-20 lg:opacity-100"
+                className="opacity-100 "
               />
             </motion.div>
           </>
@@ -399,7 +409,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-                className="font-bold text-[28px] md:text-[60px] lg:text-[92px] w-full"
+                className="font-bold text-center md:text-left w-full"
               >
                 Transform How You Reach Your Audience
               </motion.h1>
@@ -407,7 +417,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-                className="text-[14px] md:text-[18px] lg:text-[24px] w-full h-full flex items-start lg:items-end"
+                className="text-[14px] text-center md:text-left md:text-[18px] lg:text-[24px] w-full h-full flex items-start lg:items-end"
               >
                 That’s why we offer tailored support to meet your unique needs.
                 Our team sails alongside you, exploring the uncharted waters of

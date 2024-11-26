@@ -11,8 +11,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, label, id, ...props }, ref) => {
     return (
       <div className={`flex flex-col gap-2 w-full`}>
-        <label className=" text-2xl font-semibold " htmlFor={id}>
-          {label}
+        <label className="font-semibold " htmlFor={id}>
+          <h3>{label}</h3>
         </label>
         <input
           type={type}

@@ -102,12 +102,14 @@ export default function OurServices() {
         }}
         initial="hidden"
         animate="show"
-        className="relative w-full h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
+        className="relative w-full md:h-[40vh] lg:h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
       >
         <Image
-          width={500}
-          height={500}
+          // width={500}
+          // height={500}
           src={BgSection1}
+          fill
+          objectFit="cover"
           alt="bg-section1"
           className="absolute z-0 top-0 left-0 w-full h-dvh object-cover"
         />
@@ -115,14 +117,14 @@ export default function OurServices() {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-          className="w-full md:w-[70%] text-center z-20 px-[5%] lg:px-20"
+          className="w-full md:w-[70%] text-center z-20 px-[10%] lg:px-20"
         >
-          <h1 className="text-[24px] lg:text-6xl text-left">
+          <h1 className="text-[22px] text-center lg:text-6xl md:text-left">
             Complete solutions for your
             <br />
             {` brand's transformation`}
           </h1>
-          <h4 className="my-6 text-left">
+          <h4 className="my-6 text-center md:text-left">
             We care for and encourage the growth or development of knowledge,
             help or encourage the development of knowledge and skills of all
             CaptivAd.
@@ -135,7 +137,7 @@ export default function OurServices() {
       <motion.section
         ref={sectionRefs.accordion}
         id="section-accordion"
-        className="w-full h-auto bg-black p-[5%] lg:p-20 flex flex-col justify-center gap-2 md:gap-6"
+        className="w-full h-auto bg-black p-[10%] lg:p-20 flex flex-col justify-center gap-2 md:gap-6"
       >
         {visibleSections.accordion &&
           listAccordion.map((item, index) => (
@@ -151,7 +153,7 @@ export default function OurServices() {
                 <h3>{item.title}</h3>
               </div>
               <div className="collapse-content flex justify-between py-6 lg:items-center flex-col md:flex-row gap-6">
-                <p className="w-[80%] lg:w-2/3 lg:text-xl">{item.content}</p>
+                <p className="w-[80%] lg:w-2/3">{item.content}</p>
                 <div>
                   <button
                     onClick={() =>
@@ -159,7 +161,7 @@ export default function OurServices() {
                     }
                     className="md:h-14 min-w-44 p-2 lg:p-4 bg-foreground rounded-full text-primary md:text-xl font-semibold flex gap-1 items-center justify-center hover:opacity-50 transition-all duration-100"
                   >
-                    Explore
+                    <p>Explore</p>
                     <ArrowRight size={25} />
                   </button>
                 </div>

@@ -1,9 +1,9 @@
-import { Navbar } from "@/components/navbar";
-import { Menu } from "lucide-react";
+import { CONTACT_US, HOME, Navbar, OUR_SERVICES } from "@/components/navbar";
 import Image from "next/image";
 import Link from "next/link";
 import CaptivadLogo from "@/public/LogoCaptivAd-02.svg";
 import CaptivadLogoFooter from "@/public/LogoCaptivAd-black.svg";
+import Drawer from "@/components/drawer";
 
 export default function LayoutContent({
   children,
@@ -12,9 +12,9 @@ export default function LayoutContent({
 }>) {
   return (
     <div className="relative w-full h-full flex justify-between flex-col overflow-scroll">
-      <header className="h-20 px-[5%] py-10 items-center fixed w-full top-0 z-50 bg-foreground/20">
-        <div className="relative h-16 lg:h-24 flex items-center w-full rounded-full bg-white/10 backdrop-blur-md border-white border-[1px] border-opacity-30">
-          <nav className="flex flex-row-reverse lg:flex-row w-full justify-between px-[5%]">
+      <header className="h-20 py-1 lg:px-[5%] lg:py-10 items-center fixed w-full top-0 z-50 bg-foreground/20">
+        <div className="relative h-14 lg:h-24 flex items-center w-full rounded-badge lg:rounded-full bg-white/10 backdrop-blur-md border-white border-[1px] border-opacity-30">
+          <nav className="flex flex-row lg:flex-row w-full justify-between px-[5%]">
             <div className="h-12 w-28 lg:w-32 lg:h-28 overflow-hidden">
               <Image
                 width={500}
@@ -28,27 +28,12 @@ export default function LayoutContent({
               <Navbar mediaQuery="desktop" />
             </div>
             <div className="lg:hidden flex items-center">
-              <div className=" navbar-center">
-                <div className="dropdown">
-                  <div
-                    tabIndex={0}
-                    role="button"
-                    className="btn btn-ghost btn-circle"
-                  >
-                    <Menu className="w-6 md:w-12 aspect-square" />
-                  </div>
-                  <ul
-                    tabIndex={0}
-                    className="menu menu-md dropdown-content bg-background border-[1px] border-white backdrop-blur-sm rounded-box z-[1] min-w-36 mt-3 p-2 shadow"
-                  >
-                    <Navbar mediaQuery="mobile" />
-                  </ul>
-                </div>
-              </div>
+              <Drawer />
             </div>
           </nav>
         </div>
       </header>
+
       <main>{children}</main>
       <footer className=" h-full w-full bg-foreground px-[5%] py-10 md:px-20">
         <Image src={CaptivadLogoFooter} alt="logo" width={240} height={137} />
@@ -60,14 +45,14 @@ export default function LayoutContent({
               Selatan 12550
             </p>
           </div>
-          <div className="flex flex-wrap justify-around w-1/2 items-center">
+          <div className="flex gap-4 flex-wrap justify-around lg:w-1/2 items-center">
             <div className="text-primary font-semibold flex flex-col gap-2">
-              <Link href={""}>Home</Link>
-              <Link href={""}>About</Link>
+              <Link href={HOME}>Home</Link>
+              <Link href={OUR_SERVICES}>Our Services</Link>
             </div>
             <div className="text-primary font-semibold flex flex-col gap-2">
-              <Link href={""}>Solution</Link>
-              <Link href={""}>Contact As</Link>
+              <Link href={""}>Our Work</Link>
+              <Link href={CONTACT_US}>Contact As</Link>
             </div>
           </div>
         </div>

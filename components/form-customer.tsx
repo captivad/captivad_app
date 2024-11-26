@@ -14,12 +14,10 @@ const FormCustomer: React.FC = () => {
           transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
           className="z-0 w-full h-full flex flex-col gap-10"
         >
-          <h2 className="text-[24px] md:text-[60px] lg:font-5xl font-bold">
+          <h1 className="font-bold">
             Ready to Explore <br /> Digital Ads Potential?
-          </h2>
-          <p className="text-[16px] lg:text-[24px]">
-            Get in touch with us today!
-          </p>
+          </h1>
+          <p>Get in touch with us today!</p>
         </motion.div>
         <motion.div
           initial={{ opacity: 0, y: 100 }}
@@ -65,8 +63,8 @@ const FormCustomer: React.FC = () => {
           transition={{ duration: 1, ease: "easeOut", delay: 0.8 }}
           className={`flex flex-col gap-2 w-full`}
         >
-          <label className=" text-2xl font-semibold " htmlFor="message">
-            Message
+          <label className="font-semibold " htmlFor="message">
+            <h3>Message</h3>
           </label>
           <textarea
             id="message"

@@ -70,16 +70,16 @@ export default function OurServicesDetail() {
         }}
         initial="hidden"
         animate="show"
-        className="relative w-full h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
+        className="relative w-full h-auto lg:h-[70vh] 2xl:h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
       >
         <Image
-          width={500}
-          height={500}
+          fill
+          objectFit="cover"
           src={BgDetailSection.src}
           alt="bg-detail-section1"
-          className="absolute z-0 top-0 left-0 w-full h-dvh object-cover"
+          className="absolute z-0 top-0 left-0 w-full"
         />
-        <div className="z-20 px-[5%] lg:px-20">
+        <div className="z-20 px-[10%] lg:px-20">
           <div className="w-full flex justify-start mb-6">
             <button
               onClick={() => navigate.back()}
@@ -98,7 +98,7 @@ export default function OurServicesDetail() {
               <h4 className="text-left">
                 Media Placement: Rich Media Banner and Place
               </h4>
-              <h1 className="text-[24px] lg:text-6xl text-left">
+              <h1 className="text-left">
                 {` Empower Your Brand's Voice: Expert Strategies for Digital
             Communication`}
               </h1>
@@ -114,13 +114,13 @@ export default function OurServicesDetail() {
       </motion.section>
 
       {/* ###########################  section-2  ############################ */}
-      <section className="p-[5%] lg:px-20 w-full h-auto lg:h-[500px] flex flex-col gap-4">
+      <section className="p-[5%] lg:px-20 w-full h-[500px] flex flex-col gap-4">
         <h3>Relate Work</h3>
-        <div className="w-full flex items-center gap-4">
-          <button className="btn btn-circle btn-outline">
+        <div className="w-full flex xl:items-center gap-4">
+          <button className="hidden xl:flex btn btn-circle btn-outline ">
             <ArrowLeft size={24} />
           </button>
-          <div className="w-full justify-center overflow-x-scroll flex gap-6">
+          <div className="w-full justify-center overflow-x-scroll hidden xl:flex gap-6">
             <CardContent />
             <CardContent />
             <CardContent />
@@ -131,7 +131,20 @@ export default function OurServicesDetail() {
             <CardContent />
             <CardContent />
           </div>
-          <button className="btn btn-circle btn-outline flex">
+
+          {/* media-query mobile */}
+          <div className="w-full h-[60%] shadow-inner border-[1px] py-2 border-gray-100/20 rounded-lg overflow-y-scroll overflow-hidden flex-wrap justify-center flex xl:hidden gap-4">
+            <CardContent />
+            <CardContent />
+            <CardContent />
+            <CardContent />
+            <CardContent />
+            <CardContent />
+            <CardContent />
+            <CardContent />
+            <CardContent />
+          </div>
+          <button className="hidden xl:flex btn btn-circle btn-outline ">
             <ArrowRight size={24} />
           </button>
         </div>

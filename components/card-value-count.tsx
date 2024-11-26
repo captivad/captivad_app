@@ -78,7 +78,7 @@ const CardValueCount = ({
           >
             {formatNumber(currentValue)}
           </motion.h3>
-          <p className="text-[12px] lg:text-2xl text-white">{description}</p>
+          <p className="text-white">{description}</p>
         </div>
       </motion.div>
     </div>

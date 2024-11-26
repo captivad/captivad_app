@@ -44,7 +44,9 @@ export const Navbar = ({ mediaQuery }: IProps) => {
       return (
         <li
           key={item.path}
-          className={`${path.split("/")[1] === item.path ? "font-bold" : ""}`}
+          className={`${
+            "/" + path.split("/")[1] === item.path ? "font-bold text-white" : ""
+          }`}
         >
           <Link href={item.path}>{item.label}</Link>
         </li>
