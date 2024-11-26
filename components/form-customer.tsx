@@ -29,7 +29,10 @@ const FormCustomer: React.FC = () => {
         </motion.div>
         <div className="hidden lg:block absolute bottom-0 h-60 w-full bg-gradient-to-t from-background to-transparent"></div>
       </div>
-      <form action="" className="flex-1 w-full h-full flex flex-col gap-6">
+      <form
+        action=""
+        className="flex-1 w-full h-full flex flex-col gap-6 lg:gap-10"
+      >
         <motion.div
           initial={{ opacity: 0, x: 100 }}
           animate={{ opacity: 1, x: 0 }}
@@ -64,13 +67,13 @@ const FormCustomer: React.FC = () => {
           className={`flex flex-col gap-2 w-full`}
         >
           <label className="font-semibold " htmlFor="message">
-            <h3>Message</h3>
+            <h4>Message</h4>
           </label>
           <textarea
             id="message"
             name="message"
             placeholder="Enter your message"
-            className={`flex min-h-36 w-full border-b-2 border-input outline-none bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50`}
+            className={`text-[14px] md:text-[16px] lg:text-[20px] flex min-h-36 w-full border-b-2 border-input outline-none bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50`}
           />
         </motion.div>
         <motion.button
