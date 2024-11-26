@@ -7,7 +7,7 @@ import LogoForm from "@/public/logo-no-text.svg";
 const FormCustomer: React.FC = () => {
   return (
     <div className="h-full w-full flex flex-col gap-4 lg:gap-0 lg:flex-row bg-background rounded-3xl p-[5%] lg:p-20 lg:pb-0 text-foreground">
-      <div className="relative w-1/2 flex h-full flex-col justify-between">
+      <div className="relative w-full lg:w-1/2 flex h-full flex-col justify-between">
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
