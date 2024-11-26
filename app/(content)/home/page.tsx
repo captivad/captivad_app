@@ -110,7 +110,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-          className="w-full text-center z-10"
+          className="w-full text-center z-10 px-[10%] md:px-0"
         >
           <h1>
             Transform How You
@@ -143,7 +143,7 @@ export default function Home() {
       >
         {visibleSections.testimony && (
           <>
-            <div className="absolute z-10 left-[5%] lg:left-[15%] top-10 lg:top-60 w-full flex flex-col gap-4 lg:gap-10">
+            <div className="absolute z-10 left-[7%] lg:left-[15%] top-10 lg:top-60 w-full flex flex-col gap-4 lg:gap-10">
               <motion.div
                 initial={{ opacity: 0, x: -100 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -210,7 +210,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 100 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-              className="w-full text-center px-[5%] md:px-0"
+              className="w-full text-center px-[10%] md:px-0"
             >
               Trusted by Our Leading Brands
             </motion.h2>
@@ -336,7 +336,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-        className="relative h-[400px] lg:h-[600px] w-full bg-foreground px-[5%] lg:px-0 overflow-hidden lg:overflow-visible"
+        className="relative h-[400px] lg:h-[600px] w-full bg-foreground px-[10%] lg:px-0 overflow-hidden lg:overflow-visible"
       >
         {visibleSections.greeting && (
           <>
@@ -394,7 +394,7 @@ export default function Home() {
       >
         {visibleSections.transform && (
           <>
-            <div className="z-10 w-full h-full flex flex-col lg:flex-row items-center justify-center gap-10 p-[5%] lg:p-20 text-foreground">
+            <div className="z-10 w-full h-full flex flex-col lg:flex-row items-center justify-center gap-10 p-[10%] lg:p-20 text-foreground">
               <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

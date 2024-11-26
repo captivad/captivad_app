@@ -25,7 +25,7 @@ body {
     @apply text-xl md:text-4xl font-semibold;
   }
   h4 {
-    @apply text-lg md:text-3xl font-medium;
+    @apply text-sm md:text-3xl font-medium;
   }
   h5 {
     @apply md:text-2xl font-medium;
