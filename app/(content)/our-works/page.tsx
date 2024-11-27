@@ -98,7 +98,7 @@ export default function OurWorks() {
       {/* ###########################  section-2  ############################ */}
       <section
         ref={sectionRefs.category}
-        className="px-[10%] lg:px-20 w-full h-full flex flex-col gap-20"
+        className="px-[10%] pb-20 lg:px-20 w-full h-full flex flex-col gap-20"
       >
         {visibleSections.category && (
           <>
@@ -117,7 +117,6 @@ export default function OurWorks() {
                 <CardContent />
                 <CardContent />
                 <CardContent />
-                <CardContent />
               </div>
             </motion.div>
             <motion.div
@@ -126,7 +125,7 @@ export default function OurWorks() {
               transition={{
                 duration: 1,
                 ease: "easeOut",
-                delay: 0.4,
+                delay: 0.6,
               }}
               className="flex flex-col gap-4 w-full mb-4"
             >
@@ -136,7 +135,6 @@ export default function OurWorks() {
                 <CardContent />
                 <CardContent />
                 <CardContent />
-                <CardContent />
               </div>
             </motion.div>
             <motion.div
@@ -145,14 +143,13 @@ export default function OurWorks() {
               transition={{
                 duration: 1,
                 ease: "easeOut",
-                delay: 0.4,
+                delay: 0.8,
               }}
               className="flex flex-col gap-4 w-full mb-4"
             >
               <h3 className="w-full text-center">Category 3</h3>
 
               <div className="w-full justify-center flex flex-wrap gap-10 overflow-hidden">
-                <CardContent />
                 <CardContent />
                 <CardContent />
                 <CardContent />
@@ -164,12 +161,12 @@ export default function OurWorks() {
 
       {/* ###########################  section-form  ############################ */}
       <motion.section
-        ref={sectionRefs.form}
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+        ref={sectionRefs.form}
         id="form"
-        className="lg:h-dvh p-[5%] lg:p-20 bg-background"
+        className="lg:h-[851px] p-[5%] lg:p-20 bg-foreground"
       >
         {visibleSections.form && <FormCustomer />}
       </motion.section>
