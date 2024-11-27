@@ -7,23 +7,7 @@ import LogoForm from "@/public/logo-no-text.svg";
 const FormCustomer: React.FC = () => {
   return (
     <div className="h-full w-full flex flex-col gap-4 lg:gap-0 lg:flex-row bg-background rounded-3xl p-[5%] lg:p-20 lg:pb-0 text-foreground">
-      <motion.div
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-        className="absolute lg:hidden top-0 right-0 z-0 h-full"
-      >
-        <Image
-          width={462.63}
-          height={428.31}
-          // fill
-          src={LogoForm}
-          alt=""
-          className="opacity-20"
-        />
-        <div className="absolute bottom-72 h-60 w-full bg-gradient-to-t from-background from-30% via-background via-50% to-transparent"></div>
-      </motion.div>
-      <div className="relative w-full lg:w-1/2 flex h-full flex-col justify-between overflow-hidden">
+      <div className="relative w-full lg:w-1/2 flex h-full flex-col justify-between lg:overflow-hidden">
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
@@ -42,6 +26,23 @@ const FormCustomer: React.FC = () => {
           className="hidden lg:block z-0 w-full h-full"
         >
           <Image width={462.63} height={428.31} src={LogoForm} alt="" />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+          className="absolute w-full h-[300px] lg:hidden top-0 right-0"
+        >
+          <Image
+            // width={462.63}
+            // height={428.31}
+            fill
+            objectFit="cover"
+            src={LogoForm}
+            alt=""
+            className="opacity-20"
+          />
+          <div className="absolute -bottom-0 h-60 w-full bg-gradient-to-t from-background from-20% via-background via-30% to-transparent"></div>
         </motion.div>
         <div className="hidden lg:block absolute -bottom-16 h-60 w-full bg-gradient-to-t from-background via-background via-50% to-transparent"></div>
       </div>

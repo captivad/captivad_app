@@ -1,8 +1,13 @@
 import Image from "next/image";
 import HoverPicture from "@/public/Picture-Hover.svg";
+import Link from "next/link";
+import { OUR_WORK } from "./navbar";
 const CardContent: React.FC = () => {
   return (
-    <button className="relative w-[150px] h-[90px] lg:min-w-[413px] lg:min-h-[275px] rounded-lg lg:rounded-box overflow-hidden group transition-all">
+    <Link
+      href={`${OUR_WORK}/avian-1`}
+      className="relative w-[400px] h-[230px] sm:min-w-[413px] sm:min-h-[275px] rounded-box overflow-hidden group transition-all"
+    >
       <Image
         fill
         src={HoverPicture}
@@ -10,11 +15,11 @@ const CardContent: React.FC = () => {
         alt="captivad"
       />
       <div className="absolute top-0 left-0 w-full h-full flex justify-center items-end group-hover:bg-gradient-to-t group-hover:from-black/80 group-hover:from-50% group-hover:to-black/50 duration-300 p-[5%]">
-        <h5 className="hidden group-hover:block transition-all duration-400 text-left">
+        <label className="hidden group-hover:block transition-all duration-400 text-left">
           Avian collobarating with Cinta Laura
-        </h5>
+        </label>
       </div>
-    </button>
+    </Link>
   );
 };
 

@@ -3,7 +3,7 @@ import FormCustomer from "@/components/form-customer";
 import { motion } from "framer-motion";
 import React from "react";
 import BgDetailSection from "@/public/our-service-detail-section1.svg";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, ChevronLeft } from "lucide-react";
 import { useRouter } from "next/navigation";
 import CardContent from "@/components/card-content";
 import Image from "next/image";
@@ -85,7 +85,7 @@ export default function OurServicesDetail() {
               onClick={() => navigate.back()}
               className="btn btn-circle btn-outline"
             >
-              <ArrowLeft size={24} />
+              <ChevronLeft size={24} />
             </button>
           </div>
           <motion.div
@@ -114,7 +114,7 @@ export default function OurServicesDetail() {
       </motion.section>
 
       {/* ###########################  section-2  ############################ */}
-      <section className="p-[5%] lg:px-20 w-full h-[500px] flex flex-col gap-4">
+      <section className="p-[5%] lg:px-20 w-full h-auto flex flex-col gap-4">
         <h3>Relate Work</h3>
         <div className="w-full flex xl:items-center gap-4">
           <button className="hidden xl:flex btn btn-circle btn-outline ">
@@ -133,7 +133,7 @@ export default function OurServicesDetail() {
           </div>
 
           {/* media-query mobile */}
-          <div className="w-full h-[60%] shadow-inner border-[1px] py-2 border-gray-100/20 rounded-lg overflow-y-scroll overflow-hidden flex-wrap justify-center flex xl:hidden gap-4">
+          <div className="w-full h-[500px] shadow-inner border-[1px] py-2 border-gray-100/20 rounded-lg overflow-y-scroll overflow-hidden flex-wrap justify-center flex xl:hidden gap-4">
             <CardContent />
             <CardContent />
             <CardContent />
