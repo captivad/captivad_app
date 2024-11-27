@@ -15,7 +15,7 @@ interface IRouter {
 
 export const HOME = "/home";
 export const OUR_SERVICES = "/our-services";
-export const OUR_WORK = "/our-work";
+export const OUR_WORK = "/our-works";
 export const CONTACT_US = "/contact-us";
 
 const router: IRouter[] = [
