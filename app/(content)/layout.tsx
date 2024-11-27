@@ -38,7 +38,7 @@ export default function LayoutContent({
       </header>
 
       <main>{children}</main>
-      <footer className=" h-full w-full bg-foreground px-[5%] py-10 md:px-20">
+      <footer className=" h-full w-full bg-foreground px-[10%] py-10 md:px-20">
         <Image src={CaptivadLogoFooter} alt="logo" width={240} height={137} />
         <div className="grid grid-cols-1 lg:grid-cols-3 justify-between items-center gap-4">
           <div className="text-primary col-span-1 lg:col-span-2">
