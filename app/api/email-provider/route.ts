@@ -74,6 +74,8 @@ export async function POST(req: NextRequest) {
           }
         );
         console.log("Contact created:", contactResponse.data);
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
         throw new HttpException(500, error.message);
       }
@@ -83,6 +85,8 @@ export async function POST(req: NextRequest) {
     await transaction();
 
     return ResponseSuccess("Email sent successfully!");
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return ResponseError(error.statusCode, error.message);
   }

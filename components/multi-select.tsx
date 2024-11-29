@@ -77,7 +77,7 @@ const Multiselect: React.FC<MultiselectProps> = ({
   onChange,
   value,
   className = "",
-  placeholder = "I’m Intrested in",
+  placeholder = "I'm Intrested in",
   errors,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -173,7 +173,7 @@ const Multiselect: React.FC<MultiselectProps> = ({
       className={`relative min-h-16 bg-transparent w-full ${className}`}
     >
       <div
-        role="combobox"
+        // role="combobox"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         className={`min-h-16 border-2 rounded-box flex items-center px-4 py-2 ${

@@ -9,7 +9,7 @@ export interface IPayloadCreateContact {
   email: string; // Email address
   attributes: {
     FIRSTNAME: string; // First name
-    [key: string]: any; // Additional dynamic attributes, if any
+    [key: string]: string;
   };
   emailBlacklisted: boolean; // Whether the email is blacklisted for emails
   smsBlacklisted: boolean; // Whether the email is blacklisted for SMS
