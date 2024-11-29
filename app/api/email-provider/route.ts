@@ -29,18 +29,18 @@ export async function POST(req: NextRequest) {
           from: `Captivad <${process.env.BREVO_EMAIL_AUTH}>`,
           to: body.email,
           subject: `Hallo ${body.name}, terimakasih atas kunjungan anda`,
-          text: `Terimakasih atas kunjungan anda dan feedback anda`,
-          html: `<p>Terimakasih atas kunjungan anda dan feedback anda</p>`,
+          text: `Terimakasih atas kunjungan anda, kami akan segera membalas email anda`,
+          html: `<p>Terimakasih atas kunjungan anda, kami akan segera membalas email anda</p>`,
         });
         console.log("User email sent:", userMailResponse.response);
 
         // Step 2: Send email to admin
         const adminMailResponse = await transporter.sendMail({
-          from: `Feedback <${process.env.BREVO_EMAIL_AUTH}>`,
+          from: `Captivad Customer <${process.env.BREVO_EMAIL_AUTH}>`,
           replyTo: body.email,
           to: "ptbagusraditya@gmail.com",
           cc: ["captivad5@gmail.com"],
-          subject: "Hallo Captivad, can you please help me?",
+          subject: "Hallo Captivad admin, can you please help me?",
           text: body.message,
           html: `<p>${body.message}</p>`,
         });
