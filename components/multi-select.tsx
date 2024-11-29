@@ -16,6 +16,7 @@ interface MultiselectProps {
   value?: IMultiselectOption[];
   className?: string;
   placeholder?: string;
+  errors?: string;
 }
 
 // Option Item Component
@@ -32,7 +33,7 @@ const OptionItem = memo(
     <li
       role="option"
       aria-selected={isActive}
-      className={`min-h-16 rounded-lg px-4 flex items-center cursor-pointer justify-between
+      className={`min-h-14 lg:min-h-16 rounded-lg px-4 flex items-center cursor-pointer justify-between
       ${isActive ? "bg-gray-600/10" : "hover:bg-gray-600/10"}`}
       onClick={onSelect}
     >
@@ -77,6 +78,7 @@ const Multiselect: React.FC<MultiselectProps> = ({
   value,
   className = "",
   placeholder = "I’m Intrested in",
+  errors,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -137,6 +139,8 @@ const Multiselect: React.FC<MultiselectProps> = ({
     [onChange]
   );
 
+  console.log(errors, "errors");
+
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       switch (e.key) {
@@ -172,7 +176,9 @@ const Multiselect: React.FC<MultiselectProps> = ({
         role="combobox"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
-        className={`min-h-16 border-2 rounded-box flex items-center px-4 py-2`}
+        className={`min-h-16 border-2 rounded-box flex items-center px-4 py-2 ${
+          errors ? "border-red-500" : ""
+        }`}
         onClick={() => {
           setIsOpen(true);
           inputRef.current?.focus();
@@ -198,7 +204,7 @@ const Multiselect: React.FC<MultiselectProps> = ({
             onFocus={() => setIsOpen(!isOpen)}
             onKeyDown={handleKeyDown}
             placeholder={selectedOptions.length === 0 ? placeholder : ""}
-            className="flex-1 min-w-[100px] outline-none text-white bg-transparent text-xl"
+            className="flex-1 min-w-[100px] outline-none text-white bg-transparent text-sm lg:text-xl"
             aria-label="Search options"
           />
           <button
@@ -211,7 +217,9 @@ const Multiselect: React.FC<MultiselectProps> = ({
               size={25}
               className={`${
                 isOpen ? "rotate-180" : ""
-              } transition-all duration-300 text-white`}
+              } transition-all duration-300 text-white ${
+                errors ? "text-red-500" : ""
+              }`}
             />
           </button>
         </div>

@@ -4,6 +4,7 @@ import Link from "next/link";
 import CaptivadLogo from "@/public/LogoCaptivAd-02.svg";
 import CaptivadLogoFooter from "@/public/LogoCaptivAd-black.svg";
 import Drawer from "@/components/drawer";
+import { Accessibility } from "lucide-react";
 
 export default function LayoutContent({
   children,
@@ -65,6 +66,14 @@ export default function LayoutContent({
                 <h5>Contact Us</h5>
               </Link>
             </div>
+          </div>
+        </div>
+        <div className="social media w-full justify-end grid grid-cols-1 lg:grid-cols-3 py-10 gap-2">
+          <div className="col-span-2"></div>
+          <div className="flex gap-4">
+            <Accessibility size={30} className="text-black" />
+            <Accessibility size={30} className="text-black" />
+            <Accessibility size={30} className="text-black" />
           </div>
         </div>
         <div className="flex gap-4 text-gray-500 py-10">
