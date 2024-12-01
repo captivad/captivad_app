@@ -25,3 +25,13 @@ export interface IResponsePagination<T = undefined> {
   totalData: number;
   rows: T[];
 }
+
+export const usePagination = (
+  page: number | undefined,
+  size: number | undefined
+) => {
+  const limit = size ? +size : 10;
+  const offset = page ? (page - 1) * limit : 0;
+
+  return { limit, offset };
+};

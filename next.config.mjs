@@ -11,6 +11,11 @@ const envSchema = yup.object({
 
   BREVO_API_KEY: yup.string().required(),
   BREVO_BASE_API: yup.string().required(),
+
+  NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME: yup.string().required(),
+  NEXT_PUBLIC_CLOUDINARY_API_KEY: yup.string().required(),
+  CLOUDINARY_API_SECRET: yup.string().required(),
+  CLOUDINARY_UPLOAD_PRESET: yup.string().required(),
 });
 
 const validatedEnv = () => {
