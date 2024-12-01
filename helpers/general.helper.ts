@@ -1,11 +1,11 @@
 import { HttpException } from "@/utils/HttpException";
 
-export interface IResponseStatus {
+export interface IFetchStatus {
   onError?: (error: HttpException) => void;
   onSuccess?: (data: any) => void;
 }
 
-export interface IBaseResponse<T = undefined> {
+export interface IBaseResponse<T> {
   statusCode: number;
   status: boolean;
   message: string;
@@ -14,16 +14,16 @@ export interface IBaseResponse<T = undefined> {
 
 export interface IPayloadPaginationParams {
   page?: string;
-  limit?: string;
+  size?: string;
   sortBy?: string;
   order?: "asc" | "desc";
 }
 
-export interface IResponsePagination<T = undefined> {
+export interface IResponsePagination<T> {
   currentPage: number;
   totalPage: number;
   totalData: number;
-  rows: T[];
+  rows: T;
 }
 
 export const usePagination = (

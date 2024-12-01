@@ -1,5 +1,6 @@
 "use client";
 
+import { CloudUpload } from "lucide-react";
 import { CldUploadWidget } from "next-cloudinary";
 
 export default function ButtonFileUpload() {
@@ -12,7 +13,12 @@ export default function ButtonFileUpload() {
         }}
       >
         {({ open }) => {
-          return <button onClick={() => open()}>Upload an Image</button>;
+          return (
+            <button onClick={() => open()} className="btn btn-accent">
+              <CloudUpload />
+              Upload an Image
+            </button>
+          );
         }}
       </CldUploadWidget>
     </div>

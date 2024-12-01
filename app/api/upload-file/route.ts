@@ -14,26 +14,23 @@ export async function GET(req: NextRequest) {
   try {
     const params = req.nextUrl.searchParams;
 
-    const page = params.get("page") || "1";
-    const size = params.get("size") || "10";
     const type = params.get("type") as "image" | "video";
+    const nextCursor = params.get("nextCursor");
 
-    const { limit, offset } = usePagination(Number(page), Number(size));
+    const options: any = {
+      resource_type: type,
+      max_results: 10,
+    };
 
-    const { resources } = await cloudinary.api.resources({
-      resource_type: type === "video" ? "video" : "image",
-    });
+    if (nextCursor) {
+      options.next_cursor = nextCursor;
+    }
+
+    const { resources, next_cursor } = await cloudinary.api.resources(options);
 
     return ResponseSuccess({
-      pagination: {
-        currentPage: Number(page),
-        totalPage: Math.ceil(resources.length / limit),
-        totalData: resources.length,
-        rows: resources.slice(
-          offset,
-          offset + limit
-        ) as ICloudinaryAssetResponse[],
-      },
+      nextCursor: next_cursor || null,
+      rows: resources as ICloudinaryAssetResponse[],
     });
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

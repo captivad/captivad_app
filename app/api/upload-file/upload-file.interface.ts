@@ -1,3 +1,5 @@
+import { IPayloadPaginationParams } from "@/helpers/general.helper";
+
 export interface ICloudinaryAssetResponse {
   asset_id: string; // Unique identifier for the asset
   public_id: string; // Public identifier for accessing the asset
@@ -14,4 +16,14 @@ export interface ICloudinaryAssetResponse {
   access_mode: string; // Access mode (e.g., public, authenticated)
   url: string; // URL to access the asset
   secure_url: string; // Secure HTTPS URL to access the asset
+}
+
+export interface IGetCloudinaryAssetParams extends IPayloadPaginationParams {
+  type?: "image" | "video";
+  nextCursor?: string;
+}
+
+export interface IResponseLoadMore<T> {
+  nextCursor: string | null;
+  rows: T;
 }

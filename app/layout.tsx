@@ -3,6 +3,7 @@ import { DM_Sans } from "@next/font/google";
 import "./globals.css";
 import RouterProvider from "@/components/router-provider";
 import { Toaster } from "react-hot-toast";
+import ClientProviders from "@/components/client-provider";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -23,7 +24,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${dmSans.className} ${dmSans.className} antialiased`}>
         <Toaster position="top-center" reverseOrder={false} />
-        <RouterProvider>{children}</RouterProvider>
+        <RouterProvider>
+          <ClientProviders>{children}</ClientProviders>
+        </RouterProvider>
       </body>
     </html>
   );
