@@ -34,7 +34,7 @@ body {
     @apply text-sm lg:text-lg xl:text-xl font-medium;
   }
   p {
-    @apply text-[14px] md:text-[16px] lg:text-[20px] xl:text-[24px];
+    @apply text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px];
   }
 }
 

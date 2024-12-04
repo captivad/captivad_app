@@ -9,6 +9,7 @@ import "./style.css";
 import FormCustomer from "@/components/form-customer";
 import HeroGift from "@/public/Hero.gif";
 import ImgPerson from "@/public/img-person.svg";
+import HomeSection2 from "@/public/homesection-2.svg";
 
 export default function Home() {
   const [visibleSections, setVisibleSections] = React.useState({
@@ -98,7 +99,7 @@ export default function Home() {
         }}
         initial="hidden"
         animate="show"
-        className="relative w-full min-h-[75vh] xl:h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
+        className="relative w-full min-h-[600px] xl:h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
       >
         <Image
           // width={500}
@@ -113,7 +114,7 @@ export default function Home() {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-          className="w-full text-center z-10 px-[10%] md:px-0"
+          className="w-full text-center z-20 px-[10%] md:px-0"
         >
           <h1>
             Transform How You
@@ -126,11 +127,11 @@ export default function Home() {
             to reach addressable audiences at scale.
           </h4>
           <div className="w-full flex flex-col sm:flex-row justify-center gap-4 px-10 md:px-0 mt-10">
-            <button className="md:h-16 min-w-56 p-4 bg-foreground rounded-full text-primary md:text-xl font-semibold flex gap-1 items-center justify-center hover:opacity-50 transition-all duration-100">
+            <button className="h-12 md:h-16 min-w-40 md:p-4 bg-foreground rounded-full text-primary md:text-xl font-semibold flex gap-1 items-center justify-center hover:opacity-50 transition-all duration-100">
               Get Started
               <ArrowRight size={25} />
             </button>
-            <button className="md:h-16 min-w-40 p-4 border-2 border-foreground rounded-full text-foreground md:text-xl font-semibold hover:bg-foreground hover:text-primary hover:opacity-50 transition-all duration-100">
+            <button className="h-12 md:h-16 min-w-40 md:p-4 border-2 border-foreground rounded-full text-foreground md:text-xl font-semibold hover:bg-foreground hover:text-primary hover:opacity-50 transition-all duration-100">
               Learn More
             </button>
           </div>
@@ -188,7 +189,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-                src="home-section-3.svg"
+                src={HomeSection2.src}
                 alt=""
                 className="z-0 w-full h-full object-cover"
               />
@@ -227,7 +228,7 @@ export default function Home() {
                 {/* side 1 */}
                 <div>
                   <Image
-                    width={mediaQuery ? 240 : 200}
+                    width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="FrameWuling.svg"
                     alt="FrameWuling"
@@ -235,7 +236,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
-                    width={mediaQuery ? 240 : 200}
+                    width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="Tempra.svg"
                     alt="Tempra"
@@ -243,7 +244,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
-                    width={mediaQuery ? 240 : 200}
+                    width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="chery.svg"
                     alt="chery"
@@ -251,7 +252,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
-                    width={mediaQuery ? 240 : 200}
+                    width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="citroen.svg"
                     alt="citroen"
@@ -259,7 +260,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
-                    width={mediaQuery ? 240 : 200}
+                    width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="wrp.svg"
                     alt="wrp"
@@ -269,7 +270,7 @@ export default function Home() {
                 {/* side 2 */}
                 <div>
                   <Image
-                    width={mediaQuery ? 240 : 200}
+                    width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="FrameWuling.svg"
                     alt="FrameWuling"
@@ -277,7 +278,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
-                    width={mediaQuery ? 240 : 200}
+                    width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="Tempra.svg"
                     alt="Tempra"
@@ -285,7 +286,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
-                    width={mediaQuery ? 240 : 200}
+                    width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="chery.svg"
                     alt="chery"
@@ -293,7 +294,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
-                    width={mediaQuery ? 240 : 200}
+                    width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="citroen.svg"
                     alt="citroen"
@@ -301,7 +302,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
-                    width={mediaQuery ? 240 : 200}
+                    width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="wrp.svg"
                     alt="wrp"
@@ -311,7 +312,7 @@ export default function Home() {
                 {/* side 3 */}
                 <div>
                   <Image
-                    width={mediaQuery ? 240 : 200}
+                    width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="Tempra.svg"
                     alt="Tempra"
@@ -319,7 +320,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
-                    width={mediaQuery ? 240 : 200}
+                    width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="chery.svg"
                     alt="chery"
@@ -333,6 +334,7 @@ export default function Home() {
       </motion.section>
 
       {/* ###########################  section-greeting  ############################ */}
+
       <motion.section
         id="section-greting"
         ref={sectionRefs.greeting}
@@ -346,11 +348,13 @@ export default function Home() {
           objectFit="cover"
           src={ImgPerson}
           alt="Image-Person"
-          className="opacity-20 xl:hidden"
+          className="opacity-10 xl:hidden"
         />
+        <div className="absolute xl:hidden bottom-0 top-0 right-0 h-full w-[300px] bg-gradient-to-l from-foreground to-transparent z-0"></div>
+        <div className="absolute xl:hidden bottom-0 top-0 left-0 h-full w-[300px] bg-gradient-to-r from-foreground to-transparent z-0"></div>
         {visibleSections.greeting && (
           <>
-            <div className="w-full xl:w-[52%] h-full flex justify-center flex-col gap-10 xl:pl-20 text-primary">
+            <div className="w-full xl:w-[52%] h-full flex justify-center flex-col gap-10 xl:pl-20 text-primary z-20">
               <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -374,6 +378,7 @@ export default function Home() {
                 advertising.
               </motion.p>
             </div>
+
             <motion.div
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
@@ -386,7 +391,7 @@ export default function Home() {
                 height={mediaQuery ? 602 : 602}
                 src={ImgPerson.src}
                 alt="Image-Person"
-                className="opacity-100 "
+                className="hidden xl:block opacity-100 "
               />
             </motion.div>
           </>
@@ -409,7 +414,7 @@ export default function Home() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-                className="font-bold text-center md:text-left w-full"
+                className="font-bold text-center md:text-left w-full h-full lg:h-auto flex items-end lg:items-start justify-center"
               >
                 Transform How You Reach Your Audience
               </motion.h1>
@@ -424,12 +429,14 @@ export default function Home() {
                 your challenges and opportunities to develop bespoke solutions.
               </motion.p>
             </div>
-            <div className="z-0 absolute -right-44 lg:right-0 top-0 lg:-top-36 overflow-hidden opacity-30">
+            <div className="z-0 absolute inset-0 m-auto w-full lg:w-[891px] aspect-square lg:my-auto lg:mr-0 lg:-left-0 overflow-hidden opacity-30">
               <Image
-                width={891}
-                height={891}
+                // width={891}
+                // height={891}
+                fill
                 src="/SectionRotation.gif"
                 alt="Image-Person"
+                objectFit="cover"
               />
             </div>
           </>
@@ -443,7 +450,7 @@ export default function Home() {
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
         ref={sectionRefs.form}
         id="form"
-        className="lg:h-full p-[10%] lg:p-20 bg-foreground"
+        className="lg:h-full p-[5%] lg:p-20 bg-foreground"
       >
         {visibleSections.form && <FormCustomer />}
       </motion.section>

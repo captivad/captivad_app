@@ -25,6 +25,5 @@
 }
 
 .image-slider div {
-  width: 240px;
   flex-shrink: 0; /* Setiap gambar tidak boleh mengecil */
 }

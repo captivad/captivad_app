@@ -102,7 +102,7 @@ export default function OurServices() {
         }}
         initial="hidden"
         animate="show"
-        className="relative w-full md:h-[40vh] lg:h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
+        className="relative w-full md:h-[50vh] lg:h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
       >
         <Image
           // width={500}
@@ -117,7 +117,7 @@ export default function OurServices() {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-          className="w-full md:w-[70%] text-center z-20 px-[10%] lg:px-20"
+          className="w-full md:w-[70%] text-center z-20 px-[10%] md:px-0"
         >
           <h1 className="text-[22px] text-center lg:text-6xl md:text-left">
             Complete solutions for your
@@ -185,7 +185,7 @@ export default function OurServices() {
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
         ref={sectionRefs.form}
         id="form"
-        className="lg:h-full p-[10%] lg:p-20 bg-foreground"
+        className="lg:h-full p-[5%] lg:p-20 bg-foreground"
       >
         {visibleSections.form && <FormCustomer />}
       </motion.section>

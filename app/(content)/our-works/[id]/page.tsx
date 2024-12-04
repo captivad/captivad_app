@@ -180,7 +180,7 @@ export default function OurWorksDetail() {
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
         ref={sectionRefs.form}
         id="form"
-        className="lg:h-full p-[10%] lg:p-20 bg-foreground"
+        className="lg:h-full p-[5%] lg:p-20 bg-foreground"
       >
         {visibleSections.form && <FormCustomer />}
       </motion.section>

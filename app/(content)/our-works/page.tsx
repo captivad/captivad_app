@@ -68,7 +68,7 @@ export default function OurWorks() {
         }}
         initial="hidden"
         animate="show"
-        className="relative w-full md:h-[40vh] lg:h-[70vh] bg-background flex justify-start md:pt-0 md:items-center"
+        className="relative w-full min-h-[200px] lg:min-h-[50vh] xl:min-h-[60vh] bg-background flex justify-start md:pt-0 md:items-center"
       >
         <div className="h-full w-[50%] overflow-hidden absolute z-0 top-0 bottom-0 -right-20">
           <Image
@@ -166,7 +166,7 @@ export default function OurWorks() {
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
         ref={sectionRefs.form}
         id="form"
-        className="lg:h-full p-[10%] lg:p-20 bg-foreground"
+        className="lg:h-full p-[5%] lg:p-20 bg-foreground"
       >
         {visibleSections.form && <FormCustomer />}
       </motion.section>

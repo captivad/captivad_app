@@ -114,7 +114,7 @@ const FormCustomer: React.FC = () => {
           />
           <div className="absolute -bottom-0 h-60 w-full bg-gradient-to-t from-background from-30% via-background/70 to-transparent"></div>
         </motion.div>
-        <div className="hidden lg:block absolute -bottom-16 h-60 w-full bg-gradient-to-t from-background via-background via-50% to-transparent"></div>
+        <div className="hidden lg:block absolute -bottom-16 h-60 w-full bg-gradient-to-t from-background from-30% via-transparent to-transparent"></div>
       </div>
       <motion.form
         initial={{ opacity: 0, x: 100 }}
