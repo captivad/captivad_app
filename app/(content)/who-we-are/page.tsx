@@ -6,9 +6,7 @@ import React from "react";
 import Image from "next/image";
 import BgSection1 from "@/public/whoweare-section1.svg";
 import IconLamp from "@/public/emoji_objects.svg";
-import { image } from "framer-motion/client";
 import { CldImage } from "next-cloudinary";
-// import CardContent from "@/components/card-content";
 interface IOpportunity {
   title: string;
   description: string;
@@ -143,8 +141,8 @@ export default function WhoWeAre() {
             </h3>
             <ul className=" list-disc pl-6">
               <li className="text-[14px] md:text-[16px] lg:text-[20px] xl:text-[24px]">
-                To be a strategic partner that exceeds client's needs with
-                holistic digital solutions
+                {`To be a strategic partner that exceeds client's needs with
+                holistic digital solutions`}
               </li>
               <li className="text-[14px] md:text-[16px] lg:text-[20px] xl:text-[24px]">
                 To enhance knowledge and skill for CaptivAd to adapt with

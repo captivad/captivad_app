@@ -1,11 +1,11 @@
 "use client";
 import ButtonFileUpload from "@/components/button-file-upload";
-import MediaService from "./media.service";
 import { ICloudinaryAssetResponse } from "@/app/api/upload-file/upload-file.interface";
 import { CldImage, CldVideoPlayer } from "next-cloudinary";
 import "next-cloudinary/dist/cld-video-player.css";
 // import { RotateCw } from "lucide-react";
 import React from "react";
+import { useMedia } from "./media.service";
 
 export default function FileUpload() {
   const [typeSelected, setTypeSelected] = React.useState("image");
@@ -16,7 +16,7 @@ export default function FileUpload() {
     data: dataAssets,
     isLoading,
     refetch,
-  } = MediaService().getMedia({
+  } = useMedia({
     type: typeSelected as "image" | "video",
     nextCursor: nextCursor || undefined,
   });
@@ -38,7 +38,7 @@ export default function FileUpload() {
       // );
       setAssets([...assets, ...dataAssets?.payload?.rows]);
     }
-  }, [dataAssets?.payload?.rows]);
+  }, [dataAssets?.payload?.rows, assets]);
 
   return (
     <div className="w-full h-dvh flex justify-center items-center pt-24">
