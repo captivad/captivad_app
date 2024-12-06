@@ -107,6 +107,7 @@ const FormCustomer: React.FC = () => {
         >
           <Image
             fill
+            priority
             objectFit="cover"
             src={LogoForm}
             alt=""

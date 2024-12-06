@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { DM_Sans } from "@next/font/google";
 import "./globals.css";
-import RouterProvider from "@/components/router-provider";
 import { Toaster } from "react-hot-toast";
 import ClientProviders from "@/components/client-provider";
 
@@ -24,9 +23,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${dmSans.className} ${dmSans.className} antialiased`}>
         <Toaster position="top-center" reverseOrder={false} />
-        <RouterProvider>
-          <ClientProviders>{children}</ClientProviders>
-        </RouterProvider>
+        <ClientProviders>{children}</ClientProviders>
       </body>
     </html>
   );

@@ -106,6 +106,7 @@ export default function Home() {
           // height={500}
           src={HeroGift}
           fill
+          priority
           objectFit="cover"
           alt="Hero"
           className="absolute z-0 top-0 left-0 w-full h-dvh object-cover"
@@ -228,6 +229,7 @@ export default function Home() {
                 {/* side 1 */}
                 <div>
                   <Image
+                    priority
                     width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="FrameWuling.svg"
@@ -236,6 +238,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
+                    priority
                     width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="Tempra.svg"
@@ -244,6 +247,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
+                    priority
                     width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="chery.svg"
@@ -252,6 +256,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
+                    priority
                     width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="citroen.svg"
@@ -260,6 +265,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
+                    priority
                     width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="wrp.svg"
@@ -270,6 +276,7 @@ export default function Home() {
                 {/* side 2 */}
                 <div>
                   <Image
+                    priority
                     width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="FrameWuling.svg"
@@ -278,6 +285,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
+                    priority
                     width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="Tempra.svg"
@@ -286,6 +294,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
+                    priority
                     width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="chery.svg"
@@ -294,6 +303,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
+                    priority
                     width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="citroen.svg"
@@ -302,6 +312,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
+                    priority
                     width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="wrp.svg"
@@ -312,6 +323,7 @@ export default function Home() {
                 {/* side 3 */}
                 <div>
                   <Image
+                    priority
                     width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="Tempra.svg"
@@ -320,6 +332,7 @@ export default function Home() {
                 </div>
                 <div>
                   <Image
+                    priority
                     width={mediaQuery ? 240 : 160}
                     height={mediaQuery ? 143 : 100}
                     src="chery.svg"
@@ -345,6 +358,7 @@ export default function Home() {
       >
         <Image
           fill
+          priority
           objectFit="cover"
           src={ImgPerson}
           alt="Image-Person"
@@ -387,6 +401,7 @@ export default function Home() {
             >
               <Image
                 // width={602}
+                priority
                 width={mediaQuery ? 602 : 602}
                 height={mediaQuery ? 602 : 602}
                 src={ImgPerson.src}
@@ -433,6 +448,7 @@ export default function Home() {
               <Image
                 // width={891}
                 // height={891}
+                priority
                 fill
                 src="/SectionRotation.gif"
                 alt="Image-Person"

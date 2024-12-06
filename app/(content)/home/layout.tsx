@@ -1,9 +1,9 @@
-// app/(content)/home/layout.tsx
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Captivad | Home",
-  description: "Welcome to Captiad",
+  title: "Captivad - Dynamic Advertising Solutions for Your Business",
+  description:
+    "Boost your advertising success with Captivad. Explore expert media strategies, data-driven insights, and cutting-edge tools to elevate your brand and reach your audience effectively.",
 };
 
 export default function HomeLayout({
