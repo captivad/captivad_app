@@ -227,7 +227,7 @@ export default function Home() {
             >
               <div className="image-slider">
                 {/* side 1 */}
-                <div>
+                <iframe>
                   <Image
                     priority
                     width={mediaQuery ? 240 : 160}
@@ -235,8 +235,8 @@ export default function Home() {
                     src="FrameWuling.svg"
                     alt="FrameWuling"
                   />
-                </div>
-                <div>
+                </iframe>
+                <iframe>
                   <Image
                     priority
                     width={mediaQuery ? 240 : 160}
@@ -244,8 +244,8 @@ export default function Home() {
                     src="Tempra.svg"
                     alt="Tempra"
                   />
-                </div>
-                <div>
+                </iframe>
+                <iframe>
                   <Image
                     priority
                     width={mediaQuery ? 240 : 160}
@@ -253,8 +253,8 @@ export default function Home() {
                     src="chery.svg"
                     alt="chery"
                   />
-                </div>
-                <div>
+                </iframe>
+                <iframe>
                   <Image
                     priority
                     width={mediaQuery ? 240 : 160}
@@ -262,8 +262,8 @@ export default function Home() {
                     src="citroen.svg"
                     alt="citroen"
                   />
-                </div>
-                <div>
+                </iframe>
+                <iframe>
                   <Image
                     priority
                     width={mediaQuery ? 240 : 160}
@@ -271,10 +271,10 @@ export default function Home() {
                     src="wrp.svg"
                     alt="wrp"
                   />
-                </div>
+                </iframe>
 
                 {/* side 2 */}
-                <div>
+                <iframe>
                   <Image
                     priority
                     width={mediaQuery ? 240 : 160}
@@ -282,8 +282,8 @@ export default function Home() {
                     src="FrameWuling.svg"
                     alt="FrameWuling"
                   />
-                </div>
-                <div>
+                </iframe>
+                <iframe>
                   <Image
                     priority
                     width={mediaQuery ? 240 : 160}
@@ -291,8 +291,8 @@ export default function Home() {
                     src="Tempra.svg"
                     alt="Tempra"
                   />
-                </div>
-                <div>
+                </iframe>
+                <iframe>
                   <Image
                     priority
                     width={mediaQuery ? 240 : 160}
@@ -300,8 +300,8 @@ export default function Home() {
                     src="chery.svg"
                     alt="chery"
                   />
-                </div>
-                <div>
+                </iframe>
+                <iframe>
                   <Image
                     priority
                     width={mediaQuery ? 240 : 160}
@@ -309,8 +309,8 @@ export default function Home() {
                     src="citroen.svg"
                     alt="citroen"
                   />
-                </div>
-                <div>
+                </iframe>
+                <iframe>
                   <Image
                     priority
                     width={mediaQuery ? 240 : 160}
@@ -318,10 +318,10 @@ export default function Home() {
                     src="wrp.svg"
                     alt="wrp"
                   />
-                </div>
+                </iframe>
 
                 {/* side 3 */}
-                <div>
+                <iframe>
                   <Image
                     priority
                     width={mediaQuery ? 240 : 160}
@@ -329,8 +329,8 @@ export default function Home() {
                     src="Tempra.svg"
                     alt="Tempra"
                   />
-                </div>
-                <div>
+                </iframe>
+                <iframe>
                   <Image
                     priority
                     width={mediaQuery ? 240 : 160}
@@ -338,7 +338,7 @@ export default function Home() {
                     src="chery.svg"
                     alt="chery"
                   />
-                </div>
+                </iframe>
               </div>
               <div className="absolute top-0 left-0 right-0 h-[143px] w-full bg-gradient-to-r from-background via-transparent to-background"></div>
             </motion.div>

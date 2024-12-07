@@ -1,9 +1,8 @@
 import CardBlog from "@/components/card-blog";
 import FormCustomer from "@/components/form-customer";
-import { Input } from "@/components/input";
-import { Search } from "lucide-react";
 import moment from "moment";
 import { IBlogContent } from "./blog.interface";
+import SearchBlog from "./components/search-blog";
 
 const dataDamiBlog: IBlogContent[] = [
   {
@@ -130,12 +129,7 @@ export default function Blog() {
               <p>Online Tren</p>
             </button>
           </div>
-          <form action="" className="relative w-full lg:w-1/4">
-            <Input type="text" placeholder="Search" id="search" />
-            <button className="btn btn-ghost absolute right-2 top-1/2 -translate-y-1/2 rounded-full">
-              <Search />
-            </button>
-          </form>
+          <SearchBlog />
         </div>
         <div className="grid grid-cols-6 gap-2 md:gap-6 w-full justify-center py-[5%]">
           {dataDamiBlog.map((item, index) => {

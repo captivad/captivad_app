@@ -15,7 +15,20 @@ const CardBlog: React.FC<IProps> = ({ className, content }) => {
       className={`group card shadow-xl hover:scale-95 duration-300 hover:shadow-sm hover:shadow-white ${className}`}
     >
       <figure>
-        <Image width={500} height={500} src={content.imageUrl} alt="Shoes" />
+        <Image
+          priority
+          width={
+            500
+            // @ts-ignore
+          }
+          height={
+            500
+            // @ts-ignore
+          }
+          className="w-full h-full object-cover"
+          src={content.imageUrl}
+          alt="Shoes"
+        />
       </figure>
       <div className="card-body px-4">
         <h4 className="font-semibold mb-2">{content.title}</h4>
