@@ -1,4 +1,4 @@
-import { HOME } from "@/components/navbar";
+import { HOME } from "@/utils/router";
 import { redirect } from "next/navigation";
 
 export default function Root() {

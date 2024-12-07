@@ -1,9 +1,9 @@
-import { CONTACT_US, HOME, OUR_SERVICES } from "@/components/navbar";
 import Image from "next/image";
 import Link from "next/link";
 import CaptivadLogoFooter from "@/public/LogoCaptivAd-black.svg";
 import { Accessibility } from "lucide-react";
 import Header from "@/components/header";
+import { CONTACT_US, HOME, OUR_SERVICES } from "@/utils/router";
 
 export default function LayoutContent({
   children,

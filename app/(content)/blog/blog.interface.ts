@@ -1,4 +1,4 @@
-interface IBlogContent {
+export interface IBlogContent {
   uuid: string;
   title: string;
   content: string;

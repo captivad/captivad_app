@@ -1,4 +1,6 @@
+import { IBlogContent } from "@/app/(content)/blog/blog.interface";
 import { dateRange, textLimit } from "@/utils/general";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -13,7 +15,7 @@ const CardBlog: React.FC<IProps> = ({ className, content }) => {
       className={`group card shadow-xl hover:scale-95 duration-300 hover:shadow-sm hover:shadow-white ${className}`}
     >
       <figure>
-        <img src={content.imageUrl} alt="Shoes" />
+        <Image width={500} height={500} src={content.imageUrl} alt="Shoes" />
       </figure>
       <div className="card-body px-4">
         <h4 className="font-semibold mb-2">{content.title}</h4>

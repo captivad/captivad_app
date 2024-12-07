@@ -1,11 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { HOME, Navbar } from "./navbar";
 import Image from "next/image";
 import CaptivadLogo from "@/public/LogoCaptivAd-02.svg";
 import { ChevronsRight, Menu } from "lucide-react";
 import React from "react";
+import { HOME } from "@/utils/router";
+import { Navbar } from "./navbar";
 
 const Header = () => {
   const [open, setOpen] = React.useState(false);

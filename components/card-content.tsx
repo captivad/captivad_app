@@ -1,7 +1,7 @@
 import Image from "next/image";
 import HoverPicture from "@/public/Picture-Hover.svg";
 import Link from "next/link";
-import { OUR_WORK } from "./navbar";
+import { OUR_WORK } from "@/utils/router";
 const CardContent: React.FC = () => {
   return (
     <Link

@@ -3,6 +3,7 @@ import FormCustomer from "@/components/form-customer";
 import { Input } from "@/components/input";
 import { Search } from "lucide-react";
 import moment from "moment";
+import { IBlogContent } from "./blog.interface";
 
 const dataDamiBlog: IBlogContent[] = [
   {
@@ -103,7 +104,7 @@ export default function Blog() {
             Office Life, and CaptivAd Updates
           </h1>
           <h4 className="my-6 text-center md:text-left">
-            Explore your potential with Maizen's <br />
+            Explore your potential with Maizen is <br />
             mindful insights and inspiring stories
           </h4>
         </div>
@@ -140,12 +141,20 @@ export default function Blog() {
           {dataDamiBlog.map((item, index) => {
             if (index === 0 || index === 1) {
               return (
-                <CardBlog content={item} className="col-span-6 md:col-span-3" />
+                <CardBlog
+                  key={index}
+                  content={item}
+                  className="col-span-6 md:col-span-3"
+                />
               );
             }
 
             return (
-              <CardBlog content={item} className="col-span-6 md:col-span-2" />
+              <CardBlog
+                key={index}
+                content={item}
+                className="col-span-6 md:col-span-2"
+              />
             );
           })}
         </div>

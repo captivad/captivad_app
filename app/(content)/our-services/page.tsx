@@ -5,8 +5,8 @@ import { ArrowRight } from "lucide-react";
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { OUR_SERVICES } from "@/components/navbar";
 import BgSection1 from "@/public/our-service-section1.svg";
+import { OUR_SERVICES } from "@/utils/router";
 
 const listAccordion = [
   {
