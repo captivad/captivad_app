@@ -70,7 +70,7 @@ export default function OurWorksDetail() {
         }}
         initial="hidden"
         animate="show"
-        className="relative w-full h-auto xl:min-h-[75vh] bg-background flex pt-40 md:pt-52 xl:pt-44 md:items-center"
+        className="relative w-full h-auto lg:h-[70vh] 2xl:h-dvh bg-background flex justify-center pt-44 md:pt-60"
       >
         <Image
           fill
