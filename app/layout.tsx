@@ -10,7 +10,7 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://captivad.vercel.app"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || ""),
   keywords: [
     "Captivad",
     "Digital Advertising",
