@@ -9,6 +9,10 @@
 #env
 .env
 
+#prisma client 
+prisma/prisma
+prisma/migrations
+
 #debug json
 /.vscode
 

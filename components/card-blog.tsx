@@ -17,14 +17,8 @@ const CardBlog: React.FC<IProps> = ({ className, content }) => {
       <figure>
         <Image
           priority
-          width={
-            500
-            // @ts-ignore
-          }
-          height={
-            500
-            // @ts-ignore
-          }
+          width={500}
+          height={500}
           className="w-full h-full object-cover"
           src={content.imageUrl}
           alt="Shoes"

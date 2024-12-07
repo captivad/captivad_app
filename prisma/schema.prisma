@@ -1,0 +1,263 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "./prisma/client"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+//Auth
+model Users {
+  uuid                        String    @id @default(uuid())
+  username                    String    @unique
+  name                        String
+  hash_password               String
+  otp_code                    String
+  status                      Status
+  role_id                     Int
+  role                        Role      @relation(fields: [role_id], references: [id])
+
+  created_dt                  DateTime  @default(now())
+  created_by                  String?
+  updated_dt                  DateTime  @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+
+  @@map("users")
+}
+
+model Role {
+  id                          Int        @id @default(autoincrement()) @unique
+  role                        String     @unique
+  users                       Users[]
+
+  created_dt                  DateTime   @default(now())
+  created_by                  String?
+  updated_dt                  DateTime   @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+  @@map("role")
+}
+
+
+//General
+model Category {
+  id                          Int        @id @default(autoincrement()) @unique
+  name                        String     @unique
+  description                 String     @unique
+
+  //relation
+  portfolio_category          PortfolioCategory[]
+  blog_category               BlogCategory[]
+
+  created_dt                  DateTime   @default(now())
+  created_by                  String?
+  updated_dt                  DateTime   @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+
+  @@map("category")
+}
+
+model Interest {
+  id                          Int        @id @default(autoincrement()) @unique
+  name                        String     @unique
+  description                 String     @unique
+
+  created_dt                  DateTime   @default(now())
+  created_by                  String?
+  updated_dt                  DateTime   @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+
+  @@map("interest")
+}
+
+model ContactClient {
+  id                          Int        @id @default(autoincrement()) @unique
+  fullname                    String     
+  email                       String     
+  phone_number                String     
+  message                     String     
+  interest                    String     
+
+  created_dt                  DateTime   @default(now())
+  created_by                  String?
+  updated_dt                  DateTime   @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+
+  @@map("contact_client")
+}
+
+//our service
+model Service {
+  uuid                        String     @id @default(uuid())
+  name_service                String     
+  description_service         String     
+  detail_title                String     
+  main_content                String     
+  status                      StatusContent   
+
+  //relation
+  portfolio_service           PortfolioService[]  
+
+  created_dt                  DateTime   @default(now())
+  created_by                  String?
+  updated_dt                  DateTime   @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+
+  @@map("service")
+}
+
+//our work
+model Portfolio {
+  uuid                        String     @id @default(uuid())
+  title                       String     
+  description                 String     
+  objectiv_content            String     
+  key_result_content          String     
+  thumbnail_url               String     
+  video_image_url             String     
+  status                      StatusContent   
+
+  //relation
+  portfolio_service           PortfolioService[]
+  portfolio_category          PortfolioCategory[]  
+
+  created_dt                  DateTime   @default(now())
+  created_by                  String?
+  updated_dt                  DateTime   @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+
+  @@map("portfolio")
+}
+
+model PortfolioService {
+  uuid                        String     @id @default(uuid())
+  portfolio_uuid              String     
+  service_uuid                String
+
+  //relation
+  portfolio                   Portfolio  @relation(fields: [portfolio_uuid], references: [uuid])
+  service                     Service    @relation(fields: [service_uuid], references: [uuid])       
+
+  created_dt                  DateTime   @default(now())
+  created_by                  String?
+  updated_dt                  DateTime   @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+
+  @@map("portfolio_service")
+}
+
+model PortfolioCategory {
+  uuid                        String     @id @default(uuid())
+  portfolio_uuid              String     
+  category_id                 Int
+
+  //relation
+  portfolio                   Portfolio  @relation(fields: [portfolio_uuid], references: [uuid])
+  category                    Category   @relation(fields: [category_id], references: [id])       
+
+  created_dt                  DateTime   @default(now())
+  created_by                  String?
+  updated_dt                  DateTime   @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+
+  @@map("portfolio_category")
+}
+
+//Blog
+model Blog {
+  uuid                        String     @id @default(uuid())
+  title                       String
+  thumbnail_url               String
+  author                      String
+  main_content                String
+  optional_content            String
+  like_count                  Int
+  comment_count               Int
+  like_active                 Status
+  comment_active              Status
+  status                      StatusContent
+  
+  //relation 
+  blog_category               BlogCategory[]
+  blog_comment                BlogComemnt[]    
+
+  created_dt                  DateTime   @default(now())
+  created_by                  String?
+  updated_dt                  DateTime   @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+
+  @@map("blog")
+}
+
+model BlogCategory {
+  uuid                        String     @id @default(uuid())
+  blog_uuid                   String     
+  category_id                 Int
+
+  //relation
+  blog                        Blog  @relation(fields: [blog_uuid], references: [uuid])
+  category                    Category   @relation(fields: [category_id], references: [id])     
+
+  created_dt                  DateTime   @default(now())
+  created_by                  String?
+  updated_dt                  DateTime   @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+
+  @@map("blog_category")
+}
+
+model BlogComemnt {
+  uuid                        String     @id @default(uuid())
+  blog_uuid                   String     
+  fullname                    String
+  email                       String
+  message                     String
+  replay_to                   String
+
+  //relation
+  blog                        Blog  @relation(fields: [blog_uuid], references: [uuid])    
+
+  created_dt                  DateTime   @default(now())
+  created_by                  String?
+  updated_dt                  DateTime   @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+
+  @@map("blog_comment")
+}
+
+
+enum Status {
+  enable
+  disable
+}
+
+enum StatusContent {
+  publish
+  draft
+}
