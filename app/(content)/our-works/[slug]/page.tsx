@@ -44,7 +44,7 @@ export default async function OurWorksDetail({
       {/* ###########################  section-1  ############################ */}
       <section
         id="section-intro"
-        className="relative w-full h-auto lg:h-[70vh] 2xl:h-dvh bg-background flex justify-center pt-44 md:pt-60 mb-10"
+        className="relative w-full h-auto bg-background flex justify-center pt-44 md:pt-60 mb-10"
       >
         <Image
           fill
@@ -54,7 +54,7 @@ export default async function OurWorksDetail({
           alt="bg-detail-section1"
           className="absolute z-0 top-0 left-0 w-full"
         />
-        <div className="z-20 w-full px-[10%] lg:px-20 flex flex-col md:flex-row justify-between">
+        <div className="z-20 w-full px-[10%] lg:px-20 flex flex-col justify-between">
           <div className="flex justify-start mb-6 w-20">
             <BackButton />
           </div>
@@ -80,7 +80,7 @@ export default async function OurWorksDetail({
       </section>
 
       {/* ###########################  section-2  ############################ */}
-      <section className="p-[10%] xl:pt-0 xl:pb-20 lg:px-20 w-full h-auto grid grid-cols-1 xl:grid-cols-2 gap-4">
+      <section className="p-[10%] xl:pt-0 xl:pb-20 lg:px-20 w-full h-auto grid grid-cols-1 2xl:grid-cols-2 gap-10">
         <div className="w-full col-span-1 flex items-center justify-center">
           <div className="relative w-[450px] scale-100 sm:min-w-[571px] rounded-box overflow-hidden">
             <Image
