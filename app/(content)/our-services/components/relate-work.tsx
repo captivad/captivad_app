@@ -98,7 +98,7 @@ const RelateWork: React.FC<IProps> = ({ relateWork }) => {
               <CardContent
                 key={index + item.uuid}
                 uuid={item.uuid}
-                navigate={`/our-services/${item.title}?id=${item.uuid}`}
+                navigate={`/our-works/${item.title}?id=${item.uuid}`}
                 thumbnail_url={item.thumbnail_url}
                 title={item.title}
               />

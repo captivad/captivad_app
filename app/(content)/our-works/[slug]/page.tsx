@@ -44,7 +44,7 @@ export default async function OurWorksDetail({
       {/* ###########################  section-1  ############################ */}
       <section
         id="section-intro"
-        className="relative w-full h-auto lg:h-[70vh] 2xl:h-dvh bg-background flex justify-center pt-44 md:pt-60"
+        className="relative w-full h-auto lg:h-[70vh] 2xl:h-dvh bg-background flex justify-center pt-44 md:pt-60 mb-10"
       >
         <Image
           fill
@@ -76,7 +76,7 @@ export default async function OurWorksDetail({
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-background via-black/60 to-background z-10"></div>
+        <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-background via-black/70 to-background z-10"></div>
       </section>
 
       {/* ###########################  section-2  ############################ */}

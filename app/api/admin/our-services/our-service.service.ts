@@ -33,6 +33,7 @@ export async function getDetailServiceById(serviceId: string) {
                 uuid: true,
                 thumbnail_url: true,
                 title: true,
+                status: true,
               },
             },
           },
@@ -50,11 +51,14 @@ export async function getDetailServiceById(serviceId: string) {
       description_service: service.description_service,
       detail_title: service.detail_title,
       main_content: service.main_content,
-      portfolios: service.portfolio_service.map((item) => ({
-        uuid: item.portfolio.uuid,
-        title: item.portfolio.title,
-        thumbnail_url: item.portfolio.thumbnail_url,
-      })),
+      portfolios: service.portfolio_service
+        .map((item) => ({
+          uuid: item.portfolio.uuid,
+          title: item.portfolio.title,
+          thumbnail_url: item.portfolio.thumbnail_url,
+          status: item.portfolio.status,
+        }))
+        .filter((item) => item.status === StatusContent.publish),
     };
 
     return payloadResult;
