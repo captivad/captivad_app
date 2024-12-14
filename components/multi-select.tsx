@@ -139,8 +139,6 @@ const Multiselect: React.FC<MultiselectProps> = ({
     [onChange]
   );
 
-  console.log(errors, "errors");
-
   const handleKeyDown = useCallback(
     (e: React.KeyboardEvent<HTMLInputElement>) => {
       switch (e.key) {

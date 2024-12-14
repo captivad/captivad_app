@@ -29,11 +29,11 @@ export function useGetListService() {
 }
 
 //API
-export async function fetchDataSlugDetailService(
+export async function fetchDataDetailServiceById(
   id: string
 ): Promise<IGetServicDetail | null> {
   const response = await axios.get<SuccessResponse<IGetServicDetail>>(
-    "http://localhost:3000/api/admin/our-services",
+    process.env.NEXTAUTH_URL + "/api/admin/our-services",
     {
       params: { id, action: "detail" },
     }

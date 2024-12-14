@@ -5,7 +5,11 @@ import { captivadPrisma } from "@/prisma/prisma";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import { StatusContent } from "@/prisma/prisma/client";
-import { getDetailService, getListService } from "./our-service.service";
+import {
+  getDetailServiceById,
+  getListService,
+  getDetailServiceBySlug,
+} from "./our-service.service";
 import { HttpException } from "@/utils/HttpException";
 
 export async function POST(req: NextRequest) {
@@ -35,15 +39,21 @@ export async function POST(req: NextRequest) {
 export async function GET(req: NextRequest) {
   try {
     const urlParams = req.nextUrl.searchParams;
-    const acction = urlParams.get("action");
+    const action = urlParams.get("action");
     const serviceId = urlParams.get("id");
 
-    switch (acction) {
+    switch (action) {
       case "list":
         const responseList = await getListService();
         return ResponseSuccess(responseList);
       case "detail":
-        const responseDetail = await getDetailService(serviceId as string);
+        if (!serviceId) {
+          throw new HttpException(
+            400,
+            "Service ID is required for detail action"
+          );
+        }
+        const responseDetail = await getDetailServiceById(serviceId as string);
         return ResponseSuccess(responseDetail);
       default:
         throw new HttpException(400, "Bad Request");

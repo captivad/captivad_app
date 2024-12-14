@@ -25,7 +25,7 @@ export const getListOurWorkCategory = async () => {
     });
 
     const portfolioCategory = await captivadPrisma.portfolioCategory.findMany({
-      where: { deleted_dt: null },
+      where: { deleted_dt: null, portfolio: { status: StatusContent.publish } },
       orderBy: { created_dt: "asc" },
       include: {
         portfolio: true,
@@ -57,6 +57,39 @@ export const getListOurWorkCategory = async () => {
     });
 
     return listCategoryWork.filter((item) => item.portfolios.length > 0);
+  } catch (error: any) {
+    console.log(error);
+    throw new HttpException(500, error.message);
+  }
+};
+
+export const getDetailWorkById = async (workId: string) => {
+  try {
+    const work = await captivadPrisma.portfolio.findUnique({
+      where: {
+        uuid: workId,
+        deleted_dt: null,
+        status: StatusContent.publish,
+      },
+      include: {
+        portfolio_category: {
+          select: {
+            category: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
+      },
+    });
+
+    if (!work) {
+      throw new HttpException(404, "Work not found");
+    }
+
+    return work;
   } catch (error: any) {
     console.log(error);
     throw new HttpException(500, error.message);

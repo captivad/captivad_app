@@ -3,6 +3,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 const envSchema = yup.object({
+  NEXTAUTH_URL: yup.string().required(),
+
   BREVO_HOST: yup.string().required(),
   BREVO_PORT: yup.string().required(),
   BREVO_EMAIL_AUTH: yup.string().required(),

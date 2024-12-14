@@ -9,21 +9,36 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-export const metadata: Metadata = {
+export const baseMetadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || ""),
   keywords: [
-    "Captivad",
-    "Digital Advertising",
-    "Digital Advertising",
-    "Digital Advertising",
-    "Digital Advertising",
+    "brand transformation",
+    "digital brand solutions",
+    "comprehensive brand development",
+    "knowledge growth",
+    "skills enhancement",
+    "professional development",
+    "creative brand strategies",
+    "business transformation",
+    "talent development",
+    "brand evolution",
   ],
+
+  authors: [{ name: "CaptivAd Team" }],
+  creator: "CaptivAd",
+  publisher: "CaptivAd",
 
   title: {
     default: "Captivad",
     template: "%s | Captivad",
   },
   openGraph: {
+    type: "website",
+    locale: "en_ID",
+    url: "https://www.captivad.com",
+    siteName: "CaptivAd",
+    title:
+      "CaptivAd: Complete Brand Transformation & Knowledge Growth Solutions",
     description:
       "Boost your advertising success with Captivad. Explore expert media strategies, data-driven insights, and cutting-edge tools to elevate your brand and reach your audience effectively.",
   },

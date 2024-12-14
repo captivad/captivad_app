@@ -3,40 +3,22 @@ import FormCustomer from "@/components/form-customer";
 import React from "react";
 import BgDetailSection from "@/public/our-service-detail-section1.svg";
 import Image from "next/image";
-import { Metadata } from "next";
-import { fetchDataSlugDetailService } from "../our-service.web.service";
+import { fetchDataDetailServiceById } from "../our-service.web.service";
 import toast from "react-hot-toast";
 import BackButton from "@/components/button-back";
 import RelateWork from "../components/relate-work";
+import { Metadata } from "next";
+import { baseMetadata } from "@/app/layout";
 
-export async function generateMetadata({
-  searchParams,
+export function generateMetadata({
+  params,
 }: {
-  searchParams: { id?: string };
-}): Promise<Metadata> {
-  const id = searchParams.id;
-  if (!id) {
-    return {
-      title: "Page Not Found",
-      description: "The page you are looking for does not exist.",
-    };
-  }
-
-  const data = await fetchDataSlugDetailService(id);
-  if (!data) {
-    return {
-      title: "Page Not Found",
-      description: "The page you are looking for does not exist.",
-    };
-  }
-
+  params: { slug: string };
+}): Metadata {
   return {
-    title: data.detail_title, // Contoh: data.title dari API
-    description: data.main_content, // Contoh: data.description dari API
-    openGraph: {
-      title: data.detail_title,
-      description: data.main_content,
-    },
+    ...baseMetadata,
+    title: `Our Services | ${params.slug.split("%20").join(" ")}`,
+    description: params.slug.split("%20").join(" "),
   };
 }
 
@@ -46,15 +28,10 @@ export default async function OurServicesDetail({
   searchParams: { id?: string };
 }) {
   const id = searchParams.id;
+  if (!id) toast.error("get our services failed!");
 
-  if (!id) {
-    toast.error("get our services failed!");
-  }
-
-  const data = await fetchDataSlugDetailService(id as string);
-  if (!data) {
-    toast.error("get our services failed!");
-  }
+  const data = await fetchDataDetailServiceById(id as string);
+  if (!data) toast.error("get our services failed!");
 
   return (
     <>
