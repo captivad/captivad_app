@@ -1,4 +1,3 @@
-// "use client";
 import FormCustomer from "@/components/form-customer";
 import React from "react";
 import BgDetailSection from "@/public/our-service-detail-section1.svg";
@@ -8,7 +7,7 @@ import toast from "react-hot-toast";
 import BackButton from "@/components/button-back";
 import RelateWork from "../components/relate-work";
 import { Metadata } from "next";
-import { baseMetadata } from "@/app/layout";
+import { metadata } from "@/app/layout";
 
 export function generateMetadata({
   params,
@@ -16,7 +15,7 @@ export function generateMetadata({
   params: { slug: string };
 }): Metadata {
   return {
-    ...baseMetadata,
+    ...metadata,
     title: `Our Services | ${params.slug.split("%20").join(" ")}`,
     description: params.slug.split("%20").join(" "),
   };

@@ -6,7 +6,7 @@ import Contentlaptop from "@/public/content-laptop.svg";
 import BackButton from "@/components/button-back";
 import { fetchDataDetailWorkById } from "../our-work.web.service";
 import { Metadata } from "next";
-import { baseMetadata } from "@/app/layout";
+import { metadata } from "@/app/layout";
 
 async function generateStaticData({
   searchParams,
@@ -23,7 +23,7 @@ export function generateMetadata({
   params: { slug: string };
 }): Metadata {
   return {
-    ...baseMetadata,
+    ...metadata,
     title: `Our Work | ${params.slug.split("%20").join(" ")}`,
     description: params.slug.split("%20").join(" "),
   };

@@ -11,7 +11,7 @@ const SkeletonWorkCard = () => {
         ease: "easeOut",
         delay: 0.4,
       }}
-      className="flex flex-col gap-4 w-full mb-6"
+      className="hidden lg:flex flex-col gap-24 w-full mb-6"
     >
       <div className="w-full justify-center lg:flex flex-wrap gap-10 overflow-hidden">
         <div className="skeleton relative w-[400px] h-[230px] sm:min-w-[413px] sm:min-h-[275px] rounded-box overflow-hidden group transition-all"></div>

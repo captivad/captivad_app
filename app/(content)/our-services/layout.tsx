@@ -1,5 +1,4 @@
-// app/(content)/home/layout.tsx
-import { baseMetadata } from "@/app/layout";
+import { metadata as baseMetadata } from "@/app/layout";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
