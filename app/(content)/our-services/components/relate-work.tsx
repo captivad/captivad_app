@@ -58,7 +58,7 @@ const RelateWork: React.FC<IProps> = ({ relateWork }) => {
       <section className="p-[5%] lg:px-20 w-full h-auto flex flex-col gap-4">
         <h3>Relate Work</h3>
         <div className="w-full flex xl:items-center gap-4">
-          {relateWork.length > 4 && (
+          {relateWork.length >= 4 && (
             <button
               onClick={() => handleScroll("left")}
               disabled={isAtStart}
@@ -104,7 +104,7 @@ const RelateWork: React.FC<IProps> = ({ relateWork }) => {
               />
             ))}
           </div>
-          {relateWork.length > 4 && (
+          {relateWork.length >= 4 && (
             <button
               onClick={() => handleScroll("right")}
               disabled={isAtEnd}
