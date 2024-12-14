@@ -14,6 +14,9 @@ export const CONTACT_US = "/contact-us";
 export const WHO_WE_ARE = "/who-we-are";
 export const BLOG = "/blog";
 
+//admin
+export const LOGIN = "/admin/login";
+
 interface IRouter {
   path: string;
   label: string;

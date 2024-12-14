@@ -1,8 +1,10 @@
-import CardBlog from "@/components/card-blog";
+import CardBlog from "@/app/(content)/blog/components/card-blog";
 import FormCustomer from "@/components/form-customer";
 import moment from "moment";
 import { IBlogContent } from "./blog.interface";
 import SearchBlog from "./components/search-blog";
+import ButtonNavigation from "@/components/button-navigation";
+import { PencilLine } from "lucide-react";
 
 const dataDamiBlog: IBlogContent[] = [
   {
@@ -54,7 +56,7 @@ const dataDamiBlog: IBlogContent[] = [
       "Dalam dunia digital marketing, influencer marketing telah menjadi strategi yang populer untuk meningkatkan brand awareness dan engagement. Namun, tidak semua influencer memiliki jangkauan dan dampak yang sama. Salah satu kategori yang semakin populer adalah micro influencers. Artikel ini akan membahas apa itu micro influencers, perbedaannya dengan jenis influencer lainnya, serta kelebihan dan kekurangannya.",
     imageUrl:
       "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733472830/image_21_crow5x.png",
-    createdDt: moment().subtract(2, "day").format("DD-MM-YYYY"),
+    createdDt: moment().subtract(2, "day").toISOString(),
     category: "marketing",
   },
   {
@@ -64,7 +66,7 @@ const dataDamiBlog: IBlogContent[] = [
       "Dalam dunia digital marketing, influencer marketing telah menjadi strategi yang populer untuk meningkatkan brand awareness dan engagement. Namun, tidak semua influencer memiliki jangkauan dan dampak yang sama. Salah satu kategori yang semakin populer adalah micro influencers. Artikel ini akan membahas apa itu micro influencers, perbedaannya dengan jenis influencer lainnya, serta kelebihan dan kekurangannya.",
     imageUrl:
       "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733472830/image_21_crow5x.png",
-    createdDt: moment().subtract(2, "day").format("DD-MM-YYYY"),
+    createdDt: moment().subtract(2, "day").toISOString(),
     category: "marketing",
   },
   {
@@ -74,7 +76,7 @@ const dataDamiBlog: IBlogContent[] = [
       "Dalam dunia digital marketing, influencer marketing telah menjadi strategi yang populer untuk meningkatkan brand awareness dan engagement. Namun, tidak semua influencer memiliki jangkauan dan dampak yang sama. Salah satu kategori yang semakin populer adalah micro influencers. Artikel ini akan membahas apa itu micro influencers, perbedaannya dengan jenis influencer lainnya, serta kelebihan dan kekurangannya.",
     imageUrl:
       "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733472830/image_21_crow5x.png",
-    createdDt: moment().subtract(2, "day").format("DD-MM-YYYY"),
+    createdDt: moment().subtract(2, "day").toISOString(),
     category: "marketing",
   },
   {
@@ -84,7 +86,7 @@ const dataDamiBlog: IBlogContent[] = [
       "Dalam dunia digital marketing, influencer marketing telah menjadi strategi yang populer untuk meningkatkan brand awareness dan engagement. Namun, tidak semua influencer memiliki jangkauan dan dampak yang sama. Salah satu kategori yang semakin populer adalah micro influencers. Artikel ini akan membahas apa itu micro influencers, perbedaannya dengan jenis influencer lainnya, serta kelebihan dan kekurangannya.",
     imageUrl:
       "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733472830/image_21_crow5x.png",
-    createdDt: moment().subtract(2, "day").format("DD-MM-YYYY"),
+    createdDt: moment().subtract(2, "day").toISOString(),
     category: "marketing",
   },
 ];
@@ -110,8 +112,18 @@ export default function Blog() {
         <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-background from-10% via-black/80 to-background z-10"></div>
       </section>
 
+      <section className="px-[10%] lg:px-20 ">
+        <ButtonNavigation
+          redirect={"/blog"}
+          className=" md:max-w-60 rounden-box "
+        >
+          <PencilLine size={25} />
+          Write a Article
+        </ButtonNavigation>
+      </section>
+
       <article className="p-[10%] lg:p-20">
-        <div className="flex justify-between flex-col lg:flex-row">
+        <div className="flex gap-4 justify-between flex-col lg:flex-row">
           <div className="flex flex-wrap gap-2 justify-center md:justify-start">
             <button className="btn btn-ghost btn-sm lg:btn-md btn-active">
               <p>Highlights</p>

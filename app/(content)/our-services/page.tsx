@@ -1,44 +1,19 @@
 "use client";
+
 import FormCustomer from "@/components/form-customer";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Plus } from "lucide-react";
 import React from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import BgSection1 from "@/public/our-service-section1.svg";
 import { OUR_SERVICES } from "@/utils/router";
+import ButtonNavigation from "@/components/button-navigation";
+import { IListGetService } from "@/app/api/admin/our-services/our-service.interface";
+import { useGetListService } from "./our-service.web.service";
+import Link from "next/link";
 
-const listAccordion = [
-  {
-    title: "Media Placement: Rich Media Banner and Place",
-    content:
-      "Optimize your brand value through the best 360 digital communication strategy carefully designed to pave your way to unparalleled success.",
-    navigate: "",
-    uuid: "44fab825-ab06-4d84-81a9-89387ebfacca",
-  },
-  {
-    title: "AI Experience",
-    content:
-      "Optimize your brand value through the best 360 digital communication strategy carefully designed to pave your way to unparalleled success.",
-    navigate: "",
-    uuid: "ff1b2322-780c-45c0-a973-f5ad754111a3",
-  },
-  {
-    title: "KOL Management",
-    content:
-      "Optimize your brand value through the best 360 digital communication strategy carefully designed to pave your way to unparalleled success.",
-    navigate: "",
-    uuid: "67e94b7a-a495-4fba-b419-76a0bfd852ce",
-  },
-  {
-    title: "Performance Specialization",
-    content:
-      "Optimize your brand value through the best 360 digital communication strategy carefully designed to pave your way to unparalleled success.",
-    navigate: "",
-    uuid: "527c988e-2689-46c9-8f62-47d1fdcdd23d",
-  },
-];
 export default function OurServices() {
+  const { data, isLoading } = useGetListService();
   const [visibleSections, setVisibleSections] = React.useState({
     intro: false,
     accordion: false,
@@ -53,8 +28,6 @@ export default function OurServices() {
     }),
     []
   );
-
-  const navigate = useRouter();
 
   React.useEffect(() => {
     const observers = Object.entries(sectionRefs).map(([key, ref]) => {
@@ -139,8 +112,16 @@ export default function OurServices() {
         id="section-accordion"
         className="w-full h-auto bg-black p-[10%] lg:p-20 flex flex-col justify-center gap-1 md:gap-6"
       >
+        <ButtonNavigation
+          redirect={"/blog"}
+          className=" md:max-w-60 rounden-box"
+        >
+          <Plus size={25} />
+          Add Service
+        </ButtonNavigation>
         {visibleSections.accordion &&
-          listAccordion.map((item, index) => (
+          !isLoading &&
+          (data as IListGetService[]).map((item, index) => (
             <motion.div
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
@@ -158,20 +139,18 @@ export default function OurServices() {
                 defaultChecked={index === 0}
               />
               <div className="collapse-title bg-transparent border-b-2 border-white font-bold">
-                <h3>{item.title}</h3>
+                <h3>{item.name_service}</h3>
               </div>
-              <div className="collapse-content flex justify-between py-6 lg:items-center flex-col md:flex-row gap-6">
-                <p className="w-[80%] lg:w-2/3">{item.content}</p>
+              <div className="collapse-content flex justify-between py-6 lg:items-center flex-col lg:flex-row gap-6">
+                <p className="w-[80%] lg:w-2/3">{item.description_service}</p>
                 <div>
-                  <button
-                    onClick={() =>
-                      navigate.push(OUR_SERVICES + "/" + item.uuid)
-                    }
-                    className="md:h-14 min-w-44 p-2 lg:p-4 bg-foreground rounded-full text-primary md:text-xl font-semibold flex gap-1 items-center justify-center hover:opacity-50 transition-all duration-100"
+                  <Link
+                    href={`${OUR_SERVICES}/${item.name_service}?id=${item.uuid}`}
+                    className={`btn flex gap-4 bg-white rounded-badge text-background btn-lg max-w-44 lg:btn-lg`}
                   >
-                    <p>Explore</p>
+                    Explore
                     <ArrowRight size={25} />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </motion.div>

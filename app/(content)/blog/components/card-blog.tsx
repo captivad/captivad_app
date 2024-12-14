@@ -1,6 +1,8 @@
+"use client";
+
 import { IBlogContent } from "@/app/(content)/blog/blog.interface";
 import { dateRange, textLimit } from "@/utils/general";
-import Image from "next/image";
+import { CldImage } from "next-cloudinary";
 import Link from "next/link";
 import React from "react";
 
@@ -11,17 +13,17 @@ interface IProps {
 const CardBlog: React.FC<IProps> = ({ className, content }) => {
   return (
     <Link
-      href={`/blog/${content.uuid}`}
+      href={`/blog/${content.title}?id=${content.uuid}`}
       className={`group card shadow-xl hover:scale-95 duration-300 hover:shadow-sm hover:shadow-white ${className}`}
     >
       <figure>
-        <Image
+        <CldImage
           priority
           width={500}
           height={500}
           className="w-full h-full object-cover"
           src={content.imageUrl}
-          alt="Shoes"
+          alt={content.title}
         />
       </figure>
       <div className="card-body px-4">

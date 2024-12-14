@@ -6,7 +6,7 @@ import moment from "moment";
 import { CldImage } from "next-cloudinary";
 import Markdown from "react-markdown";
 
-export default function BlogDetails({ params }: { params: { id: string } }) {
+export default function BlogDetails({ params }: { params: { slug: string } }) {
   console.log(params);
 
   return (

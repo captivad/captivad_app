@@ -18,6 +18,8 @@ const envSchema = yup.object({
   CLOUDINARY_UPLOAD_PRESET: yup.string().required(),
 
   NEXT_PUBLIC_BASE_URL: yup.string().required(),
+  DATABASE_URL: yup.string().required(),
+  SECRET_KEY: yup.string().required(),
 });
 
 const validatedEnv = () => {
