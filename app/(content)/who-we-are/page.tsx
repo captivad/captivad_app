@@ -127,18 +127,21 @@ export default function WhoWeAre() {
         </motion.div>
       </motion.section>
 
-      <section className="w-full relative min-h-[400px] xl:min-h-[70vh] bg-background overflow-hidden">
-        <Image src={BgSection1} alt="Who We Are" fill objectFit="cover" />
+      <section className="w-full relative min-h-[350px] xl:min-h-[70vh] bg-background overflow-hidden">
+        <Image
+          src={BgSection1}
+          alt="Who We Are"
+          fill
+          className="object-cover"
+        />
         <div className="absolute bottom-20 left-0 right-0 w-full grid grid-cols-1 lg:grid-cols-2 z-20 px-[10%] 2xl:px-[20%] gap-4 lg:gap-10">
           <div className="col-span-1 ">
-            <h2 className="text-center w-full lg:text-left">
-              Leading The Innovation for The Future
+            <h2 className="w-full text-left">
+              Leading The Innovation for <br /> The Future
             </h2>
           </div>
           <div className="">
-            <h3 className="w-full text-center lg:text-left font-bold pb-4">
-              Our Mission
-            </h3>
+            <h3 className="w-full text-left font-bold pb-4">Our Mission</h3>
             <ul className=" list-disc pl-6">
               <li className="text-[14px] md:text-[16px] lg:text-[20px] xl:text-[24px]">
                 {`To be a strategic partner that exceeds client's needs with
@@ -151,7 +154,7 @@ export default function WhoWeAre() {
             </ul>
           </div>
         </div>
-        <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-background via-transparent to-background z-10"></div>
+        <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-background via-black/50 lg:via-transparent to-background z-10"></div>
       </section>
 
       <section className="w-full flex flex-wrap justify-center gap-4 lg:gap-10 relative h-full bg-background overflow-hidden p-[10%] lg:p-20 pt-0">
