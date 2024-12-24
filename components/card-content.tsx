@@ -17,7 +17,7 @@ const CardContent: React.FC<IProps> = ({
     <Link
       key={key}
       href={navigate}
-      className="relative w-[400px] h-[230px] sm:min-w-[413px] sm:min-h-[275px] rounded-box overflow-hidden group transition-all"
+      className="relative w-[300px] h-[190px] lg:min-w-[413px] lg:min-h-[275px] rounded-box overflow-hidden group transition-all"
     >
       <CldImage
         priority

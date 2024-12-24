@@ -73,7 +73,7 @@ const RelateWork: React.FC<IProps> = ({ relateWork }) => {
           <div
             ref={scrollContainerRef}
             onScroll={checkScrollPosition}
-            className="w-full justify-start overflow-x-scroll hidden xl:flex gap-6 scroll-smooth"
+            className="w-full justify-start overflow-x-scroll flex gap-6 scroll-smooth"
             style={{
               scrollbarWidth: "none",
               msOverflowStyle: "none",
@@ -93,7 +93,7 @@ const RelateWork: React.FC<IProps> = ({ relateWork }) => {
           </div>
 
           {/* media-query mobile */}
-          <div className="w-full max-h-[500px] shadow-inner border-[1px] py-2 border-gray-100/20 rounded-lg overflow-y-scroll overflow-hidden flex-wrap justify-center flex xl:hidden gap-4">
+          {/* <div className="w-[200px] max-h-[230px] shadow-inner border-[1px] py-2 border-gray-100/20 rounded-lg overflow-x-scroll overflow-hidden flex-wrap justify-center flex xl:hidden gap-4">
             {relateWork.map((item, index) => (
               <CardContent
                 key={index + item.uuid}
@@ -103,7 +103,7 @@ const RelateWork: React.FC<IProps> = ({ relateWork }) => {
                 title={item.title}
               />
             ))}
-          </div>
+          </div> */}
           {relateWork.length >= 4 && (
             <button
               onClick={() => handleScroll("right")}
