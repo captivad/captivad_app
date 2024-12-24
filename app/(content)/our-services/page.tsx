@@ -146,10 +146,10 @@ export default function OurServices() {
                 <div>
                   <Link
                     href={`${OUR_SERVICES}/${item.name_service}?id=${item.uuid}`}
-                    className={`btn flex gap-4 bg-white rounded-badge text-background btn-lg max-w-44 lg:btn-lg`}
+                    className="btn btn-md lg:btn-lg rounded-badge bg-foreground text-primary hover:text-white"
                   >
                     Explore
-                    <ArrowRight size={25} />
+                    <ArrowRight size={20} />
                   </Link>
                 </div>
               </div>
