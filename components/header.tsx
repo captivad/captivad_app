@@ -28,7 +28,7 @@ const Header = () => {
               />
             </Link>
             <div className="hidden xl:flex gap-6 text-foreground items-center">
-              <Navbar mediaQuery="desktop" />
+              <Navbar open={setOpen} mediaQuery="desktop" />
             </div>
             <div className=" xl:hidden flex items-center overflow-y-scroll">
               {/* Drawer */}
@@ -76,7 +76,7 @@ const Header = () => {
                       </div>
                     </div>
                     <hr className="my-2 md:my-4" />
-                    <Navbar mediaQuery="mobile" />
+                    <Navbar open={setOpen} mediaQuery="mobile" />
                   </ul>
                 </div>
               </div>
