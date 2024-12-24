@@ -8,8 +8,10 @@ import Image from "next/image";
 import "./style.css";
 import FormCustomer from "@/components/form-customer";
 import HeroGift from "@/public/Hero.gif";
+import ImgPersonGroup from "@/public/group-image.svg";
 import ImgPerson from "@/public/img-person.svg";
 import HomeSection2 from "@/public/homesection-2.svg";
+import Link from "next/link";
 
 export default function Home() {
   const [visibleSections, setVisibleSections] = React.useState({
@@ -99,7 +101,7 @@ export default function Home() {
         }}
         initial="hidden"
         animate="show"
-        className="relative w-full min-h-[600px] xl:h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
+        className="relative w-full min-h-[600px] xl:h-dvh bg-primary flex justify-center pt-44 md:pt-0 md:items-center"
       >
         <Image
           // width={500}
@@ -127,14 +129,20 @@ export default function Home() {
             <br />
             to reach addressable audiences at scale.
           </h4>
-          <div className="w-full flex flex-col sm:flex-row justify-center gap-4 px-10 md:px-0 mt-10">
-            <button className="h-12 md:h-16 min-w-40 md:p-4 bg-foreground rounded-full text-primary md:text-xl font-semibold flex gap-1 items-center justify-center hover:opacity-50 transition-all duration-100">
+          <div className="w-full flex justify-center gap-2 lg:gap-4 px-10 md:px-0 mt-10">
+            <Link
+              href=""
+              className="btn btn-md lg:btn-lg rounded-badge bg-foreground text-primary hover:text-white"
+            >
               Get Started
-              <ArrowRight size={25} />
-            </button>
-            <button className="h-12 md:h-16 min-w-40 md:p-4 border-2 border-foreground rounded-full text-foreground md:text-xl font-semibold hover:bg-foreground hover:text-primary hover:opacity-50 transition-all duration-100">
+              <ArrowRight size={20} />
+            </Link>
+            <Link
+              href=""
+              className="btn btn-md lg:btn-lg rounded-badge border-white bg-transparent"
+            >
               Learn More
-            </button>
+            </Link>
           </div>
         </motion.div>
         <div className="absolute bottom-0 w-full h-40 bg-gradient-to-t from-background to-transparent z-10"></div>
@@ -144,7 +152,7 @@ export default function Home() {
       <motion.section
         id="section-testimony"
         ref={sectionRefs.testimony}
-        className="relative w-full h-[400px] sm:h-[600px] md:h-[800px] xl:h-full overflow-hidden bg-background lg:pt-40"
+        className="relative w-full h-[400px] sm:h-[600px] md:h-[800px] xl:h-full overflow-hidden bg-black lg:pt-40"
       >
         {visibleSections.testimony && (
           <>
@@ -354,26 +362,32 @@ export default function Home() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-        className="relative h-[400px] lg:h-[600px] px-[10%] w-full bg-foreground xl:px-0 overflow-hidden lg:overflow-visible"
+        className="relative h-auto xl:h-[600px] px-[10%] w-full bg-foreground xl:px-0 overflow-hidden lg:overflow-visible"
       >
-        <Image
-          fill
-          priority
-          objectFit="cover"
-          src={ImgPerson}
-          alt="Image-Person"
-          className="opacity-10 xl:hidden"
-        />
-        <div className="absolute xl:hidden bottom-0 top-0 right-0 h-full w-[300px] bg-gradient-to-l from-foreground to-transparent z-0"></div>
-        <div className="absolute xl:hidden bottom-0 top-0 left-0 h-full w-[300px] bg-gradient-to-r from-foreground to-transparent z-0"></div>
         {visibleSections.greeting && (
           <>
-            <div className="w-full xl:w-[52%] h-full flex justify-center flex-col gap-10 xl:pl-20 text-primary z-20">
+            <div className="w-full xl:w-[52%] h-full flex justify-center flex-col gap-6 lg:gap-10 xl:pl-20 text-primary z-20 py-10 xl:py-0">
+              <motion.div
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
+                className="w-full flex justify-center"
+              >
+                <Image
+                  width={500}
+                  height={500}
+                  priority
+                  objectFit="cover"
+                  src={ImgPersonGroup}
+                  alt="Image-Person"
+                  className="xl:hidden"
+                />
+              </motion.div>
               <motion.h1
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-                className="font-bold text-center xl:text-left"
+                className="font-boldtext-left"
               >
                 Welcome to CaptivAd
               </motion.h1>
@@ -381,15 +395,17 @@ export default function Home() {
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-                className=" text-center xl:text-left"
+                className="text-left"
               >
                 is your ultimate partner for dynamic advertising success. With
                 cutting-edge tools and expert media guidance, we handle daily ad
                 operations, navigate the evolving media landscape, and turn data
-                insights into actionable strategies. Let us help you build a
-                nimble digital marketing infrastructure that ensures your brand
-                not only survives but thrives in the competitive world of
-                advertising.
+                insights into actionable strategies.
+                <br />
+                <br />
+                Let us help you build a nimble digital marketing infrastructure
+                that ensures your brand not only survives but thrives in the
+                competitive world of advertising.
               </motion.p>
             </div>
 
@@ -420,7 +436,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-        className="relative h-[400px] md:h-[600px] w-full bg-background flex overflow-hidden"
+        className="relative h-[400px] md:h-[600px] w-full bg-primary flex overflow-hidden"
       >
         {visibleSections.transform && (
           <>

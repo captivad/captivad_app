@@ -33,7 +33,7 @@ const OptionItem = memo(
     <li
       role="option"
       aria-selected={isActive}
-      className={`min-h-14 lg:min-h-16 rounded-lg px-4 flex items-center cursor-pointer justify-between
+      className={`min-h-12 lg:min-h-16 rounded-lg px-4 flex items-center cursor-pointer justify-between
       ${isActive ? "bg-gray-600/10" : "hover:bg-gray-600/10"}`}
       onClick={onSelect}
     >
@@ -53,7 +53,7 @@ const SelectedTag = memo(
     option: IMultiselectOption;
     onRemove: () => void;
   }) => (
-    <div className="w-auto h-11 px-4 rounded-badge bg-white flex items-center gap-2 font-medium">
+    <div className="w-auto h-8 text-[11px] md:text-sm md:h-11 px-4 rounded-badge bg-white flex items-center gap-2 font-medium">
       {option.label}
       <button
         type="button"
@@ -64,7 +64,7 @@ const SelectedTag = memo(
         className="hover:bg-gray-600 rounded-full p-0.5 group"
         aria-label={`Remove ${option.label}`}
       >
-        <X size={20} className=" group-hover:text-white" />
+        <X size={15} className=" group-hover:text-white" />
       </button>
     </div>
   )
@@ -168,13 +168,13 @@ const Multiselect: React.FC<MultiselectProps> = ({
   return (
     <div
       ref={dropdownRef}
-      className={`relative min-h-16 bg-transparent w-full ${className}`}
+      className={`relative min-h-14 bg-transparent w-full ${className}`}
     >
       <div
         // role="combobox"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
-        className={`min-h-16 border-2 rounded-box flex items-center px-4 py-2 ${
+        className={`min-h-14 border-2 rounded-box flex items-center px-4 py-2 ${
           errors ? "border-red-500" : ""
         }`}
         onClick={() => {
@@ -225,7 +225,7 @@ const Multiselect: React.FC<MultiselectProps> = ({
 
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -100 }}
+          initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, ease: "easeOut", delay: 0.1 }}
           className="absolute top-full left-0 bg-white rounded-lg w-full mt-2 p-2 shadow-lg border border-gray-200 z-50"

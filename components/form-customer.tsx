@@ -78,13 +78,13 @@ const FormCustomer: React.FC = () => {
   // console.log(values, "values");
 
   return (
-    <div className="h-full w-full flex flex-col gap-4 lg:gap-0 lg:flex-row bg-background rounded-3xl p-[5%] lg:p-20 text-foreground">
-      <div className="relative w-full lg:w-1/2 flex h-full flex-col justify-between lg:overflow-hidden">
+    <div className="relative h-full w-full flex flex-col gap-4 lg:gap-10 lg:flex-row bg-background rounded-3xl p-[5%] lg:p-20 pb-0 text-foreground overflow-hidden">
+      <div className="w-full lg:w-1/2 flex h-full flex-col justify-between lg:overflow-hidden">
         <motion.div
           initial={{ opacity: 0, x: -100 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-          className="z-0 w-full h-full flex flex-col gap-10"
+          className="z-0 w-full h-full flex flex-col gap-4 lg:gap-10 text-center lg:text-left"
         >
           <h1 className="font-bold">
             Ready to Explore <br /> Digital Ads Potential?
@@ -95,33 +95,17 @@ const FormCustomer: React.FC = () => {
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-          className="hidden lg:block z-0 w-full h-full mt-10"
+          className="hidden lg:block z-0 w-full h-full mt-24"
         >
           <Image width={462.63} height={428.31} src={LogoForm} alt="" />
+          <div className="absolute -bottom-0 h-60 w-full bg-gradient-to-t from-background from-10% via-background/70 to-transparent"></div>
         </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-          className="absolute w-full h-[300px] lg:hidden top-0 right-0"
-        >
-          <Image
-            fill
-            priority
-            objectFit="cover"
-            src={LogoForm}
-            alt=""
-            className="opacity-20"
-          />
-          <div className="absolute -bottom-0 h-60 w-full bg-gradient-to-t from-background from-30% via-background/70 to-transparent"></div>
-        </motion.div>
-        <div className="hidden lg:block absolute -bottom-16 h-60 w-full bg-gradient-to-t from-background from-30% via-transparent to-transparent"></div>
       </div>
       <motion.form
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-        className="flex-1 w-full h-full flex flex-col gap-6 lg:gap-10"
+        className="flex-1 w-full h-full flex flex-col gap-6 lg:gap-10 z-10"
         onSubmit={handleSubmit}
       >
         <div>
@@ -181,21 +165,40 @@ const FormCustomer: React.FC = () => {
             } z-10 text-[14px] md:text-[16px] lg:text-[20px] flex min-h-36 w-full border-b-2 border-input outline-none bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50`}
           />
         </div>
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="md:h-16 min-w-56 p-4 bg-foreground rounded-full text-primary md:text-xl font-semibold flex gap-1 items-center justify-center hover:opacity-50 transition-all duration-100"
-        >
-          {isSubmitting ? (
-            "Sending..."
-          ) : (
-            <>
-              Let’s get started
-              <ArrowRight size={25} />
-            </>
-          )}
-        </button>
+        <div className="w-full flex justify-center my-10 lg:my-0">
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="h-10 md:h-16 min-w-44 max-w-44 md:min-w-52 md:max-w-52 lg:w-full lg:max-w-full p-4 bg-foreground rounded-full text-primary text-sm md:text-xl font-semibold flex gap-1 items-center justify-center hover:opacity-50 transition-all duration-100"
+          >
+            {isSubmitting ? (
+              "Sending..."
+            ) : (
+              <p className="flex items-center gap-2">
+                Send Inquery
+                <ArrowRight className="w-6 aspect-square" />
+              </p>
+            )}
+          </button>
+        </div>
       </motion.form>
+      <motion.div
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+        className="absolute flex justify-center w-full h-[300px] lg:hidden -bottom-20 m-auto mr-0 right-0 left-0 z-0"
+      >
+        <Image
+          width={600}
+          height={600}
+          priority
+          src={LogoForm}
+          alt=""
+          className="opacity-20"
+        />
+        <div className="absolute -bottom-0 h-60 w-full bg-gradient-to-t from-background from-30% via-background/70 to-transparent"></div>
+      </motion.div>
+      {/* <div className="hidden lg:block absolute -bottom-16 h-60 w-full bg-gradient-to-t from-background from-30% via-transparent to-transparent"></div> */}
     </div>
   );
 };

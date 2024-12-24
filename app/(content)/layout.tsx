@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import CaptivadLogoFooter from "@/public/LogoCaptivAd-black.svg";
-import { Accessibility } from "lucide-react";
+import CaptivadLogoFooter from "@/public/LogoCaptivAd-01.svg";
 import Header from "@/components/header";
 import { CONTACT_US, HOME, OUR_SERVICES } from "@/utils/router";
+import FacebbokIcon from "@/public/facebook-icon.svg";
+import IntagramIcon from "@/public/instagram-icon.svg";
+import XIcon from "@/public/x-icon.svg";
 
 export default function LayoutContent({
   children,
@@ -16,7 +18,13 @@ export default function LayoutContent({
 
       <main className="h-full">{children}</main>
       <footer className=" h-full w-full bg-foreground px-[10%] py-10 md:px-20">
-        <Image src={CaptivadLogoFooter} alt="logo" width={240} height={137} />
+        <Image
+          src={CaptivadLogoFooter}
+          alt="logo"
+          width={130}
+          height={130}
+          className="mb-4"
+        />
         <div className="grid grid-cols-1 lg:grid-cols-3 justify-between items-center gap-4">
           <div className="text-primary col-span-1 lg:col-span-2">
             <h6 className=" font-bold">CaptivAd Office</h6>
@@ -47,12 +55,26 @@ export default function LayoutContent({
         <div className="social media w-full justify-end grid grid-cols-1 lg:grid-cols-3 py-10 gap-2">
           <div className="col-span-2"></div>
           <div className="flex gap-4">
-            <Accessibility size={30} className="text-black" />
-            <Accessibility size={30} className="text-black" />
-            <Accessibility size={30} className="text-black" />
+            <Link href={""}>
+              {" "}
+              <Image src={FacebbokIcon} alt="facebook" width={30} height={30} />
+            </Link>
+            <Link href={""}>
+              {" "}
+              <Image
+                src={IntagramIcon}
+                alt="instagram"
+                width={30}
+                height={30}
+              />
+            </Link>
+            <Link href={""}>
+              {" "}
+              <Image src={XIcon} alt="x" width={30} height={30} />
+            </Link>
           </div>
         </div>
-        <div className="flex gap-4 text-gray-500 py-10">
+        <div className="flex text-[10px] lg:text-[16px] gap-4 text-gray-500 py-10">
           <span>© 2024 CaptivAd. All rights reserved.</span>
           <span>Privacy Policy</span>
           <span>Terms & Condition</span>

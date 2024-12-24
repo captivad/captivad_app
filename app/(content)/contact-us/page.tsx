@@ -12,7 +12,7 @@ export default function OurServices() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
         id="form"
-        className="lg:h-dvh p-[5%] lg:p-20 mt-32 bg-background"
+        className="h-full p-[5%] pb-0 lg:p-20 lg:pb-0 mt-32 bg-background"
       >
         <FormCustomer />
       </motion.section>
