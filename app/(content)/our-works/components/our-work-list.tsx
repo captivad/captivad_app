@@ -83,7 +83,7 @@ const OurWorkList = () => {
                     <div className="w-full flex justify-center mt-4">
                       <button
                         onClick={() => handleShowMore(category.id)}
-                        className="min-w-[200px] text-lg flex items-center justify-center gap-2 bg-foreground h-16 text-background font-semibold rounded-badge"
+                        className="btn btn-md lg:btn-lg rounded-badge bg-foreground text-primary hover:text-white"
                       >
                         Show More
                         <ChevronDown />
