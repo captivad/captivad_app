@@ -4,6 +4,7 @@ import { router } from "@/utils/router";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ButtonLogout from "./button-logout";
+import { useSession } from "next-auth/react";
 
 interface IProps {
   mediaQuery: "mobile" | "tablet" | "desktop";
@@ -13,11 +14,14 @@ interface IProps {
 export const Navbar = ({ mediaQuery, open }: IProps) => {
   const path = usePathname();
   console.log("/" + path.split("/")[1]);
+  const { data: session } = useSession();
 
   return (
     <>
       {router.map((item) => {
+        const token = session?.user.accessToken;
         if (mediaQuery === "desktop") {
+          if (item.authenticated && !token) return null;
           return (
             <Link
               onClick={() => open(false)}
@@ -31,6 +35,7 @@ export const Navbar = ({ mediaQuery, open }: IProps) => {
             </Link>
           );
         } else {
+          if (item.authenticated && !token) return null;
           return (
             <li
               onClick={() => open(false)}

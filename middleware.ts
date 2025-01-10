@@ -5,7 +5,7 @@ import { ResponseUnauthorized } from "./helpers/exception.helper";
 import { HOME } from "./utils/router";
 
 function authorizedApi(pathname: string) {
-  return pathname.startsWith("/api/admin/cona");
+  return pathname.startsWith("/api/admin");
 }
 
 export default async function middleware(req: NextRequest, res: NextResponse) {

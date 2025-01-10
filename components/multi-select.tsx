@@ -64,7 +64,7 @@ const SelectedTag = memo(
         className="hover:bg-gray-600 rounded-full p-0.5 group"
         aria-label={`Remove ${option.label}`}
       >
-        <X size={15} className=" group-hover:text-white" />
+        <X size={15} className="group-hover:text-white" />
       </button>
     </div>
   )
@@ -77,7 +77,7 @@ const Multiselect: React.FC<MultiselectProps> = ({
   onChange,
   value,
   className = "",
-  placeholder = "I'm Intrested in",
+  placeholder = "I'm Interested in",
   errors,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,12 +86,46 @@ const Multiselect: React.FC<MultiselectProps> = ({
     []
   );
   const [focusedOptionIndex, setFocusedOptionIndex] = useState(-1);
+  const [dropdownPosition, setDropdownPosition] = useState<"top" | "bottom">(
+    "bottom"
+  );
   const dropdownRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setSelectedOptions(value ?? []);
   }, [value]);
+
+  // Calculate dropdown position
+  const updateDropdownPosition = useCallback(() => {
+    if (!dropdownRef.current || !listRef.current) return;
+
+    const dropdownRect = dropdownRef.current.getBoundingClientRect();
+    const listHeight = 232; // Max height (200px) + padding and margins
+    const windowHeight = window.innerHeight;
+    const spaceBelow = windowHeight - dropdownRect.bottom;
+    const spaceAbove = dropdownRect.top;
+
+    if (spaceBelow < listHeight && spaceAbove > spaceBelow) {
+      setDropdownPosition("top");
+    } else {
+      setDropdownPosition("bottom");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isOpen) {
+      updateDropdownPosition();
+      window.addEventListener("scroll", updateDropdownPosition);
+      window.addEventListener("resize", updateDropdownPosition);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", updateDropdownPosition);
+      window.removeEventListener("resize", updateDropdownPosition);
+    };
+  }, [isOpen, updateDropdownPosition]);
 
   const filteredOptions = options.filter(
     (option) =>
@@ -171,7 +205,6 @@ const Multiselect: React.FC<MultiselectProps> = ({
       className={`relative min-h-14 bg-transparent w-full ${className}`}
     >
       <div
-        // role="combobox"
         aria-expanded={isOpen}
         aria-haspopup="listbox"
         className={`min-h-14 border-2 rounded-box flex items-center px-4 py-2 ${
@@ -225,10 +258,13 @@ const Multiselect: React.FC<MultiselectProps> = ({
 
       {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: -10 }}
+          ref={listRef}
+          initial={{ opacity: 0, y: dropdownPosition === "top" ? 10 : -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, ease: "easeOut", delay: 0.1 }}
-          className="absolute top-full left-0 bg-white rounded-lg w-full mt-2 p-2 shadow-lg border border-gray-200 z-50"
+          className={`absolute ${
+            dropdownPosition === "top" ? "bottom-full mb-2" : "top-full mt-2"
+          } left-0 bg-white rounded-lg w-full shadow-lg border border-gray-200 z-50`}
           role="listbox"
         >
           {filteredOptions.length === 0 ? (

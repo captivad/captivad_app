@@ -1,14 +1,15 @@
-import { NextAuthOptions } from "next-auth";
 import CredentialProvider from "next-auth/providers/credentials";
 import NextAuth from "next-auth/next";
 // import { LOGIN } from "@/router";
 import { login } from "./nextauth.service";
 import { LOGIN } from "@/utils/router";
+import { NextAuthOptions } from "next-auth";
 
 export interface IUserSession {
   id: string;
   email: string;
   roleId: number;
+  accessToken: string;
 }
 
 export interface ILoginPayload {
@@ -46,10 +47,11 @@ const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    async jwt({ token, user, account }: any) {
-      if (account?.providers === "credentials") {
+    async jwt({ token, user }: any) {
+      if (user) {
         token.uuid = user.id;
         token.email = user.email;
+        token.accessToken = user.accessToken;
       }
       return token;
     },

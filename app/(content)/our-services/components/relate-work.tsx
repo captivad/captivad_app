@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
-import { IPorfolios } from "@/app/api/admin/our-services/our-service.interface";
 import CardContent from "@/components/card-content";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { IOurWork } from "@/app/api/our-work/our-work.interface";
 
 interface IProps {
-  relateWork: IPorfolios[];
+  relateWork: IOurWork[];
 }
 
 const RelateWork: React.FC<IProps> = ({ relateWork }) => {
@@ -83,10 +83,8 @@ const RelateWork: React.FC<IProps> = ({ relateWork }) => {
               {relateWork.map((item, index) => (
                 <CardContent
                   key={index}
-                  uuid={item.uuid}
                   navigate={`/our-works/${item.title}?id=${item.uuid}`}
-                  thumbnail_url={item.thumbnail_url}
-                  title={item.title}
+                  data={item}
                 />
               ))}
             </div>

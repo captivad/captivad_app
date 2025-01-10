@@ -2,22 +2,36 @@
 
 import FormCustomer from "@/components/form-customer";
 import { motion } from "framer-motion";
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, Pencil, Plus, Trash2, Upload } from "lucide-react";
 import React from "react";
 import Image from "next/image";
 import BgSection1 from "@/public/our-service-section1.svg";
 import { OUR_SERVICES } from "@/utils/router";
-import ButtonNavigation from "@/components/button-navigation";
-import { IListGetService } from "@/app/api/admin/our-services/our-service.interface";
-import { useGetListService } from "./our-service.web.service";
+import { useDeleteService, useGetListService } from "./our-service.web.service";
 import Link from "next/link";
+import ModalAddService from "./components/ModalAddService";
+import { useSession } from "next-auth/react";
+import { StatusContent } from "@/prisma/prisma/client";
+import ModalEditService from "./components/ModalEditService";
+import { IListGetService } from "@/app/api/our-services/our-service.interface";
+import ModalConfirmAlert from "@/components/modal-confirm";
 
 export default function OurServices() {
-  const { data, isLoading } = useGetListService();
+  const { status } = useSession();
+  const { data, isLoading, refetch } = useGetListService();
   const [visibleSections, setVisibleSections] = React.useState({
     intro: false,
     accordion: false,
     form: false,
+  });
+  const [selectedService, setSelectedService] = React.useState<IListGetService>(
+    {} as IListGetService
+  );
+
+  const { mutate } = useDeleteService({
+    onSuccess: () => {
+      refetch();
+    },
   });
 
   const sectionRefs = React.useMemo(
@@ -112,49 +126,129 @@ export default function OurServices() {
         id="section-accordion"
         className="w-full h-auto bg-black p-[10%] lg:p-20 flex flex-col justify-center gap-1 md:gap-6"
       >
-        <ButtonNavigation
-          redirect={"/blog"}
-          className=" md:max-w-60 rounden-box"
-        >
-          <Plus size={25} />
-          Add Service
-        </ButtonNavigation>
+        {status === "authenticated" && (
+          <button
+            onClick={() => {
+              const modal = document.getElementById(
+                "my_modal_1"
+              ) as HTMLDialogElement;
+              if (modal) {
+                modal.showModal();
+              } else {
+                console.error("Modal element not found");
+              }
+            }}
+            className="btn md:max-w-60 rounden-box"
+          >
+            <Plus size={25} />
+            Add Service
+          </button>
+        )}
         {visibleSections.accordion &&
           !isLoading &&
-          (data as IListGetService[]).map((item, index) => (
-            <motion.div
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{
-                duration: 1,
-                ease: "easeOut",
-                delay: 0.4 + index / 5,
-              }}
-              key={index}
-              className="collapse collapse-arrow "
-            >
-              <input
-                type="radio"
-                name="my-accordion-2"
-                defaultChecked={index === 0}
-              />
-              <div className="collapse-title bg-transparent border-b-2 border-white font-bold">
-                <h3>{item.name_service}</h3>
-              </div>
-              <div className="collapse-content flex justify-between py-6 lg:items-center flex-col lg:flex-row gap-6">
-                <p className="w-[80%] lg:w-2/3">{item.description_service}</p>
-                <div>
-                  <Link
-                    href={`${OUR_SERVICES}/${item.name_service}?id=${item.uuid}`}
-                    className="btn btn-md lg:btn-lg rounded-badge bg-foreground text-primary hover:text-white"
-                  >
-                    Explore
-                    <ArrowRight size={20} />
-                  </Link>
+          ((data as IListGetService[]) || []).map((item, index) => {
+            const color = item.status == StatusContent.draft ? "blue" : "green";
+            return (
+              <motion.div
+                initial={{ opacity: 0, x: 100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{
+                  duration: 1,
+                  ease: "easeOut",
+                  delay: 0.4 + index / 5,
+                }}
+                key={index}
+                className="collapse collapse-arrow "
+              >
+                <input
+                  type="radio"
+                  name="my-accordion-2"
+                  defaultChecked={index === 0}
+                />
+                <div className="collapse-title bg-transparent border-b-2 border-white font-bold">
+                  <h3>
+                    {item.name_service}
+                    {status === "authenticated" && (
+                      <div
+                        style={{ backgroundColor: color }}
+                        className="ml-2 badge text-foreground"
+                      >
+                        {item.status}
+                      </div>
+                    )}
+                  </h3>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+                <div className="collapse-content">
+                  <div className="flex justify-between py-6 lg:items-center flex-col lg:flex-row gap-6">
+                    <p className="w-[80%] lg:w-2/3 whitespace-pre-line">
+                      {item.description_service}
+                    </p>
+                    <div>
+                      <Link
+                        href={`${OUR_SERVICES}/${item.name_service}?id=${item.uuid}`}
+                        className="btn btn-md lg:btn-lg rounded-badge bg-foreground text-primary hover:text-white"
+                      >
+                        Explore
+                        <ArrowRight size={20} />
+                      </Link>
+                    </div>
+                  </div>
+                  {status === "authenticated" && (
+                    <div className="flex gap-4 w-full pl-10">
+                      {item.status == StatusContent.draft && (
+                        <button
+                          className="tooltip tooltip-top"
+                          data-tip="Publish"
+                        >
+                          <kbd className="kbd bg-blue-700">
+                            <Upload size={18} color="white" />
+                          </kbd>
+                        </button>
+                      )}
+                      <button
+                        onClick={() => {
+                          setSelectedService(item);
+                          const modal = document.getElementById(
+                            "my_modal_2"
+                          ) as HTMLDialogElement;
+                          if (modal) {
+                            modal.showModal();
+                          } else {
+                            console.error("Modal element not found");
+                          }
+                        }}
+                        className="tooltip tooltip-top"
+                        data-tip="Edit"
+                      >
+                        <kbd className="kbd">
+                          <Pencil size={18} color="white" />
+                        </kbd>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setSelectedService(item);
+                          const modal = document.getElementById(
+                            `my_modal_${item.uuid}`
+                          ) as HTMLDialogElement;
+                          if (modal) {
+                            modal.showModal();
+                          } else {
+                            console.error("Modal element not found");
+                          }
+                        }}
+                        className="tooltip tooltip-top"
+                        data-tip="Delete"
+                      >
+                        <kbd className="kbd">
+                          <Trash2 size={18} color="white" />
+                        </kbd>
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
       </motion.section>
 
       {/* ###########################  section-form  ############################ */}
@@ -168,6 +262,17 @@ export default function OurServices() {
       >
         {visibleSections.form && <FormCustomer />}
       </motion.section>
+      <ModalAddService refetch={refetch} />
+      <ModalEditService refetch={refetch} data={selectedService} />
+      <ModalConfirmAlert
+        title="Delete Our Service"
+        description={`Are you sure want to delete ${selectedService.name_service}?`}
+        submitLabel="Delete"
+        id={selectedService.uuid!}
+        onSubmit={() => {
+          mutate(selectedService.uuid!);
+        }}
+      />
     </>
   );
 }

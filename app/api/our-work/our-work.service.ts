@@ -1,12 +1,13 @@
 import { captivadPrisma } from "@/prisma/prisma";
 import { StatusContent } from "@/prisma/prisma/client";
 import { HttpException } from "@/utils/HttpException";
-import { IOurWork, IResponseListCategoryWork } from "./our-work.interface";
+import { IResponseListCategoryWork } from "./our-work.interface";
 
-export const getListOurWork = async () => {
+export const getListOurWork = async (token: any) => {
   try {
+    const whereCondition = { deleted_dt: null, status: StatusContent.publish };
     const services = await captivadPrisma.portfolio.findMany({
-      where: { deleted_dt: null, status: StatusContent.publish },
+      where: whereCondition,
       orderBy: { created_dt: "asc" },
     });
 
@@ -17,16 +18,28 @@ export const getListOurWork = async () => {
   }
 };
 
-export const getListOurWorkCategory = async () => {
+export const getListOurWorkCategory = async (token: any) => {
   try {
     const category = await captivadPrisma.category.findMany({
       where: { deleted_dt: null },
       orderBy: { name: "asc" },
     });
 
+    let whereCondition: any = {
+      deleted_dt: null,
+      portfolio: { deleted_dt: null },
+    };
+
+    if (!token) {
+      whereCondition = {
+        deleted_dt: null,
+        portfolio: { status: StatusContent.publish },
+      };
+    }
+
     const portfolioCategory = await captivadPrisma.portfolioCategory.findMany({
-      where: { deleted_dt: null, portfolio: { status: StatusContent.publish } },
-      orderBy: { created_dt: "asc" },
+      where: whereCondition,
+      orderBy: { portfolio: { created_dt: "desc" } },
       include: {
         portfolio: true,
       },
@@ -69,7 +82,6 @@ export const getDetailWorkById = async (workId: string) => {
       where: {
         uuid: workId,
         deleted_dt: null,
-        status: StatusContent.publish,
       },
       include: {
         portfolio_category: {

@@ -5,8 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import { StatusContent } from "@/prisma/prisma/client";
 import { IPayloadCreateOurWork } from "./our-work.interface";
-import { getListOurWork, getListOurWorkCategory } from "./our-work.service";
-import { HttpException } from "@/utils/HttpException";
 
 export async function POST(req: NextRequest) {
   try {
@@ -95,27 +93,6 @@ export async function POST(req: NextRequest) {
     });
 
     return ResponseSuccess("Request create portfolio success");
-  } catch (error: any) {
-    console.log(error);
-    return ResponseError(500, error.message);
-  }
-}
-
-export async function GET(req: NextRequest) {
-  try {
-    const urlParams = req.nextUrl.searchParams;
-    const acction = urlParams.get("action");
-
-    switch (acction) {
-      case "list":
-        const responseList = await getListOurWork();
-        return ResponseSuccess(responseList);
-      case "category-work":
-        const responseCategoryWork = await getListOurWorkCategory();
-        return ResponseSuccess(responseCategoryWork);
-      default:
-        throw new HttpException(400, "Bad Request");
-    }
   } catch (error: any) {
     console.log(error);
     return ResponseError(500, error.message);

@@ -1,13 +1,17 @@
-import { ResponseError, ResponseSuccess } from "@/helpers/exception.helper";
 import { captivadPrisma } from "@/prisma/prisma";
 import { StatusContent } from "@/prisma/prisma/client";
 import { HttpException } from "@/utils/HttpException";
+import { video } from "framer-motion/client";
 
-export async function getListService() {
+export async function getListService(token: any) {
   try {
+    let whereCondition: any = { deleted_dt: null };
+    if (!token) {
+      whereCondition = { deleted_dt: null, status: StatusContent.publish };
+    }
     const services = await captivadPrisma.service.findMany({
-      where: { deleted_dt: null, status: StatusContent.publish },
-      orderBy: { created_dt: "asc" },
+      where: whereCondition,
+      orderBy: { created_dt: "desc" },
     });
 
     return services;
@@ -19,23 +23,13 @@ export async function getListService() {
 
 export async function getDetailServiceById(serviceId: string) {
   try {
+    const whereCondition: any = { deleted_dt: null, uuid: serviceId };
     const service = await captivadPrisma.service.findUnique({
-      where: {
-        uuid: serviceId,
-        deleted_dt: null,
-        status: StatusContent.publish,
-      },
+      where: whereCondition,
       include: {
         portfolio_service: {
           include: {
-            portfolio: {
-              select: {
-                uuid: true,
-                thumbnail_url: true,
-                title: true,
-                status: true,
-              },
-            },
+            portfolio: true,
           },
         },
       },
@@ -57,6 +51,10 @@ export async function getDetailServiceById(serviceId: string) {
           title: item.portfolio.title,
           thumbnail_url: item.portfolio.thumbnail_url,
           status: item.portfolio.status,
+          video_image_url: item.portfolio.video_image_url,
+          objectiv_content: item.portfolio.objectiv_content,
+          key_result_content: item.portfolio.key_result_content,
+          description: item.portfolio.description,
         }))
         .filter((item) => item.status === StatusContent.publish),
     };

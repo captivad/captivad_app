@@ -4,13 +4,19 @@ import ButtonNavigation from "@/components/button-navigation";
 import { ChevronDown, Plus } from "lucide-react";
 import { useGetOurWork } from "../our-work.web.service";
 import React from "react";
-import { IResponseListCategoryWork } from "@/app/api/admin/our-work/our-work.interface";
 import { motion } from "framer-motion";
 import CardContent from "@/components/card-content";
 import SkeletonWorkCard from "./skeleton-work-card";
+import { IResponseListCategoryWork } from "@/app/api/our-work/our-work.interface";
+import { useSession } from "next-auth/react";
+import ModalAddWork from "./ModalAddWork";
+import { CldVideoPlayer } from "next-cloudinary";
 
 const OurWorkList = () => {
-  const { data, isLoading } = useGetOurWork();
+  const { status, data: session } = useSession();
+  console.log(session);
+
+  const { data, isLoading, refetch } = useGetOurWork();
   const [showMore, setShowMore] = React.useState<Map<number, number>>(
     new Map()
   );
@@ -38,13 +44,24 @@ const OurWorkList = () => {
     <>
       {/* ###########################  section-2  ############################ */}
       <section className="px-[10%] pb-20 lg:px-20 w-full h-full flex flex-col gap-20">
-        <ButtonNavigation
-          redirect={"/blog"}
-          className=" md:max-w-60 rounden-box"
-        >
-          <Plus size={25} />
-          Add Portfolio
-        </ButtonNavigation>
+        {status === "authenticated" && (
+          <button
+            onClick={() => {
+              const modal = document.getElementById(
+                "my_modal_add_portfolio"
+              ) as HTMLDialogElement;
+              if (modal) {
+                modal.showModal();
+              } else {
+                console.error("Modal element not found");
+              }
+            }}
+            className="btn md:max-w-60 rounden-box"
+          >
+            <Plus size={25} />
+            Add Portfolio
+          </button>
+        )}
         {isLoading && <SkeletonWorkCard />}
         {!isLoading &&
           data &&
@@ -69,11 +86,9 @@ const OurWorkList = () => {
                     .slice(0, showMore.get(category.id) || 2)
                     .map((item, index) => (
                       <CardContent
-                        uuid={item.uuid}
                         navigate={`/our-works/${item.title}?id=${item.uuid}`}
-                        thumbnail_url={item.thumbnail_url}
-                        title={item.title}
                         key={index}
+                        data={item}
                       />
                     ))}
                 </div>
@@ -94,6 +109,7 @@ const OurWorkList = () => {
             );
           })}
       </section>
+      <ModalAddWork refetch={refetch} />
     </>
   );
 };
