@@ -4,7 +4,10 @@ import { captivadPrisma } from "@/prisma/prisma";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import { StatusContent } from "@/prisma/prisma/client";
-import { IPayloadCreateOurWork } from "./our-work.interface";
+import {
+  IPayloadCreateOurWork,
+  IPayloadEditOurWork,
+} from "./our-work.interface";
 
 export async function POST(req: NextRequest) {
   try {

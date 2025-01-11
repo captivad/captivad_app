@@ -7,14 +7,15 @@ interface IProps {
   navigate: string;
   key?: string | number;
   data?: IOurWork;
+  refach?: () => void;
 }
 
-const CardContent: React.FC<IProps> = ({ navigate, key, data }) => {
+const CardContent: React.FC<IProps> = ({ navigate, key, data, refach }) => {
   console.log(data, "data");
 
   return (
     <div className="relative w-[300px] h-[190px] lg:min-w-[413px] lg:min-h-[275px] rounded-box overflow-hidden group transition-all">
-      <CardContentAction data={data} />
+      <CardContentAction data={data} refach={refach} />
       <Link key={key} href={navigate} className="">
         <CldImage
           priority

@@ -7,7 +7,11 @@ import React from "react";
 import Image from "next/image";
 import BgSection1 from "@/public/our-service-section1.svg";
 import { OUR_SERVICES } from "@/utils/router";
-import { useDeleteService, useGetListService } from "./our-service.web.service";
+import {
+  useDeleteService,
+  useEditService,
+  useGetListService,
+} from "./our-service.web.service";
 import Link from "next/link";
 import ModalAddService from "./components/ModalAddService";
 import { useSession } from "next-auth/react";
@@ -15,6 +19,8 @@ import { StatusContent } from "@/prisma/prisma/client";
 import ModalEditService from "./components/ModalEditService";
 import { IListGetService } from "@/app/api/our-services/our-service.interface";
 import ModalConfirmAlert from "@/components/modal-confirm";
+import toast from "react-hot-toast";
+import { IPayloadUpdateOurService } from "@/app/api/admin/our-services/our-service.interface";
 
 export default function OurServices() {
   const { status } = useSession();
@@ -27,9 +33,18 @@ export default function OurServices() {
   const [selectedService, setSelectedService] = React.useState<IListGetService>(
     {} as IListGetService
   );
+  const [isOpen, setIsOpen] = React.useState<string>("");
 
   const { mutate } = useDeleteService({
     onSuccess: () => {
+      toast.success("Delete Our Service Success");
+      refetch();
+    },
+  });
+
+  const { mutate: mutateEdit } = useEditService({
+    onSuccess: () => {
+      toast.success("Edit Our Service Success");
       refetch();
     },
   });
@@ -195,16 +210,46 @@ export default function OurServices() {
                   </div>
                   {status === "authenticated" && (
                     <div className="flex gap-4 w-full pl-10">
-                      {item.status == StatusContent.draft && (
-                        <button
-                          className="tooltip tooltip-top"
-                          data-tip="Publish"
+                      <button
+                        onClick={async () => {
+                          setIsOpen("status");
+                          setSelectedService(item);
+                          const modal = document.getElementById(
+                            `my_modal_${item.uuid}`
+                          ) as HTMLDialogElement;
+                          if (modal) {
+                            modal.showModal();
+                          } else {
+                            console.error("Modal element not found");
+                          }
+                        }}
+                        className="tooltip tooltip-top"
+                        data-tip={
+                          item.status == StatusContent.draft
+                            ? "Publish"
+                            : "Unpublish"
+                        }
+                      >
+                        <kbd
+                          style={{
+                            backgroundColor:
+                              item.status == StatusContent.draft
+                                ? "blue"
+                                : "red",
+                          }}
+                          className="kbd"
                         >
-                          <kbd className="kbd bg-blue-700">
-                            <Upload size={18} color="white" />
-                          </kbd>
-                        </button>
-                      )}
+                          <Upload
+                            size={18}
+                            color="white"
+                            className={`${
+                              item.status === StatusContent.publish
+                                ? "rotate-180"
+                                : ""
+                            }`}
+                          />
+                        </kbd>
+                      </button>
                       <button
                         onClick={() => {
                           setSelectedService(item);
@@ -226,6 +271,7 @@ export default function OurServices() {
                       </button>
                       <button
                         onClick={() => {
+                          setIsOpen("delete");
                           setSelectedService(item);
                           const modal = document.getElementById(
                             `my_modal_${item.uuid}`
@@ -264,15 +310,55 @@ export default function OurServices() {
       </motion.section>
       <ModalAddService refetch={refetch} />
       <ModalEditService refetch={refetch} data={selectedService} />
-      <ModalConfirmAlert
-        title="Delete Our Service"
-        description={`Are you sure want to delete ${selectedService.name_service}?`}
-        submitLabel="Delete"
-        id={selectedService.uuid!}
-        onSubmit={() => {
-          mutate(selectedService.uuid!);
-        }}
-      />
+      {isOpen === "delete" && (
+        <ModalConfirmAlert
+          title="Delete Our Service"
+          description={`Are you sure want to delete ${selectedService.name_service}?`}
+          submitLabel="Delete"
+          id={selectedService.uuid!}
+          onSubmit={() => {
+            mutate(selectedService.uuid!);
+          }}
+        />
+      )}
+      {isOpen === "status" && (
+        <ModalConfirmAlert
+          title={
+            selectedService.status === StatusContent.publish
+              ? "Unpublish"
+              : "Publish"
+          }
+          description={`Are you sure want to ${
+            selectedService.status === StatusContent.publish
+              ? "unpublish"
+              : "publish"
+          } ${selectedService.name_service}?`}
+          submitLabel={
+            selectedService.status === StatusContent.publish
+              ? "Unpublish"
+              : "Publish"
+          }
+          id={selectedService.uuid!}
+          onSubmit={() => {
+            mutateEdit({
+              payload: {
+                nameService: selectedService.name_service,
+                descriptionService: selectedService.description_service,
+                detailTitle: selectedService.detail_title,
+                mainContatent: selectedService.main_content,
+                status:
+                  selectedService.status === StatusContent.publish
+                    ? "draft"
+                    : "publish",
+              } as IPayloadUpdateOurService,
+              id: selectedService.uuid!,
+            });
+          }}
+          color={
+            selectedService.status === StatusContent.publish ? "red" : "blue"
+          }
+        />
+      )}
     </>
   );
 }

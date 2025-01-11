@@ -29,7 +29,20 @@ export async function getDetailServiceById(serviceId: string) {
       include: {
         portfolio_service: {
           include: {
-            portfolio: true,
+            portfolio: {
+              include: {
+                portfolio_category: {
+                  include: {
+                    category: true,
+                  },
+                },
+                portfolio_service: {
+                  include: {
+                    service: true,
+                  },
+                },
+              },
+            },
           },
         },
       },
@@ -47,14 +60,15 @@ export async function getDetailServiceById(serviceId: string) {
       main_content: service.main_content,
       portfolios: service.portfolio_service
         .map((item) => ({
-          uuid: item.portfolio.uuid,
-          title: item.portfolio.title,
-          thumbnail_url: item.portfolio.thumbnail_url,
-          status: item.portfolio.status,
-          video_image_url: item.portfolio.video_image_url,
-          objectiv_content: item.portfolio.objectiv_content,
-          key_result_content: item.portfolio.key_result_content,
-          description: item.portfolio.description,
+          ...item.portfolio,
+          portfolio_category: item.portfolio.portfolio_category.map((item) => ({
+            category_id: item.category.id,
+            category_name: item.category.name,
+          })),
+          portfolio_service: item.portfolio.portfolio_service.map((item) => ({
+            service_uuid: item.service.uuid,
+            service_name: item.service.name_service,
+          })),
         }))
         .filter((item) => item.status === StatusContent.publish),
     };

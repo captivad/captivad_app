@@ -61,7 +61,7 @@ const SelectedTag = memo(
           e.stopPropagation();
           onRemove();
         }}
-        className="hover:bg-gray-600 rounded-full p-0.5 group"
+        className="bg-gray-600/30 hover:bg-gray-600 rounded-full p-0.5 group"
         aria-label={`Remove ${option.label}`}
       >
         <X size={15} className="group-hover:text-white" />

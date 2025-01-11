@@ -46,7 +46,8 @@ export default function FileUpload() {
       dataAssets?.payload?.rows.length &&
       dataAssets?.payload?.rows.length > 0
     ) {
-      setAssets([...assets, ...dataAssets?.payload?.rows]);
+      const assetData = dataAssets?.payload?.rows;
+      setAssets((prev) => [...prev, ...assetData]);
     }
   }, [dataAssets?.payload?.rows, setAssets]);
 
@@ -121,7 +122,10 @@ export default function FileUpload() {
                   );
                 } else if (item.resource_type == "video") {
                   return (
-                    <div className="col-span-1 w-[330px] scale-100 rounded-lg overflow-hidden relative">
+                    <div
+                      key={item.public_id}
+                      className="col-span-1 w-[330px] scale-100 rounded-lg overflow-hidden relative"
+                    >
                       <button
                         onClick={() => handleCopyLink(item.url)}
                         className="btn btn-md tooltip btn-circle absolute top-2 right-2 flex justify-center items-center z-20"

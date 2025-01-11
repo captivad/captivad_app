@@ -1,5 +1,5 @@
 import { captivadPrisma } from "@/prisma/prisma";
-import { StatusContent } from "@/prisma/prisma/client";
+import { PortfolioCategory, StatusContent } from "@/prisma/prisma/client";
 import { HttpException } from "@/utils/HttpException";
 import { IResponseListCategoryWork } from "./our-work.interface";
 
@@ -41,7 +41,30 @@ export const getListOurWorkCategory = async (token: any) => {
       where: whereCondition,
       orderBy: { portfolio: { created_dt: "desc" } },
       include: {
-        portfolio: true,
+        portfolio: {
+          include: {
+            portfolio_category: {
+              select: {
+                category: {
+                  select: {
+                    id: true,
+                    name: true,
+                  },
+                },
+              },
+            },
+            portfolio_service: {
+              select: {
+                service: {
+                  select: {
+                    uuid: true,
+                    name_service: true,
+                  },
+                },
+              },
+            },
+          },
+        },
       },
     });
 
@@ -52,10 +75,26 @@ export const getListOurWorkCategory = async (token: any) => {
 
     const categoryPortfolioMap = new Map();
     portfolioCategory.forEach((item) => {
+      const enrichedPortfolio = {
+        ...item.portfolio,
+        portfolio_category: item.portfolio.portfolio_category.map((item) => {
+          return {
+            category_id: item.category.id,
+            category_name: item.category.name,
+          };
+        }),
+        portfolio_service: item.portfolio.portfolio_service.map((item) => {
+          return {
+            service_uuid: item.service.uuid,
+            service_name: item.service.name_service,
+          };
+        }),
+      };
+
       if (categoryPortfolioMap.has(item.category_id)) {
-        categoryPortfolioMap.get(item.category_id).push(item.portfolio);
+        categoryPortfolioMap.get(item.category_id).push(enrichedPortfolio);
       } else {
-        categoryPortfolioMap.set(item.category_id, [item.portfolio]);
+        categoryPortfolioMap.set(item.category_id, [enrichedPortfolio]);
       }
     });
 

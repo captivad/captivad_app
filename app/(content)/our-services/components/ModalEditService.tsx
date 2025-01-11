@@ -1,5 +1,8 @@
 "use client";
-import { IPayloadCreateOurService } from "@/app/api/admin/our-services/our-service.interface";
+import {
+  IPayloadCreateOurService,
+  IPayloadUpdateOurService,
+} from "@/app/api/admin/our-services/our-service.interface";
 import { useFormik } from "formik";
 import { FC } from "react";
 import * as Yup from "yup";
@@ -33,13 +36,14 @@ const ModalEditService: FC<IProps> = ({ refetch, data }) => {
   });
 
   const { handleSubmit, handleChange, values, errors, resetForm, setValues } =
-    useFormik<IPayloadCreateOurService>({
+    useFormik<IPayloadUpdateOurService>({
       initialValues: {
         nameService: data.name_service,
         descriptionService: data.description_service,
         detailTitle: data.detail_title,
         mainContatent: data.main_content,
-      } as IPayloadCreateOurService,
+        status: data.status,
+      } as IPayloadUpdateOurService,
       validationSchema: validationSchema,
       onSubmit: (values) => {
         mutate({
@@ -55,6 +59,7 @@ const ModalEditService: FC<IProps> = ({ refetch, data }) => {
       descriptionService: data.description_service,
       detailTitle: data.detail_title,
       mainContatent: data.main_content,
+      status: data.status,
     });
   }, [data, setValues]);
 

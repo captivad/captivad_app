@@ -54,12 +54,24 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
     }));
   }, [listCategory]);
 
+  const [valueSelectedService, setValueSelectedService] = React.useState<
+    IMultiselectOption[]
+  >([]);
+  const [valueSelectedCategory, setValueSelectedCategory] = React.useState<
+    IMultiselectOption[]
+  >([]);
+
   const { mutate, isPending } = useCreateOurWork({
     onSuccess: () => {
       refetch && refetch(); // Refetch data setelah sukses
       resetForm(); // Reset form setelah submit
-      const modal = document.getElementById("my_modal_1") as HTMLDialogElement;
-      modal?.close(); // Menutup modal
+      setValueSelectedCategory([]);
+      setValueSelectedService([]);
+
+      const modal = document.getElementById(
+        "my_modal_add_ourwork"
+      ) as HTMLDialogElement;
+      modal?.close();
       toast.success("Add Our Service Success");
     },
   });
@@ -101,15 +113,17 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
   console.log(errors.videoImageUrl, "videoImageUrl");
 
   return (
-    <dialog id="my_modal_add_portfolio" className="modal">
+    <dialog id="my_modal_add_ourwork" className="modal">
       <div className="modal-box w-11/12 max-w-7xl">
         <div className="flex justify-between">
           <h3 className="font-bold">Add Porfolio</h3>
           <button
             onClick={() => {
+              setValueSelectedCategory([]);
+              setValueSelectedService([]);
               resetForm();
               const modal = document.getElementById(
-                "my_modal_add_portfolio"
+                "my_modal_add_ourwork"
               ) as HTMLDialogElement;
               modal?.close();
             }}
@@ -217,7 +231,9 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
                       "categoryIds",
                       selected.map((item) => item.value).join(",")
                     );
+                    setValueSelectedCategory(selected);
                   }}
+                  value={valueSelectedCategory}
                   errors={
                     errors.categoryIds && touched.categoryIds
                       ? errors.categoryIds
@@ -239,7 +255,9 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
                       "serviceIds",
                       selected.map((item) => item.value).join(",")
                     );
+                    setValueSelectedService(selected);
                   }}
+                  value={valueSelectedService}
                   errors={
                     errors.serviceIds && touched.serviceIds
                       ? errors.serviceIds
@@ -255,7 +273,7 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
               <div>
                 <label className="label">
                   <span className="label-text text-foreground font-bold">
-                    Tumbnail URL <span className="text-error">*</span>
+                    Tumbnail URL (Image) <span className="text-error">*</span>
                   </span>
                 </label>
                 <div className="flex gap-2">

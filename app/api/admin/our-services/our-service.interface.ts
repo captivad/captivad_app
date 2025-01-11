@@ -1,5 +1,4 @@
 import { StatusContent } from "@/prisma/prisma/client";
-import { string } from "yup";
 
 export interface IPayloadCreateOurService {
   nameService: string;
@@ -8,7 +7,9 @@ export interface IPayloadCreateOurService {
   mainContatent: string;
 }
 
-export interface IPayloadUpdateOurService extends IPayloadCreateOurService {}
+export interface IPayloadUpdateOurService extends IPayloadCreateOurService {
+  status: StatusContent;
+}
 
 export interface IPayloadUpdateStatusContent {
   status: StatusContent;

@@ -12,6 +12,7 @@ export async function PUT(
   try {
     const serviceId = params.id as string;
     const body = (await req.json()) as IPayloadUpdateOurService;
+
     const servicedata = await captivadPrisma.service.findUnique({
       where: { uuid: serviceId, deleted_dt: null },
     });
@@ -25,6 +26,7 @@ export async function PUT(
     servicedata.description_service =
       body.descriptionService || servicedata.description_service;
     servicedata.name_service = body.nameService || servicedata.name_service;
+    servicedata.status = body.status || servicedata.status;
 
     await captivadPrisma.service.update({
       where: { uuid: serviceId },

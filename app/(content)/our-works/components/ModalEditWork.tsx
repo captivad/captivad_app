@@ -1,16 +1,17 @@
 "use client";
 
 import { useFormik } from "formik";
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
 import { Clipboard, X } from "lucide-react";
+import { useGetListService } from "../../our-services/our-service.web.service";
 import {
-  useCreateService,
-  useGetListService,
-} from "../../our-services/our-service.web.service";
-import { useCreateOurWork, useGetCategory } from "../our-work.web.service";
-import { IPayloadCreateOurWork } from "@/app/api/admin/our-work/our-work.interface";
+  useCreateOurWork,
+  useEditOurWork,
+  useGetCategory,
+} from "../our-work.web.service";
+import { IPayloadEditOurWorkFormik } from "@/app/api/admin/our-work/our-work.interface";
 import { CldImage, CldVideoPlayer } from "next-cloudinary";
 import Link from "next/link";
 import { MEDIA } from "@/utils/router";
@@ -30,8 +31,8 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
     keyResult: Yup.string().required("Key Result is required"),
     thumbnailUrl: Yup.string().url().required("Thumbnail is required"),
     videoImageUrl: Yup.string().url().required("Video is required"),
-    serviceIds: Yup.string().required("Service is required"),
-    categoryIds: Yup.string().required("Category is required"),
+    // serviceIds: Yup.string().required("Service is required"),
+    // categoryIds: Yup.string().required("Category is required"),
   });
 
   //list service options
@@ -56,13 +57,16 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
     }));
   }, [listCategory]);
 
-  const { mutate, isPending } = useCreateOurWork({
+  const { mutate, isPending } = useEditOurWork({
     onSuccess: () => {
       refetch && refetch(); // Refetch data setelah sukses
-      resetForm(); // Reset form setelah submit
-      const modal = document.getElementById("my_modal_1") as HTMLDialogElement;
+      // resetForm(); // Reset form setelah submit
+      const modal = document.getElementById(
+        `my_modal_edit_work_${data.uuid}`
+      ) as HTMLDialogElement;
       modal?.close(); // Menutup modal
       toast.success("Add Our Service Success");
+      document.location.reload();
     },
   });
 
@@ -76,7 +80,7 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
     setFieldValue,
     setFieldError,
     setValues,
-  } = useFormik<IPayloadCreateOurWork>({
+  } = useFormik<IPayloadEditOurWorkFormik>({
     initialValues: {
       title: "",
       description: "",
@@ -84,12 +88,15 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
       keyResult: "",
       thumbnailUrl: "",
       videoImageUrl: "",
-      serviceIds: "",
-      categoryIds: "",
+      serviceIds: [],
+      categoryIds: [],
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      mutate(values);
+      mutate({
+        id: data.uuid,
+        payload: values,
+      });
     },
   });
 
@@ -102,24 +109,37 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
   };
 
   React.useEffect(() => {
-    if (data) {
-      setValues({
-        title: data.title,
-        description: data.description,
-        objective: data.objectiv_content,
-        keyResult: data.key_result_content,
-        thumbnailUrl: data.thumbnail_url,
-        videoImageUrl: data.video_image_url,
-        serviceIds: "",
-        categoryIds: "",
-      });
-    }
-  }, [data]);
+    setValues({
+      title: data.title,
+      description: data.description,
+      objective: data.objectiv_content,
+      keyResult: data.key_result_content,
+      thumbnailUrl: data.thumbnail_url,
+      videoImageUrl: data.video_image_url,
+      serviceIds:
+        data.portfolio_service && data.portfolio_service.length > 0
+          ? data.portfolio_service.map((item, _i) => ({
+              id: _i,
+              value: item.service_uuid,
+              label: item.service_name,
+            }))
+          : [],
+      categoryIds:
+        data.portfolio_category && data.portfolio_category.length > 0
+          ? data.portfolio_category.map((item, _i) => ({
+              id: _i,
+              value: String(item.category_id),
+              label: item.category_name,
+            }))
+          : [],
+    });
+  }, [data, setValues]);
+
   return (
     <dialog id={`my_modal_edit_work_${data.uuid}`} className="modal">
       <div className="modal-box w-11/12 max-w-7xl">
         <div className="flex justify-between">
-          <h3 className="font-bold">Add Porfolio</h3>
+          <h3 className="font-bold">Edit Porfolio</h3>
           <button
             onClick={() => {
               resetForm();
@@ -228,16 +248,14 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
                   options={categoryOptions}
                   placeholder="select category"
                   onChange={(selected) => {
-                    setFieldValue(
-                      "categoryIds",
-                      selected.map((item) => item.value).join(",")
-                    );
+                    setFieldValue("categoryIds", selected);
                   }}
-                  errors={
-                    errors.categoryIds && touched.categoryIds
-                      ? errors.categoryIds
-                      : ""
-                  }
+                  value={values.categoryIds}
+                  // errors={
+                  //   errors.categoryIds && touched.categoryIds
+                  //     ? errors.categoryIds
+                  //     : ""
+                  // }
                 />
               </div>
               <div>
@@ -250,16 +268,14 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
                   options={serviceOptions as IMultiselectOption[]}
                   placeholder="select service"
                   onChange={(selected) => {
-                    setFieldValue(
-                      "serviceIds",
-                      selected.map((item) => item.value).join(",")
-                    );
+                    setFieldValue("serviceIds", selected);
                   }}
-                  errors={
-                    errors.serviceIds && touched.serviceIds
-                      ? errors.serviceIds
-                      : ""
-                  }
+                  value={values.serviceIds}
+                  // errors={
+                  //   errors.serviceIds && touched.serviceIds
+                  //     ? errors.serviceIds
+                  //     : ""
+                  // }
                 />
               </div>
             </div>
@@ -270,7 +286,7 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
               <div>
                 <label className="label">
                   <span className="label-text text-foreground font-bold">
-                    Tumbnail URL <span className="text-error">*</span>
+                    Tumbnail URL (Image) <span className="text-error">*</span>
                   </span>
                 </label>
                 <div className="flex gap-2">

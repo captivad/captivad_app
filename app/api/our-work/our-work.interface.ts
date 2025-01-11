@@ -1,12 +1,24 @@
+export interface IOurWorkCategory {
+  category_id: number;
+  category_name: string;
+}
+
+export interface IOurWorkService {
+  service_uuid: string;
+  service_name: string;
+}
+
 export interface IOurWork {
   uuid: string;
   title: string;
-  thumbnail_url: string;
   description: string;
   objectiv_content: string;
   key_result_content: string;
+  thumbnail_url: string;
   video_image_url: string;
   status: string;
+  portfolio_category: IOurWorkCategory[];
+  portfolio_service: IOurWorkService[];
 }
 
 export interface IResponseListCategoryWork {
@@ -24,7 +36,7 @@ export interface IPortfolioCategory {
   category: ICategory;
 }
 
-export interface IResponseOurWork {
+export interface IResponseOurWorkDetail {
   uuid: string;
   title: string;
   description: string;
