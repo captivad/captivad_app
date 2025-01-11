@@ -16,7 +16,9 @@ const ButtonLogout: React.FC = () => {
         <button
           onClick={async () => {
             try {
-              await signOut();
+              await signOut({
+                callbackUrl: LOGIN,
+              });
             } catch (error) {
               toast.error("Logout failed!");
             }
