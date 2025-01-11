@@ -1,4 +1,5 @@
 import moment from "moment";
+import toast from "react-hot-toast";
 
 interface ITextLimit {
   text: string;
@@ -23,4 +24,9 @@ export const dateRange = ({ createdDt }: IDateRange): string => {
   } else {
     return `${moment(createdDt).format("MMM DD, YYYY")}`;
   }
+};
+
+export const handleCopyLink = (link: string) => {
+  navigator.clipboard.writeText(link);
+  toast.success("Link copied to clipboard");
 };

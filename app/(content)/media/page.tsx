@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { LOGIN } from "@/utils/router";
 import { Copy } from "lucide-react";
 import toast from "react-hot-toast";
+import { handleCopyLink } from "@/utils/general";
 
 export default function FileUpload() {
   const { status } = useSession();
@@ -34,11 +35,6 @@ export default function FileUpload() {
       setNextCursor(dataAssets.payload.nextCursor);
       refetch();
     }
-  };
-
-  const handleCopyLink = (link: string) => {
-    navigator.clipboard.writeText(link);
-    toast.success("Link copied to clipboard");
   };
 
   React.useEffect(() => {
