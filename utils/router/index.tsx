@@ -50,7 +50,7 @@ export const router: IRouter[] = [
     path: BLOG,
     label: "Blog",
     icon: <Globe size={20} />,
-    authenticated: false,
+    authenticated: true,
   },
   {
     path: CONTACT_US,

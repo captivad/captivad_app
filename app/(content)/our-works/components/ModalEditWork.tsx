@@ -18,6 +18,7 @@ import { MEDIA } from "@/utils/router";
 import MultiSelect, { IMultiselectOption } from "@/components/multi-select";
 import React from "react";
 import { IOurWork } from "@/app/api/our-work/our-work.interface";
+import "next-cloudinary/dist/cld-video-player.css";
 interface IProps {
   refetch?: () => void;
   data: IOurWork;
@@ -366,38 +367,34 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
                     <Clipboard size={20} />
                   </label>
                 </div>
-                <div className="overflow-hidden grid grid-cols-1">
+                <div className="overflow-hidden">
                   {values.videoImageUrl &&
                   !errors.videoImageUrl &&
                   values.videoImageUrl.includes("image") ? (
-                    <div className="col-span-1">
-                      <CldImage
-                        className="object-cover mt-2"
-                        width="960"
-                        height="600"
-                        src={values.videoImageUrl}
-                        onError={() => {
-                          console.log("error");
-                          setFieldError(
-                            "videoImageUrl",
-                            "URL is not valid, please enter a valid URL."
-                          );
-                        }}
-                        sizes="100vw"
-                        alt=""
-                      />
-                    </div>
+                    <CldImage
+                      className="object-cover mt-2"
+                      width="1920"
+                      height="1080"
+                      src={values.videoImageUrl}
+                      onError={() => {
+                        console.log("error");
+                        setFieldError(
+                          "videoImageUrl",
+                          "URL is not valid, please enter a valid URL."
+                        );
+                      }}
+                      sizes="100vw"
+                      alt=""
+                    />
                   ) : values.videoImageUrl &&
                     values.videoImageUrl.includes("video") &&
                     !errors.videoImageUrl ? (
-                    <div className="col-span-1 w-[300px] scale-50">
-                      <CldVideoPlayer
-                        width="1920"
-                        height="1080"
-                        src={values.videoImageUrl}
-                        fontFace="DM Sans"
-                      />
-                    </div>
+                    <CldVideoPlayer
+                      width="1920"
+                      height="1080"
+                      src={values.videoImageUrl}
+                      fontFace="DM Sans"
+                    />
                   ) : null}
                 </div>
 

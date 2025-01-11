@@ -7,6 +7,7 @@ import BackButton from "@/components/button-back";
 import { fetchDataDetailWorkById } from "../our-work.web.service";
 import { Metadata } from "next";
 import { metadata } from "@/app/layout";
+import VideoComponent from "../components/VIdeoComponent";
 
 async function generateStaticData({
   searchParams,
@@ -82,16 +83,20 @@ export default async function OurWorksDetail({
       {/* ###########################  section-2  ############################ */}
       <section className="p-[10%] xl:pt-0 xl:pb-20 lg:px-20 w-full h-auto grid grid-cols-1 2xl:grid-cols-2 gap-10">
         <div className="w-full col-span-1 flex items-center justify-center">
-          <div className="relative w-[450px] scale-100 sm:min-w-[571px] rounded-box overflow-hidden">
-            <Image
-              priority
-              src={data?.video_image_url || Contentlaptop}
-              alt="picture-content"
-              objectFit="cover"
-              height={500}
-              width={500}
-              className="w-full h-full object-cover"
-            />
+          <div className="relative w-full aspect-video max-w-xl rounded-box overflow-hidden">
+            {data?.video_image_url.includes("image") && (
+              <Image
+                priority
+                src={data?.video_image_url || Contentlaptop}
+                alt="picture-content"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1440px) 50vw"
+                className="object-cover"
+              />
+            )}
+            {data?.video_image_url.includes("video") && (
+              <VideoComponent url={data?.video_image_url} />
+            )}
           </div>
         </div>
         <div className="w-full col-span-1 flex flex-col gap-10">
