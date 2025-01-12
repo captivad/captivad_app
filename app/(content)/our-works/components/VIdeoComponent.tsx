@@ -8,7 +8,13 @@ const VideoComponent = ({ url }: { url: string }) => {
 
   return (
     <div className="">
-      <CldVideoPlayer width="1920" height="1080" src={url} fontFace="DM Sans" />
+      <CldVideoPlayer
+        width="1920"
+        height="1080"
+        src={url}
+        fontFace="DM Sans"
+        aspectRatio="16:9"
+      />
     </div>
   );
 };

@@ -319,7 +319,8 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
                       height="600"
                       src={values.thumbnailUrl}
                       sizes="100vw"
-                      alt=""
+                      alt={values.thumbnailUrl}
+                      loading="lazy"
                       onError={() => {
                         console.log("error");
                         setFieldError(
@@ -384,7 +385,8 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
                         );
                       }}
                       sizes="100vw"
-                      alt=""
+                      alt={values.videoImageUrl}
+                      loading="lazy"
                     />
                   ) : values.videoImageUrl &&
                     values.videoImageUrl.includes("video") &&

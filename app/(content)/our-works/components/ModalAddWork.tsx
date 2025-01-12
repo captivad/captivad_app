@@ -306,7 +306,7 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
                       height="600"
                       src={values.thumbnailUrl}
                       sizes="100vw"
-                      alt=""
+                      alt={values.thumbnailUrl}
                       onError={() => {
                         console.log("error");
                         setFieldError(
@@ -314,6 +314,7 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
                           "URL is not valid, please enter a valid URL."
                         );
                       }}
+                      loading="lazy"
                     />
                   )}
                   {errors.thumbnailUrl && (
@@ -370,8 +371,9 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
                           "URL is not valid, please enter a valid URL."
                         );
                       }}
+                      loading="lazy"
                       sizes="100vw"
-                      alt=""
+                      alt={values.videoImageUrl}
                     />
                   ) : values.videoImageUrl &&
                     values.videoImageUrl.includes("video") &&

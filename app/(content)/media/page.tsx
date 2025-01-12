@@ -8,9 +8,6 @@ import { useMedia } from "./media.service";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { LOGIN } from "@/utils/router";
-import { Copy } from "lucide-react";
-import toast from "react-hot-toast";
-import { handleCopyLink } from "@/utils/general";
 import ButtonCopy from "@/components/button-copy";
 
 export default function FileUpload() {
@@ -79,18 +76,6 @@ export default function FileUpload() {
             >
               Video
             </button>
-            {/* <button
-              onClick={() => {
-                refetch();
-              }}
-              className="btn"
-            >
-              {isLoading ? (
-                <span className="loading loading-infinity loading-sm text-white"></span>
-              ) : (
-                <RotateCw />
-              )}
-            </button> */}
           </div>
         </div>
         <div className="flex flex-col items-center gap-10 ">
@@ -100,13 +85,7 @@ export default function FileUpload() {
                 if (item.resource_type == "image") {
                   return (
                     <div key={item.public_id} className="relative col-span-1">
-                      <button
-                        onClick={() => handleCopyLink(item.url)}
-                        className="btn btn-md tooltip btn-circle absolute top-2 right-2 flex justify-center items-center"
-                        data-tip="Download"
-                      >
-                        <Copy size={20} />
-                      </button>
+                      <ButtonCopy url={item.url} />
                       <CldImage
                         className="object-cover "
                         width="960"
@@ -114,6 +93,8 @@ export default function FileUpload() {
                         src={item.public_id}
                         sizes="100vw"
                         alt=""
+                        aspectRatio="16:9"
+                        loading="lazy"
                       />
                     </div>
                   );
@@ -121,7 +102,7 @@ export default function FileUpload() {
                   return (
                     <div
                       key={item.public_id}
-                      className="col-span-1 w-[330px] scale-100 rounded-lg overflow-hidden relative"
+                      className="col-span-1 h-[150px] md:h-full w-full scale-100 aspect-video rounded-lg overflow-hidden relative"
                     >
                       <ButtonCopy url={item.url} />
                       <CldVideoPlayer
@@ -129,6 +110,8 @@ export default function FileUpload() {
                         height="1200"
                         src={item.url}
                         fontFace="DM Sans"
+                        className="w-full h-full object-cover"
+                        aspectRatio="16:9"
                       />
                     </div>
                   );
