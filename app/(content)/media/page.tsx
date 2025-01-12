@@ -11,6 +11,7 @@ import { LOGIN } from "@/utils/router";
 import { Copy } from "lucide-react";
 import toast from "react-hot-toast";
 import { handleCopyLink } from "@/utils/general";
+import ButtonCopy from "@/components/button-copy";
 
 export default function FileUpload() {
   const { status } = useSession();
@@ -122,13 +123,7 @@ export default function FileUpload() {
                       key={item.public_id}
                       className="col-span-1 w-[330px] scale-100 rounded-lg overflow-hidden relative"
                     >
-                      <button
-                        onClick={() => handleCopyLink(item.url)}
-                        className="btn btn-md tooltip btn-circle absolute top-2 right-2 flex justify-center items-center z-20"
-                        data-tip="Download"
-                      >
-                        <Copy size={20} />
-                      </button>
+                      <ButtonCopy url={item.url} />
                       <CldVideoPlayer
                         width="1720"
                         height="1200"
