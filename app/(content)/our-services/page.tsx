@@ -35,19 +35,8 @@ export default function OurServices() {
   );
   const [isOpen, setIsOpen] = React.useState<string>("");
 
-  const { mutate } = useDeleteService({
-    onSuccess: () => {
-      toast.success("Delete Our Service Success");
-      refetch();
-    },
-  });
-
-  const { mutate: mutateEdit } = useEditService({
-    onSuccess: () => {
-      toast.success("Edit Our Service Success");
-      refetch();
-    },
-  });
+  const { mutate } = useDeleteService();
+  const { mutate: mutateEdit } = useEditService();
 
   const sectionRefs = React.useMemo(
     () => ({
@@ -308,8 +297,8 @@ export default function OurServices() {
       >
         {visibleSections.form && <FormCustomer />}
       </motion.section>
-      <ModalAddService refetch={refetch} />
-      <ModalEditService refetch={refetch} data={selectedService} />
+      <ModalAddService />
+      <ModalEditService data={selectedService} />
       {isOpen === "delete" && (
         <ModalConfirmAlert
           title="Delete Our Service"

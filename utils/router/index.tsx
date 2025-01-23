@@ -15,6 +15,7 @@ export const CONTACT_US = "/contact-us";
 export const WHO_WE_ARE = "/who-we-are";
 export const BLOG = "/blog";
 export const MEDIA = "/media";
+export const BLOG_DASHBOARD = "/admin/blog-dashboard";
 
 //admin
 export const LOGIN = "/admin/login";

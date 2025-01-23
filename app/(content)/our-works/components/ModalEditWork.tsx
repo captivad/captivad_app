@@ -25,6 +25,8 @@ interface IProps {
 }
 
 const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
+  console.log(data, "data");
+
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
     description: Yup.string().required("Description is required"),
@@ -67,7 +69,6 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
       ) as HTMLDialogElement;
       modal?.close(); // Menutup modal
       toast.success("Add Our Service Success");
-      document.location.reload();
     },
   });
 
@@ -143,7 +144,6 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
           <h3 className="font-bold">Edit Porfolio</h3>
           <button
             onClick={() => {
-              resetForm();
               const modal = document.getElementById(
                 `my_modal_edit_work_${data.uuid}`
               ) as HTMLDialogElement;

@@ -33,7 +33,7 @@ export default function ActionPost() {
             </span>
             Add New Post
           </button>
-          let's start writing articles
+          let`s start writing articles
         </div>
       )}
     </div>

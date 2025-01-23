@@ -10,7 +10,7 @@ import {
 } from "@/app/api/our-work/our-work.interface";
 import { SuccessResponse } from "@/helpers/exception.helper";
 import { IFetchStatus } from "@/helpers/general.helper";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { param } from "framer-motion/m";
 import toast from "react-hot-toast";
@@ -60,18 +60,25 @@ export function useGetOurWorkDetailById({ id }: { id: string }) {
 }
 
 export function useCreateOurWork({ onSuccess }: IFetchStatus) {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (payload: IPayloadCreateOurWork) => {
       const response = await axios.post("/api/admin/our-work", payload);
       return response;
     },
-    onSuccess,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["list-our-work"],
+      });
+      onSuccess && onSuccess(data);
+    },
     onError: (e) => {
       toast.error(e.message);
     },
   });
 }
 export function useEditOurWork({ onSuccess }: IFetchStatus) {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({
       id,
@@ -103,7 +110,12 @@ export function useEditOurWork({ onSuccess }: IFetchStatus) {
       );
       return response;
     },
-    onSuccess,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["list-our-work"],
+      });
+      onSuccess && onSuccess(data);
+    },
     onError: (e) => {
       toast.error(e.message);
     },
@@ -111,12 +123,18 @@ export function useEditOurWork({ onSuccess }: IFetchStatus) {
 }
 
 export function useDeleteOurWork({ onSuccess }: IFetchStatus) {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
       const response = await axios.delete("/api/admin/our-work/" + id);
       return response;
     },
-    onSuccess,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["list-our-work"],
+      });
+      onSuccess && onSuccess(data);
+    },
     onError: (e) => {
       toast.error(e.message);
     },
@@ -144,6 +162,7 @@ export function useGetCategory() {
 }
 
 export function useEditStatusOurWork({ onSuccess }: IFetchStatus) {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
       const response = await axios.put(
@@ -157,7 +176,13 @@ export function useEditStatusOurWork({ onSuccess }: IFetchStatus) {
       );
       return response;
     },
-    onSuccess,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["list-our-work"],
+      });
+      toast.success("Edit Status Our Work Success");
+      onSuccess && onSuccess(data);
+    },
     onError: (e) => {
       toast.error(e.message);
     },

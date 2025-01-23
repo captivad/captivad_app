@@ -5,6 +5,7 @@ import { IBlogContent } from "./blog.interface";
 import ButtonNavigation from "@/components/button-navigation";
 import { PencilLine } from "lucide-react";
 import Search from "@/components/search";
+import { BLOG_DASHBOARD } from "@/utils/router";
 
 const dataDamiBlog: IBlogContent[] = [
   {
@@ -114,7 +115,7 @@ export default function Blog() {
 
       <section className="px-[10%] lg:px-20 ">
         <ButtonNavigation
-          redirect={"/blog"}
+          redirect={BLOG_DASHBOARD}
           className=" md:max-w-60 rounden-box "
         >
           <PencilLine size={25} />

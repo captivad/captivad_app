@@ -15,7 +15,7 @@ import { CldVideoPlayer } from "next-cloudinary";
 const OurWorkList = () => {
   const { status } = useSession();
 
-  const { data, isLoading, refetch } = useGetOurWork();
+  const { data, isLoading } = useGetOurWork();
   const [showMore, setShowMore] = React.useState<Map<number, number>>(
     new Map()
   );
@@ -108,7 +108,7 @@ const OurWorkList = () => {
             );
           })}
       </section>
-      <ModalAddWork refetch={refetch} />
+      <ModalAddWork />
     </>
   );
 };

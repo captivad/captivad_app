@@ -1,7 +1,8 @@
 "use client";
 
 import Search from "@/components/search";
-import { Ellipsis, Globe, Trash, Upload } from "lucide-react";
+import { BLOG } from "@/utils/router";
+import { ChevronLeft, Ellipsis, Globe, Trash, Upload } from "lucide-react";
 import moment from "moment";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -35,9 +36,13 @@ export default function ListPost() {
   return (
     <div className="min-w-96 max-w-min h-full">
       <h5 className="font-bold mb-4 flex items-center gap-2">
-        <span>
-          <Globe size={30} />
-        </span>
+        <label
+          onClick={() => navigate.push(BLOG)}
+          className="btn btn-square rounded-full tooltip flex justify-center items-center"
+          data-tip="Back to blog"
+        >
+          <ChevronLeft size={25} />
+        </label>
         List Post
       </h5>
       <div className="w-full mb-4">

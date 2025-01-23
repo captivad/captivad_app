@@ -16,37 +16,28 @@ import { StatusContent } from "@/prisma/prisma/client";
 
 interface IProps {
   data?: IOurWork;
-  refach?: () => void;
 }
 
-const CardContentAction: FC<IProps> = ({ data, refach }) => {
+const CardContentAction: FC<IProps> = ({ data }) => {
   const { status } = useSession();
 
   const [isOpen, setIsOpen] = React.useState<string>("");
   const { mutate, isPending } = useDeleteOurWork({
     onSuccess: () => {
       toast.success("Deleted successfully!");
-      refach && refach();
       const modal = document.getElementById(
         `my_modal_${data?.uuid}`
       ) as HTMLDialogElement;
       modal?.close();
-
-      //reload window
-      document.location.reload();
     },
   });
 
   const { mutate: mutateStatus } = useEditStatusOurWork({
     onSuccess: () => {
-      refach && refach();
       const modal = document.getElementById(
         `my_modal_${data?.uuid}`
       ) as HTMLDialogElement;
       modal?.close();
-
-      //reload window
-      document.location.reload();
     },
   });
 

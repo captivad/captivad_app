@@ -8,7 +8,7 @@ import {
 } from "@/app/api/our-services/our-service.interface";
 import { SuccessResponse } from "@/helpers/exception.helper";
 import { IFetchStatus } from "@/helpers/general.helper";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 
@@ -34,19 +34,27 @@ export function useGetListService() {
 }
 
 export function useCreateService({ onSuccess }: IFetchStatus) {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (payload: IPayloadCreateOurService) => {
       const response = await axios.post("/api/admin/our-services", payload);
       return response;
     },
-    onSuccess,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({
+        queryKey: ["list-service"],
+      });
+      toast.success("Create Our Service Success");
+      onSuccess && onSuccess(data);
+    },
     onError: (e) => {
       toast.error(e.message);
     },
   });
 }
 
-export function useEditService({ onSuccess }: IFetchStatus) {
+export function useEditService() {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({
       payload,
@@ -61,20 +69,31 @@ export function useEditService({ onSuccess }: IFetchStatus) {
       );
       return response;
     },
-    onSuccess,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["list-service"],
+      });
+      toast.success("Edit Our Service Success");
+    },
     onError: (e) => {
       toast.error(e.message);
     },
   });
 }
 
-export function useDeleteService({ onSuccess }: IFetchStatus) {
+export function useDeleteService() {
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (id: string) => {
       const response = await axios.delete(`/api/admin/our-services/${id}`);
       return response;
     },
-    onSuccess,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["list-service"],
+      });
+      toast.success("Delete Service Success");
+    },
     onError: (e) => {
       toast.error(e.message);
     },
