@@ -4,7 +4,9 @@ import { Search, X } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React from "react";
 
-const SearchBlog: React.FC = () => {
+interface IProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+const SearchBlog: React.FC<IProps> = ({ className }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const search = searchParams.get("search");
@@ -36,7 +38,9 @@ const SearchBlog: React.FC = () => {
   };
 
   return (
-    <div className="flex w-full lg:w-1/4 items-center rounded-xl border-2">
+    <div
+      className={`flex w-full items-center rounded-xl border-2 ${className}`}
+    >
       <form
         onSubmit={handleSubmit}
         className="relative w-full flex items-center gap-2"

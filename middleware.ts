@@ -16,10 +16,6 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
 
   const token = await getToken({ req, secret: process.env.SECRET_KEY });
 
-  if (token && pathname.startsWith("/admin")) {
-    return NextResponse.redirect(new URL(HOME, req.nextUrl));
-  }
-
   if (authorizedApi(pathname)) {
     if (token == null) {
       return ResponseUnauthorized("Unauthorized");

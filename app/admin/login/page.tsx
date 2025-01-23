@@ -7,9 +7,13 @@ import { ILoginPayload } from "@/app/api/auth/[...nextauth]/route";
 import { useFormik } from "formik";
 import { HOME } from "@/utils/router";
 import toast from "react-hot-toast";
+import { useSession } from "next-auth/react";
 
 export default function AdminLogin() {
   const navigate = useRouter();
+  const { status } = useSession();
+  if (status === "authenticated") navigate.push(HOME);
+
   const { mutate: handleLogin, isPending } = useLogin({
     onSuccess(data) {
       console.log(data);

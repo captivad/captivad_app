@@ -2,9 +2,9 @@ import CardBlog from "@/app/(content)/blog/components/card-blog";
 import FormCustomer from "@/components/form-customer";
 import moment from "moment";
 import { IBlogContent } from "./blog.interface";
-import SearchBlog from "./components/search-blog";
 import ButtonNavigation from "@/components/button-navigation";
 import { PencilLine } from "lucide-react";
+import Search from "@/components/search";
 
 const dataDamiBlog: IBlogContent[] = [
   {
@@ -141,7 +141,7 @@ export default function Blog() {
               <p>Online Tren</p>
             </button>
           </div>
-          <SearchBlog />
+          <Search className="lg:w-1/4" />
         </div>
         <div className="grid grid-cols-6 gap-2 md:gap-6 w-full justify-center py-[5%]">
           {dataDamiBlog.map((item, index) => {

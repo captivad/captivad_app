@@ -36,6 +36,10 @@ body {
   p {
     @apply text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px];
   }
+
+  pre {
+    @apply p-4 bg-gray-800 text-foreground rounded-md;
+  }
 }
 
 /* Shadow Inner Effect */
@@ -56,6 +60,12 @@ body {
     /* Dark overlay for shadow effect */ rgba(0, 0, 0, 0.4)
   );
   pointer-events: none; /* Make sure it doesn't block interactions */
+}
+
+blockquote {
+  border-left: 2px solid #808080ff;
+  margin: 1.5rem 0;
+  padding-left: 1rem;
 }
 
 /* @layer utilities {
