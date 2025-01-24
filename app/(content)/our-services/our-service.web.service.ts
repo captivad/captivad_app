@@ -53,7 +53,7 @@ export function useCreateService({ onSuccess }: IFetchStatus) {
   });
 }
 
-export function useEditService() {
+export function useEditService({ onSuccess }: IFetchStatus) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({
@@ -69,7 +69,8 @@ export function useEditService() {
       );
       return response;
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      onSuccess && onSuccess(data);
       queryClient.invalidateQueries({
         queryKey: ["list-service"],
       });

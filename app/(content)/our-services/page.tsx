@@ -36,7 +36,9 @@ export default function OurServices() {
   const [isOpen, setIsOpen] = React.useState<string>("");
 
   const { mutate } = useDeleteService();
-  const { mutate: mutateEdit } = useEditService();
+  const { mutate: mutateEdit } = useEditService({
+    onSuccess: () => {},
+  });
 
   const sectionRefs = React.useMemo(
     () => ({

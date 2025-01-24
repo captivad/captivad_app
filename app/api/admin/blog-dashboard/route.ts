@@ -8,7 +8,7 @@ import { captivadPrisma } from "@/prisma/prisma";
 import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import { Blog, Prisma, Status, StatusContent } from "@/prisma/prisma/client";
-import { IResponsePagination, usePagination } from "@/helpers/general.helper";
+import { getPagination, IResponsePagination } from "@/helpers/general.helper";
 
 export async function POST(req: NextRequest) {
   try {
@@ -70,9 +70,9 @@ export async function GET(req: NextRequest) {
     const urlParams = req.nextUrl.searchParams;
     const search = urlParams.get("search");
     const status = urlParams.get("status") || StatusContent.publish;
-    const page = urlParams.get("page"); // ?page=1
+    const page = Number(urlParams.get("page") || 1);
 
-    const { limit, offset } = usePagination(Number(page), 10);
+    const { limit, offset } = getPagination(Number(page || 1), 10);
 
     const whereCondition: Prisma.BlogWhereInput = {
       AND: [

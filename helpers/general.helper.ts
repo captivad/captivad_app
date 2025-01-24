@@ -26,7 +26,7 @@ export interface IResponsePagination<T> {
   rows: T;
 }
 
-export const usePagination = (
+export const getPagination = (
   page: number | undefined,
   size: number | undefined
 ) => {

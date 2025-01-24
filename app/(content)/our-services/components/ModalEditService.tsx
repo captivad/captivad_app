@@ -27,11 +27,9 @@ const ModalEditService: FC<IProps> = ({ refetch, data }) => {
 
   const { mutate, isPending } = useEditService({
     onSuccess: () => {
-      refetch && refetch(); // Refetch data setelah sukses
       resetForm(); // Reset form setelah submit
       const modal = document.getElementById("my_modal_2") as HTMLDialogElement;
       modal?.close(); // Menutup modal
-      toast.success("Edit Our Service Success");
     },
   });
 
