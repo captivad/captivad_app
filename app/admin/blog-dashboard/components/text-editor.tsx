@@ -13,6 +13,7 @@ import ToolBar from "./text-editor-toolbar";
 import TextStyle from "@tiptap/extension-text-style";
 import Text from "@tiptap/extension-text";
 import { Extension } from "@tiptap/core";
+import React from "react";
 
 const FontSize = Extension.create({
   name: "fontSize",
@@ -63,11 +64,16 @@ const FontSize = Extension.create({
 });
 
 interface IProps {
-  content: string;
+  contentHtml: string;
   onChange: (content: string) => void;
 }
 
-export default function TextEditor({ content, onChange }: IProps) {
+export default function TextEditor({ contentHtml, onChange }: IProps) {
+  const initialContent =
+    typeof window !== "undefined" && localStorage.getItem("editorContent")
+      ? localStorage.getItem("editorContent")
+      : contentHtml;
+
   const editor = useEditor({
     extensions: [
       StarterKit.configure(),
@@ -94,17 +100,26 @@ export default function TextEditor({ content, onChange }: IProps) {
       Text,
       FontSize,
     ],
-    content: content,
+    content: initialContent,
     editorProps: {
       attributes: {
         class: "min-h-[600px] border rounded-md bg-slate-50 py-2 px-3",
       },
     },
     onUpdate: ({ editor }) => {
-      console.log(editor.getHTML());
+      const content = editor.getHTML();
       onChange(editor.getHTML());
+      localStorage.setItem("editorContent", content);
     },
   });
+
+  React.useEffect(() => {
+    if (editor && contentHtml !== editor.getHTML()) {
+      editor.commands.setContent(initialContent || "<p></p>");
+    }
+  }, [contentHtml, editor, initialContent]);
+
+  if (!editor) return <div>Loading editor...</div>;
 
   return (
     <>

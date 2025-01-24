@@ -1,6 +1,14 @@
 "use client";
 import { Editor } from "@tiptap/react";
-import { Heading, List, Quote, Redo, Ruler, Undo } from "lucide-react";
+import {
+  AlignJustify,
+  Heading,
+  List,
+  Quote,
+  Redo,
+  Ruler,
+  Undo,
+} from "lucide-react";
 import {
   Heading1,
   Heading2,
@@ -107,6 +115,11 @@ export default function ToolBar({ editor }: Props) {
       preesed: editor.isActive({ textAlign: "right" }),
     },
     {
+      icon: <AlignJustify className="size-4" />,
+      onClick: () => editor.chain().focus().setTextAlign("justify").run(),
+      preesed: editor.isActive({ textAlign: "justify" }),
+    },
+    {
       icon: <List className="size-4" />,
       onClick: () => editor.chain().focus().toggleBulletList().run(),
       preesed: editor.isActive("bulletList"),
@@ -149,7 +162,7 @@ export default function ToolBar({ editor }: Props) {
   ];
 
   return (
-    <div className="border border-slate-200 rounded-md p-1.5 mb-1 bg-slate-50 space-x-1 sticky top-10 z-50">
+    <div className="border border-slate-200 rounded-md p-1.5 mb-1 bg-slate-50 space-x-1 sticky top-10 z-30">
       <select
         className="kbd bg-white cursor-pointer mr-1 placeholder:text-black"
         onChange={(e) =>

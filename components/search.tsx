@@ -53,7 +53,7 @@ const SearchBlog: React.FC<IProps> = ({ className }) => {
           name="search"
           value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Search"
+          placeholder="Enter for search"
           id="search"
           className="bg-transparent outline-none"
         />
