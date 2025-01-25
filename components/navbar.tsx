@@ -28,7 +28,9 @@ export const Navbar = ({ mediaQuery, open }: IProps) => {
               key={item.path}
               href={item.path}
               className={`${
-                "/" + path.split("/")[1] === item.path ? "font-bold" : ""
+                "/" + path.split("/")[1] === item.path.split("?")[0]
+                  ? "font-bold"
+                  : ""
               } text-xl`}
             >
               {item.label}
@@ -41,7 +43,7 @@ export const Navbar = ({ mediaQuery, open }: IProps) => {
               onClick={() => open(false)}
               key={item.path}
               className={`${
-                "/" + path.split("/")[1] === item.path
+                "/" + path.split("/")[1] === item.path.split("?")[0]
                   ? "font-bold text-white"
                   : ""
               } py-2`}

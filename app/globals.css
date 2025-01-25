@@ -38,7 +38,7 @@ body {
   }
 
   pre {
-    @apply p-4 bg-gray-800 text-foreground rounded-md;
+    @apply p-4 bg-gray-800 text-foreground rounded-md overflow-auto;
   }
 }
 

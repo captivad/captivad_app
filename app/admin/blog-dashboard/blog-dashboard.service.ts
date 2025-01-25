@@ -59,6 +59,9 @@ export function useDeletePostDashboard({ onSuccess }: IFetchStatus) {
       queryClient.invalidateQueries({
         queryKey: ["get-post-dashboard"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["blog"],
+      });
 
       toast.success("Delete post dashboard success!");
       if (typeof window !== "undefined") {
@@ -112,6 +115,9 @@ export function useUpdatePostDashboard(id: string) {
       queryClient.invalidateQueries({
         queryKey: ["get-detail-post", id],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["blog"],
+      });
       toast.success("Update post dashboard success!");
       if (typeof window !== "undefined") {
         localStorage.removeItem("editorContent");
@@ -140,6 +146,9 @@ export function useCreatePostDashboard() {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["get-post-dashboard"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["blog"],
       });
       toast.success("Create post dashboard success!");
       if (typeof window !== "undefined") {
@@ -190,6 +199,9 @@ export function useUpdateStatusPostDashboard({ onSuccess }: IFetchStatus) {
       onSuccess && onSuccess(data);
       queryClient.invalidateQueries({
         queryKey: ["get-post-dashboard"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["blog"],
       });
       toast.success("Update status post dashboard success!");
     },

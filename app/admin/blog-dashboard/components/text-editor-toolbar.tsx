@@ -34,24 +34,24 @@ export default function ToolBar({ editor }: Props) {
   if (!editor) return null;
 
   const fontSizes = [
-    "8px",
-    "10px",
-    "12px",
-    "14px",
-    "16px",
-    "18px",
-    "20px",
-    "24px",
-    "30px",
-    "36px",
-    "48px",
-    "60px",
-    "72px",
+    "0.5em",
+    "0.625em",
+    "0.75em",
+    "0.875em",
+    "1em",
+    "1.125em",
+    "1.25em",
+    "1.5em",
+    "1.875em",
+    "2.25em",
+    "3em",
+    "3.75em",
+    "4.5em",
   ];
 
-  const getFontSize = () => {
-    return editor.getAttributes("fontSize").fontSize || "16px";
-  };
+  // const getFontSize = () => {
+  //   return editor.getAttributes("fontSize").fontSize || "16px";
+  // };
 
   const Options = [
     {

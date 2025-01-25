@@ -21,6 +21,7 @@ export default function ListPost() {
   const [postSelected, setPostSelected] = React.useState<Blog[]>([]);
 
   const startEditPost = (uuid: string) => {
+    window.localStorage.removeItem("editorContent");
     params.set("action", "edit");
     params.set("id", uuid);
     navigate.push(`?${params.toString()}`);

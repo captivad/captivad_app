@@ -1,96 +1,11 @@
-import CardBlog from "@/app/(content)/blog/components/card-blog";
 import FormCustomer from "@/components/form-customer";
-import moment from "moment";
-import { IBlogContent } from "./blog.interface";
 import ButtonNavigation from "@/components/button-navigation";
 import { PencilLine } from "lucide-react";
 import Search from "@/components/search";
 import { BLOG_DASHBOARD } from "@/utils/router";
-
-const dataDamiBlog: IBlogContent[] = [
-  {
-    uuid: "cedcebdf-d369-4d2e-9e2b-2b2c8f43d578",
-    title:
-      "A/B Testing Adalah: Pengertian, Fungsi, dan Pentingnya Dalam Digital Marketing",
-    content:
-      "Dalam dunia digital marketing, influencer marketing telah menjadi strategi yang populer untuk meningkatkan brand awareness dan engagement. Namun, tidak semua influencer memiliki jangkauan dan dampak yang sama. Salah satu kategori yang semakin populer adalah micro influencers. Artikel ini akan membahas apa itu micro influencers, perbedaannya dengan jenis influencer lainnya, serta kelebihan dan kekurangannya.",
-    imageUrl:
-      "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733472837/Frame_45_h4dojr.png",
-    createdDt: moment().toISOString(),
-    category: "marketing",
-  },
-  {
-    uuid: "fcd73283-48b7-431f-9d12-843481eeb009",
-    title: "UGC: Apa Itu dan Pentingnya dalam Strategi Marketing",
-    content:
-      "Dalam dunia digital marketing, influencer marketing telah menjadi strategi yang populer untuk meningkatkan brand awareness dan engagement. Namun, tidak semua influencer memiliki jangkauan dan dampak yang sama. Salah satu kategori yang semakin populer adalah micro influencers. Artikel ini akan membahas apa itu micro influencers, perbedaannya dengan jenis influencer lainnya, serta kelebihan dan kekurangannya.",
-    imageUrl:
-      "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733472838/image_18_p2w7av.png",
-    createdDt: moment().subtract(1, "day").toISOString(),
-    category: "marketing",
-  },
-  {
-    uuid: "60e7e5dd-d87f-46af-9769-21b4d276b6b7",
-    title:
-      "TikTok Ads: Pengertian, Jenis, Cara Kerja, dan Tips Beriklan Efektif CaptivAd Team . 25 Oct",
-    content:
-      "Dalam dunia digital marketing, influencer marketing telah menjadi strategi yang populer untuk meningkatkan brand awareness dan engagement. Namun, tidak semua influencer memiliki jangkauan dan dampak yang sama. Salah satu kategori yang semakin populer adalah micro influencers. Artikel ini akan membahas apa itu micro influencers, perbedaannya dengan jenis influencer lainnya, serta kelebihan dan kekurangannya.",
-    imageUrl:
-      "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733472829/image_19_tlvepu.png",
-    createdDt: moment().subtract(4, "day").toISOString(),
-    category: "marketing",
-  },
-  {
-    uuid: "19643159-3c28-4cc6-8f80-8539eeddc465",
-    title: "OOH: Strategi Pemasaran Offline, Apa Tetap Efektif di Era Digital?",
-    content:
-      "Dalam dunia digital marketing, influencer marketing telah menjadi strategi yang populer untuk meningkatkan brand awareness dan engagement. Namun, tidak semua influencer memiliki jangkauan dan dampak yang sama. Salah satu kategori yang semakin populer adalah micro influencers. Artikel ini akan membahas apa itu micro influencers, perbedaannya dengan jenis influencer lainnya, serta kelebihan dan kekurangannya.",
-    imageUrl:
-      "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733473738/image_20_kuuu37.png",
-    createdDt: moment().subtract(1, "day").toISOString(),
-    category: "marketing",
-  },
-  {
-    uuid: "324cbe43-3db5-4ead-bfcf-b67d6d5ed3df",
-    title: "Micro Influencers: Pengaruh Besar dari Jumlah Pengikut yang Kecil",
-    content:
-      "Dalam dunia digital marketing, influencer marketing telah menjadi strategi yang populer untuk meningkatkan brand awareness dan engagement. Namun, tidak semua influencer memiliki jangkauan dan dampak yang sama. Salah satu kategori yang semakin populer adalah micro influencers. Artikel ini akan membahas apa itu micro influencers, perbedaannya dengan jenis influencer lainnya, serta kelebihan dan kekurangannya.",
-    imageUrl:
-      "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733472830/image_21_crow5x.png",
-    createdDt: moment().subtract(2, "day").toISOString(),
-    category: "marketing",
-  },
-  {
-    uuid: "324cbe43-3db5-4ead-bfcf-b67d6d5ed3df",
-    title: "Micro Influencers: Pengaruh Besar dari Jumlah Pengikut yang Kecil",
-    content:
-      "Dalam dunia digital marketing, influencer marketing telah menjadi strategi yang populer untuk meningkatkan brand awareness dan engagement. Namun, tidak semua influencer memiliki jangkauan dan dampak yang sama. Salah satu kategori yang semakin populer adalah micro influencers. Artikel ini akan membahas apa itu micro influencers, perbedaannya dengan jenis influencer lainnya, serta kelebihan dan kekurangannya.",
-    imageUrl:
-      "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733472830/image_21_crow5x.png",
-    createdDt: moment().subtract(2, "day").toISOString(),
-    category: "marketing",
-  },
-  {
-    uuid: "324cbe43-3db5-4ead-bfcf-b67d6d5ed3df",
-    title: "Micro Influencers: Pengaruh Besar dari Jumlah Pengikut yang Kecil",
-    content:
-      "Dalam dunia digital marketing, influencer marketing telah menjadi strategi yang populer untuk meningkatkan brand awareness dan engagement. Namun, tidak semua influencer memiliki jangkauan dan dampak yang sama. Salah satu kategori yang semakin populer adalah micro influencers. Artikel ini akan membahas apa itu micro influencers, perbedaannya dengan jenis influencer lainnya, serta kelebihan dan kekurangannya.",
-    imageUrl:
-      "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733472830/image_21_crow5x.png",
-    createdDt: moment().subtract(2, "day").toISOString(),
-    category: "marketing",
-  },
-  {
-    uuid: "324cbe43-3db5-4ead-bfcf-b67d6d5ed3df",
-    title: "Micro Influencers: Pengaruh Besar dari Jumlah Pengikut yang Kecil",
-    content:
-      "Dalam dunia digital marketing, influencer marketing telah menjadi strategi yang populer untuk meningkatkan brand awareness dan engagement. Namun, tidak semua influencer memiliki jangkauan dan dampak yang sama. Salah satu kategori yang semakin populer adalah micro influencers. Artikel ini akan membahas apa itu micro influencers, perbedaannya dengan jenis influencer lainnya, serta kelebihan dan kekurangannya.",
-    imageUrl:
-      "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733472830/image_21_crow5x.png",
-    createdDt: moment().subtract(2, "day").toISOString(),
-    category: "marketing",
-  },
-];
+import NavbarCategory from "./components/navbar-category";
+import SearchResult from "./components/search-result";
+import ListArticle from "./components/list-article";
 
 export default function Blog() {
   return (
@@ -123,48 +38,13 @@ export default function Blog() {
         </ButtonNavigation>
       </section>
 
-      <article className="p-[10%] lg:p-20">
+      <article id="section-content" className="p-[10%] lg:p-20">
         <div className="flex gap-4 justify-between flex-col lg:flex-row">
-          <div className="flex flex-wrap gap-2 justify-center md:justify-start">
-            <button className="btn btn-ghost btn-sm lg:btn-md btn-active">
-              <p>Highlights</p>
-            </button>
-            <button className="btn btn-ghost btn-sm lg:btn-md">
-              <p>All</p>
-            </button>
-            <button className="btn btn-ghost btn-sm lg:btn-md">
-              <p>Marketing</p>
-            </button>
-            <button className="btn btn-ghost btn-sm lg:btn-md">
-              <p>News</p>
-            </button>
-            <button className="btn btn-ghost btn-sm lg:btn-md">
-              <p>Online Tren</p>
-            </button>
-          </div>
-          <Search className="lg:w-1/4" />
+          <NavbarCategory />
+          <Search className="lg:w-1/4 max-h-12" />
         </div>
-        <div className="grid grid-cols-6 gap-2 md:gap-6 w-full justify-center py-[5%]">
-          {dataDamiBlog.map((item, index) => {
-            if (index === 0 || index === 1) {
-              return (
-                <CardBlog
-                  key={index}
-                  content={item}
-                  className="col-span-6 md:col-span-3"
-                />
-              );
-            }
-
-            return (
-              <CardBlog
-                key={index}
-                content={item}
-                className="col-span-6 md:col-span-2"
-              />
-            );
-          })}
-        </div>
+        <SearchResult />
+        <ListArticle />
       </article>
 
       <section id="form" className="lg:h-full p-[5%] lg:p-20 bg-foreground">

@@ -13,9 +13,9 @@ export const OUR_SERVICES = "/our-services";
 export const OUR_WORK = "/our-works";
 export const CONTACT_US = "/contact-us";
 export const WHO_WE_ARE = "/who-we-are";
-export const BLOG = "/blog";
+export const BLOG = "/blog?category=highlights";
 export const MEDIA = "/media";
-export const BLOG_DASHBOARD = "/admin/blog-dashboard";
+export const BLOG_DASHBOARD = "/admin/blog-dashboard?tab=publish";
 
 //admin
 export const LOGIN = "/admin/login";
@@ -51,7 +51,7 @@ export const router: IRouter[] = [
     path: BLOG,
     label: "Blog",
     icon: <Globe size={20} />,
-    authenticated: true,
+    authenticated: false,
   },
   {
     path: CONTACT_US,

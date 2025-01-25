@@ -8,6 +8,7 @@ import BackButton from "@/components/button-back";
 import RelateWork from "../components/relate-work";
 import { Metadata } from "next";
 import { metadata } from "@/app/layout";
+import NavigateToErrorPage from "@/components/navigate-error";
 
 export function generateMetadata({
   params,
@@ -30,7 +31,7 @@ export default async function OurServicesDetail({
   if (!id) toast.error("get our services failed!");
 
   const data = await fetchDataDetailServiceById(id as string);
-  if (!data) toast.error("get our services failed!");
+  if (!data) return <NavigateToErrorPage />;
 
   return (
     <>

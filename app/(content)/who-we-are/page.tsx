@@ -37,12 +37,12 @@ const meetTheTeam = [
     image:
       "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1732983568/profile-1_mznsyp.png",
   },
-  {
-    name: "Syarief Putra",
-    role: "Chief operation officer, co-founder",
-    image:
-      "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1732983316/profile-2_uca6ib.png",
-  },
+  // {
+  //   name: "Syarief Putra",
+  //   role: "Chief operation officer, co-founder",
+  //   image:
+  //     "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1732983316/profile-2_uca6ib.png",
+  // },
   {
     name: "Amelia Yoanita Tham",
     role: "Chief revenue officer, co-founder",
