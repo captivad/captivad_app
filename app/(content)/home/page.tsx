@@ -163,7 +163,7 @@ export default function Home() {
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
                 <CardValueCount
-                  value={22123021}
+                  value={22123}
                   description="Impressions"
                   icon="thumb_up.svg" //svg path in public
                 />

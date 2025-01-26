@@ -13,6 +13,7 @@ import { IPayloadSendEmail } from "@/app/api/email-provider/email-provider.inter
 import React from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useGetCategory } from "@/app/(content)/our-works/our-work.web.service";
 
 const multiselectOptions: IMultiselectOption[] = [
   { id: 1, value: "option1", label: "Option 1" },
@@ -35,6 +36,17 @@ const validationSchema: Yup.Schema<IPayloadSendEmail> = Yup.object({
 });
 
 const FormCustomer: React.FC = () => {
+  //list category options
+  const { data: listCategory } = useGetCategory();
+  const categoryOptions = React.useMemo(() => {
+    if (!listCategory) return [];
+    return listCategory?.map((item, _i) => ({
+      id: _i,
+      value: String(item.id),
+      label: item.name,
+    }));
+  }, [listCategory]);
+
   const [interestSelected, setInterestSelected] = React.useState<
     IMultiselectOption[]
   >([]);
@@ -136,7 +148,7 @@ const FormCustomer: React.FC = () => {
         </div>
         <div>
           <MultiSelect
-            options={multiselectOptions}
+            options={categoryOptions}
             onChange={(selected) => {
               setInterestSelected(selected);
               setFieldValue(

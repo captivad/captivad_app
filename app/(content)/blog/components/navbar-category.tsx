@@ -30,7 +30,7 @@ const NavbarCategory: FC = () => {
   return (
     <div
       id="category"
-      className="flex flex-wrap gap-2 justify-center md:justify-start mb-10"
+      className="flex flex-wrap gap-2 justify-center md:justify-start mb-10 max-h-24 overflow-auto"
     >
       <button
         onClick={(e) => handleSelectCategory("highlights", e)}

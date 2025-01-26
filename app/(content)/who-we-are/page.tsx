@@ -137,7 +137,7 @@ export default function WhoWeAre() {
         <div className="absolute bottom-20 left-0 right-0 w-full grid grid-cols-1 lg:grid-cols-2 z-20 px-[10%] 2xl:px-[20%] gap-4 lg:gap-10">
           <div className="col-span-1 ">
             <h2 className="w-full text-left">
-              Leading The Innovation for <br /> The Future
+              Leading The Innovation for The Future
             </h2>
           </div>
           <div className="">

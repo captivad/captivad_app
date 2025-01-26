@@ -4,6 +4,7 @@ export interface IPayloadGetBlogPost {
   search: string;
   category: string;
   page: number;
+  size: number;
 }
 
 export interface IBlogPost {

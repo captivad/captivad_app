@@ -1,6 +1,5 @@
 "use client";
 
-import { IBlogContent } from "@/app/(content)/blog/blog.interface";
 import { Blog } from "@/prisma/prisma/client";
 import { dateRange, textLimit } from "@/utils/general";
 import { CldImage } from "next-cloudinary";
@@ -11,8 +10,14 @@ interface IProps {
   className?: string;
   content: Blog;
   type?: "content" | "preview";
+  image?: boolean;
 }
-const CardBlog: React.FC<IProps> = ({ className, content, type }) => {
+const CardBlog: React.FC<IProps> = ({
+  className,
+  content,
+  type,
+  image = true,
+}) => {
   // Parse the HTML content
   const parser = new DOMParser();
   const doc = parser.parseFromString(content.main_content, "text/html");
@@ -26,16 +31,21 @@ const CardBlog: React.FC<IProps> = ({ className, content, type }) => {
         <div
           className={`group card shadow-xl hover:scale-95 duration-300 hover:shadow-sm hover:shadow-white ${className}`}
         >
-          <figure>
-            <CldImage
-              priority
-              width={500}
-              height={500}
-              className="w-full h-full object-cover"
-              src={content.thumbnail_url}
-              alt={content.title}
-            />
-          </figure>
+          {image && (
+            <figure className="max-h-72">
+              <CldImage
+                priority
+                width={500}
+                height={500}
+                className="w-full h-full object-cover"
+                src={content.thumbnail_url}
+                alt={content.title}
+                onError={(e) => {
+                  e.currentTarget.src = "default-image.jpg";
+                }}
+              />
+            </figure>
+          )}
           <div className="card-body px-4">
             <h4 className="font-semibold mb-2">{content.title}</h4>
             <h6 className="">
@@ -56,16 +66,21 @@ const CardBlog: React.FC<IProps> = ({ className, content, type }) => {
           href={`/blog/${content.title}?id=${content.uuid}`}
           className={`group card shadow-xl hover:scale-95 duration-300 hover:shadow-sm hover:shadow-white ${className}`}
         >
-          <figure>
-            <CldImage
-              priority
-              width={500}
-              height={500}
-              className="w-full h-full object-cover"
-              src={content.thumbnail_url}
-              alt={content.title}
-            />
-          </figure>
+          {image && (
+            <figure className="max-h-72">
+              <CldImage
+                priority
+                width={500}
+                height={500}
+                className="w-full h-full object-cover"
+                src={content.thumbnail_url}
+                alt={content.title}
+                onError={(e) => {
+                  e.currentTarget.src = "default-image.jpg";
+                }}
+              />
+            </figure>
+          )}
           <div className="card-body px-4">
             <h4 className="font-semibold mb-2">{content.title}</h4>
             <h6 className="">

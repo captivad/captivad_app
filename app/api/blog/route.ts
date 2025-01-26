@@ -11,8 +11,9 @@ export async function GET(req: NextRequest) {
     const search = urlParams.get("search");
     const page = Number(urlParams.get("page") || 1);
     const category = urlParams.get("category");
+    const size = Number(urlParams.get("size") || 20);
 
-    const { limit, offset } = getPagination(Number(page || 1), 20);
+    const { limit, offset } = getPagination(Number(page || 1), size);
 
     let whereCondition: Prisma.BlogWhereInput = {
       AND: [

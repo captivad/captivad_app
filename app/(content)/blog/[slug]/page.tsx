@@ -9,6 +9,7 @@ import { metadata } from "@/app/layout";
 import { article } from "framer-motion/m";
 import { IBlogPost } from "@/app/api/blog/blog.interface";
 import NavigateToErrorPage from "@/components/navigate-error";
+import ListArticleLatest from "../components/list-article-latest";
 
 export function generateMetadata({
   params,
@@ -85,7 +86,7 @@ export default async function BlogDetails({
         </div>
 
         <div className="w-full grid grid-cols-7 gap-10 px-[10%] lg:px-20 pb-20">
-          <div className="col-span-7 md:col-span-5">
+          <div className="col-span-7 lg:col-span-5">
             <div
               className="flex flex-col gap-2 lg:gap-4"
               dangerouslySetInnerHTML={{
@@ -95,10 +96,9 @@ export default async function BlogDetails({
             <div></div>
           </div>
           <hr className="col-span-7 border-t-2 md:hidden" />
-          <div className="col-span-7 md:col-span-2">
-            {/* <Markdown className={"text-justify flex flex-col gap-4 lg:gap-10"}>
-              {latestBlog1}
-            </Markdown> */}
+          <div className="col-span-7 lg:col-span-2">
+            <h3 className="mb-4">Latest Blog</h3>
+            <ListArticleLatest />
           </div>
         </div>
       </article>

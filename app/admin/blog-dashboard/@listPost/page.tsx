@@ -13,12 +13,17 @@ import {
 } from "../blog-dashboard.service";
 import { Blog, StatusContent } from "@/prisma/prisma/client";
 import ModalConfirmAlert from "@/components/modal-confirm";
+import PaginationButton from "@/components/PaginationButton";
+import { IResponsePagination } from "@/helpers/general.helper";
+import { data } from "framer-motion/m";
+import EmptyData from "@/components/empty-data";
 
 export default function ListPost() {
   const navigate = useRouter();
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams.toString());
   const [postSelected, setPostSelected] = React.useState<Blog[]>([]);
+  const [currentPage, setCurrentPage] = React.useState<number>(1);
 
   const startEditPost = (uuid: string) => {
     window.localStorage.removeItem("editorContent");
@@ -33,6 +38,7 @@ export default function ListPost() {
     params.delete("action");
     params.delete("id");
     navigate.push(`?${params.toString()}`);
+    setCurrentPage(1);
     setPostSelected([]);
   };
 
@@ -42,11 +48,12 @@ export default function ListPost() {
     params.delete("action");
     params.delete("id");
     navigate.push(`?${params.toString()}`);
+    setCurrentPage(1);
     setPostSelected([]);
   };
 
   const { data: listpost, isLoading } = useGetPostDashboard({
-    page: 1,
+    page: currentPage,
     search: params.get("search") || "",
     status: params.get("tab") as StatusContent,
   });
@@ -72,6 +79,7 @@ export default function ListPost() {
   const { mutate: deleteMutate, isPending } = useDeletePostDashboard({
     onSuccess: () => {
       setPostSelected([]);
+      setCurrentPage(1);
     },
   });
   const handleDeletePost = (uuids: string) => {
@@ -83,13 +91,14 @@ export default function ListPost() {
     useUpdateStatusPostDashboard({
       onSuccess: () => {
         setPostSelected([]);
+        setCurrentPage(1);
       },
     });
 
   return (
     <>
       <div className="min-w-96 max-w-min h-full">
-        <h5 className="font-bold mb-4 flex items-center gap-2">
+        <h5 className="font-bold mb-4 flex items-center justify-between gap-2">
           <label
             onClick={() => navigate.push(BLOG)}
             className="btn btn-square rounded-full tooltip flex justify-center items-center"
@@ -178,7 +187,7 @@ export default function ListPost() {
           )}
         </div>
 
-        <div className=" w-full min-h-[800px] max-h-[800px] overflow-y-auto p-4 rounded-box bg-gray-500/30">
+        <div className="w-full max-h-[700px] overflow-y-auto p-4 rounded-box bg-gray-500/30">
           <ul className="menu menu-md">
             {!isLoading &&
               (listpost?.payload?.rows || []).map((item) => (
@@ -243,7 +252,18 @@ export default function ListPost() {
                 <span className="loading loading-dots loading-lg"></span>
               </div>
             )}
+            {!isLoading && listpost?.payload?.rows?.length === 0 && (
+              <EmptyData />
+            )}
           </ul>
+          {!isLoading &&
+            listpost?.payload &&
+            listpost?.payload?.totalPage > 1 && (
+              <PaginationButton
+                data={listpost?.payload as IResponsePagination<any>}
+                setCurrentPage={setCurrentPage}
+              />
+            )}
         </div>
       </div>
       <ModalConfirmAlert

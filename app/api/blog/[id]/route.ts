@@ -15,7 +15,7 @@ export async function GET(
     if (!uuid) throw new HttpException(400, "article uuid is required");
 
     const response = await captivadPrisma.blog.findFirst({
-      where: { uuid, status: StatusContent.publish, deleted_dt: null },
+      where: { uuid, deleted_dt: null },
       include: {
         blog_category: {
           include: {

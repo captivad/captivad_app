@@ -26,8 +26,8 @@ const CardValueCount = ({
   React.useEffect(() => {
     // Increment the value from 1 to the target value
     let startValue = 0;
-    const duration = 2000; // Duration for the animation in milliseconds
-    const stepTime = Math.max(Math.floor(duration / value), 10); // Time between increments
+    const duration = 1000; // Duration for the animation in milliseconds
+    const stepTime = Math.max(Math.floor(duration / value), 20); // Time between increments
 
     const increment = () => {
       startValue += Math.ceil(value / (duration / stepTime));

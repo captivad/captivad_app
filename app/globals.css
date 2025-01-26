@@ -33,8 +33,11 @@ body {
   h6 {
     @apply text-sm lg:text-lg xl:text-xl font-medium;
   }
-  p {
+  /* p {
     @apply text-[12px] md:text-[16px] lg:text-[20px] xl:text-[24px];
+  } */
+  p {
+    @apply text-[1em] lg:text-[1.3em];
   }
 
   pre {

@@ -184,7 +184,7 @@ const CreateNewPost: FC = () => {
             {errors.mainContent && (
               <label className="text-error">{errors.mainContent}</label>
             )}
-            <label className="btn btn-md">Preview</label>
+            {/* <label className="btn btn-md">Preview</label> */}
           </div>
           <TextEditor
             contentHtml={values.mainContent}

@@ -234,7 +234,12 @@ const EditPost: FC = () => {
             {errors.mainContent && (
               <label className="text-error">{errors.mainContent}</label>
             )}
-            <label className="btn btn-md">Preview</label>
+            {/* <Link
+              href={`/blog/${values.title}?id=${id}`}
+              className="btn btn-md"
+            >
+              Preview
+            </Link> */}
           </div>
           <TextEditor
             contentHtml={values.mainContent}

@@ -4,6 +4,8 @@ import { FC, useState } from "react";
 import CardBlog from "./card-blog";
 import { useGetBlogPost } from "../blog.web.service";
 import { useSearchParams } from "next/navigation";
+import { IResponsePagination } from "@/helpers/general.helper";
+import PaginationButton from "@/components/PaginationButton";
 
 const ListArticle: FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -14,65 +16,8 @@ const ListArticle: FC = () => {
     page: currentPage,
     search: params.get("search") || "",
     category: params.get("category") || "",
+    size: 20,
   });
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
-
-  const renderPaginationButtons = () => {
-    if (!listArticle) return null;
-
-    const { currentPage, totalPage } = listArticle;
-    const buttons = [];
-
-    // First page and previous
-    if (currentPage > 1) {
-      buttons.push(
-        <button
-          key="prev"
-          className="join-item btn"
-          onClick={() => handlePageChange(currentPage - 1)}
-        >
-          «
-        </button>
-      );
-    }
-
-    // Page number buttons
-    const visiblePages = 5;
-    const startPage = Math.max(1, currentPage - Math.floor(visiblePages / 2));
-    const endPage = Math.min(totalPage, startPage + visiblePages - 1);
-
-    for (let page = startPage; page <= endPage; page++) {
-      buttons.push(
-        <button
-          key={page}
-          className={`join-item btn ${
-            page === currentPage ? "btn-active" : ""
-          }`}
-          onClick={() => handlePageChange(page)}
-        >
-          {page}
-        </button>
-      );
-    }
-
-    // Next page
-    if (currentPage < totalPage) {
-      buttons.push(
-        <button
-          key="next"
-          className="join-item btn"
-          onClick={() => handlePageChange(currentPage + 1)}
-        >
-          »
-        </button>
-      );
-    }
-
-    return buttons;
-  };
 
   return (
     <div>
@@ -104,8 +49,11 @@ const ListArticle: FC = () => {
         )}
       </div>
       {listArticle && listArticle.totalPage > 1 && (
-        <div className="join flex justify-center mt-4">
-          {renderPaginationButtons()}
+        <PaginationButton data={listArticle} setCurrentPage={setCurrentPage} />
+      )}
+      {listArticle && listArticle.rows.length === 0 && (
+        <div className="w-full h-32 flex justify-center items-center">
+          <h5>No Article Found</h5>
         </div>
       )}
     </div>
