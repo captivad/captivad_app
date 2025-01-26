@@ -41,7 +41,12 @@ const nextConfig = {
   reactStrictMode: true,
   env: validatedEnv(),
   images: {
-    domains: ["res.cloudinary.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
+    ],
   },
 };
 

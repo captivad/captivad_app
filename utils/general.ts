@@ -22,7 +22,7 @@ export const dateRange = ({ createdDt }: IDateRange): string => {
     }
     return `${moment().diff(createdDt, "hour")} hours ago`;
   } else {
-    return `${moment(createdDt).format("MMM DD, YYYY")}`;
+    return `${moment(createdDt).format("dddd, MMMM Do YYYY")}`;
   }
 };
 

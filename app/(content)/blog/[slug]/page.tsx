@@ -1,13 +1,10 @@
 import BackButton from "@/components/button-back";
 import { dateRange } from "@/utils/general";
 import moment from "moment";
-import Markdown from "react-markdown";
 import { fetchDetailArticle } from "../blog.web.service";
 import { Metadata } from "next";
 import Image from "next/image";
 import { metadata } from "@/app/layout";
-import { article } from "framer-motion/m";
-import { IBlogPost } from "@/app/api/blog/blog.interface";
 import NavigateToErrorPage from "@/components/navigate-error";
 import ListArticleLatest from "../components/list-article-latest";
 
@@ -72,9 +69,7 @@ export default async function BlogDetails({
                     <h4 className="text-left">Date</h4>
                     <h6 className="text-left">
                       {dateRange({
-                        createdDt: moment(article?.created_dt).format(
-                          "dddd DD MMMM YYYY"
-                        ),
+                        createdDt: moment(article?.created_dt).toDate(),
                       })}
                     </h6>
                   </div>
