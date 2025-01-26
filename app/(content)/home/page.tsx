@@ -12,6 +12,7 @@ import ImgPersonGroup from "@/public/group-image.svg";
 import ImgPerson from "@/public/img-person.svg";
 import HomeSection2 from "@/public/homesection-2.svg";
 import Link from "next/link";
+import { OUR_SERVICES, WHO_WE_ARE } from "@/utils/router";
 
 export default function Home() {
   const [visibleSections, setVisibleSections] = React.useState({
@@ -131,14 +132,14 @@ export default function Home() {
           </h4>
           <div className="w-full flex justify-center gap-2 lg:gap-4 px-10 md:px-0 mt-10">
             <Link
-              href=""
+              href={WHO_WE_ARE}
               className="btn btn-md lg:btn-lg rounded-badge bg-foreground text-primary hover:text-white"
             >
               Get Started
               <ArrowRight size={20} />
             </Link>
             <Link
-              href=""
+              href={OUR_SERVICES}
               className="btn btn-md lg:btn-lg rounded-badge border-white bg-transparent"
             >
               Learn More
