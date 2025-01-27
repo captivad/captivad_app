@@ -7,6 +7,7 @@ import { ResponseError, ResponseSuccess } from "@/helpers/exception.helper";
 import { HttpException } from "@/utils/HttpException";
 import nodemailer from "nodemailer";
 import axios from "axios";
+import { templateGreating } from "@/utils/template/email";
 
 export async function POST(req: NextRequest) {
   try {
@@ -28,9 +29,9 @@ export async function POST(req: NextRequest) {
         const userMailResponse = await transporter.sendMail({
           from: `Captivad <${process.env.BREVO_EMAIL_AUTH}>`,
           to: body.email,
-          subject: `Hallo ${body.name}, terimakasih atas kunjungan anda`,
+          subject: `Terima kasih telah berlangganan Captivad, ${body.name}!`,
           text: `Terimakasih atas kunjungan anda, kami akan segera membalas email anda`,
-          html: `<p>Terimakasih atas kunjungan anda, kami akan segera membalas email anda</p>`,
+          html: templateGreating(),
         });
         console.log("User email sent:", userMailResponse.response);
 
@@ -38,8 +39,8 @@ export async function POST(req: NextRequest) {
         const adminMailResponse = await transporter.sendMail({
           from: `Captivad Customer <${process.env.BREVO_EMAIL_AUTH}>`,
           replyTo: body.email,
-          to: "ptbagusraditya@gmail.com",
-          cc: ["captivad5@gmail.com"],
+          to: "captivad.sp@gmail.com",
+          // cc: ["captivad5@gmail.com"],
           subject: "Hallo Captivad admin, can you please help me?",
           text: body.message,
           html: `<p>${body.message}</p>`,
