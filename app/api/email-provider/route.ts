@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
         const adminMailResponse = await transporter.sendMail({
           from: `Captivad Customer <${process.env.BREVO_EMAIL_AUTH}>`,
           replyTo: body.email,
-          to: "captivad.sp@gmail.com",
+          to: process.env.BREVO_EMAIL_AUTH,
           // cc: ["captivad5@gmail.com"],
           subject: "Hallo Captivad admin, can you please help me?",
           text: body.message,

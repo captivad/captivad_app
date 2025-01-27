@@ -183,7 +183,7 @@ export default function WhoWeAre() {
       </section>
 
       <section className="w-full flex flex-col justify-centerrelative h-full bg-foreground overflow-hidden p-[10%] lg:p-20">
-        <h1 className="w-full text-center text-background mb-16">
+        <h1 className="w-full text-center mb-16 bg-gradient-to-r from-background to-gray-500 bg-clip-text text-transparent">
           Meet The Team
         </h1>
         <div className="w-full h-full flex flex-wrap gap-10 justify-center">
