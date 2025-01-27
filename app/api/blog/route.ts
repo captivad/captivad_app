@@ -11,9 +11,9 @@ export async function GET(req: NextRequest) {
     const search = urlParams.get("search");
     const page = Number(urlParams.get("page") || 1);
     const category = urlParams.get("category");
-    const size = Number(urlParams.get("size") || 20);
+    const size = Number(urlParams.get("size"));
 
-    const { limit, offset } = getPagination(Number(page || 1), size);
+    const { limit, offset } = getPagination(Number(page || 1), size || 20);
 
     let whereCondition: Prisma.BlogWhereInput = {
       AND: [
@@ -50,12 +50,20 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    const response = await captivadPrisma.blog.findMany({
-      where: whereCondition,
-      orderBy: { created_dt: "desc" },
-      take: limit,
-      skip: offset,
-    });
+    let response: Blog[] = [];
+    if (page && size) {
+      response = await captivadPrisma.blog.findMany({
+        where: whereCondition,
+        orderBy: { created_dt: "desc" },
+        take: limit,
+        skip: offset,
+      });
+    } else {
+      response = await captivadPrisma.blog.findMany({
+        where: whereCondition,
+        orderBy: { created_dt: "desc" },
+      });
+    }
 
     const count = await captivadPrisma.blog.count({
       where: whereCondition,

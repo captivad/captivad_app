@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_ID",
-    url: "https://www.captivad.com",
+    url: process.env.NEXT_PUBLIC_BASE_URL,
     siteName: "CaptivAd",
     title:
       "CaptivAd: Complete Brand Transformation & Knowledge Growth Solutions",
