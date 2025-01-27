@@ -1,14 +1,12 @@
 import { router } from "@/utils/router";
-import { useGetBlogPost } from "./(content)/blog/blog.web.service";
 import axios from "axios";
 import { IBaseResponse, IResponsePagination } from "@/helpers/general.helper";
 import { Blog } from "@/prisma/prisma/client";
-import { IPayloadGetBlogPost } from "./api/blog/blog.interface";
 
 export default async function sitemap() {
   const bashUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
-  let allArticles = [];
+  const allArticles = [];
 
   try {
     const response = await axios<IBaseResponse<IResponsePagination<Blog[]>>>({
@@ -16,8 +14,6 @@ export default async function sitemap() {
       method: "GET",
       params: {},
     });
-
-    console.log(response, "response");
 
     if (response) {
       const articles = response.data.payload?.rows.map((item) => {
