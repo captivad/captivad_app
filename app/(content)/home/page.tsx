@@ -120,15 +120,9 @@ export default function Home() {
           transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
           className="w-full text-center z-20 px-[10%] md:px-0"
         >
-          <h1>
-            Transform How You
-            <br />
-            Reach Your Audience
-          </h1>
+          <h1>{`Transform How You \n Reach Your Audience`}</h1>
           <h4 className="my-6">
-            Providing advanced targeting solutions
-            <br />
-            to reach addressable audiences at scale.
+            {`Providing advanced targeting solutions \n to reach addressable audiences at scale.`}
           </h4>
           <div className="w-full flex justify-center gap-2 lg:gap-4 px-10 md:px-0 mt-10">
             <Link

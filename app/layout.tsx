@@ -42,6 +42,10 @@ export const metadata: Metadata = {
     description:
       "Boost your advertising success with Captivad. Explore expert media strategies, data-driven insights, and cutting-edge tools to elevate your brand and reach your audience effectively.",
   },
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({
@@ -51,6 +55,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <link rel="icon" href="/icon.png" type="image/png" />
+      <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       <body className={`${dmSans.className} ${dmSans.className} antialiased`}>
         <Toaster position="top-center" reverseOrder={false} />
         <ClientProviders>{children}</ClientProviders>

@@ -8,6 +8,8 @@ import { fetchDataDetailWorkById } from "../our-work.web.service";
 import { Metadata } from "next";
 import { metadata } from "@/app/layout";
 import VideoComponent from "../components/VIdeoComponent";
+import { DefaultImage } from "@/public";
+import ImageRender from "../components/image-render";
 
 async function generateStaticData({
   searchParams,
@@ -45,7 +47,7 @@ export default async function OurWorksDetail({
       {/* ###########################  section-1  ############################ */}
       <section
         id="section-intro"
-        className="relative w-full h-auto bg-background flex justify-center pt-44 md:pt-60 mb-10"
+        className="relative w-full h-auto bg-background flex justify-center pt-44 md:pt-60 mb-[10%]"
       >
         <Image
           fill
@@ -85,14 +87,7 @@ export default async function OurWorksDetail({
         <div className="w-full col-span-1 flex items-center justify-center">
           <div className="relative w-full aspect-video max-w-xl rounded-box overflow-hidden">
             {data?.video_image_url.includes("image") && (
-              <Image
-                priority
-                src={data?.video_image_url || Contentlaptop}
-                alt="picture-content"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1440px) 50vw"
-                className="object-cover"
-              />
+              <ImageRender src={data?.video_image_url} />
             )}
             {data?.video_image_url.includes("video") && (
               <VideoComponent url={data?.video_image_url} />

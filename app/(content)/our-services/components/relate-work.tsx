@@ -55,7 +55,10 @@ const RelateWork: React.FC<IProps> = ({ relateWork }) => {
 
   return (
     <>
-      <section className="p-[5%] lg:px-20 w-full h-auto flex flex-col gap-4">
+      <section
+        style={{ paddingTop: "0px" }}
+        className="p-[5%] lg:px-20 w-full h-auto flex flex-col gap-4"
+      >
         <h3>Relate Work</h3>
         <div className="w-full flex xl:items-center gap-4">
           {relateWork.length >= 4 && (

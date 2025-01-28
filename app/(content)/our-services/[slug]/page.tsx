@@ -38,7 +38,7 @@ export default async function OurServicesDetail({
       {/* ###########################  section-1  ############################ */}
       <section
         id="section-intro"
-        className="relative w-full md:h-[50vh] lg:h-dvh bg-background flex justify-center pt-44 md:pt-60"
+        className="relative w-full mb-[5%] lg:h-dvh bg-background flex justify-center pt-44 md:pt-60"
       >
         <Image
           fill
@@ -47,15 +47,17 @@ export default async function OurServicesDetail({
           alt="bg-detail-section1"
           className="absolute z-0 top-0 left-0 w-full"
         />
-        <div className="z-20 px-[10%] lg:px-20">
-          <div className="w-full flex justify-start mb-6">
-            <BackButton />
-          </div>
-          <div className="flex justify-center">
-            <div className="flex flex-col lg:gap-4 w-full md:w-[70%] text-center">
-              <h4 className="text-left">{data && data.name_service}</h4>
-              <h1 className="text-left">{data && data.detail_title}</h1>
-              <h5 className="my-6 text-left">{data && data.main_content}</h5>
+        <div className="z-20 px-[10%] lg:px-20 flex justify-start w-full">
+          <div className="w-full">
+            <div className="w-full flex justify-start mb-6">
+              <BackButton />
+            </div>
+            <div className="flex justify-center w-full">
+              <div className="flex flex-col lg:gap-4 w-full md:w-[70%] text-center">
+                <h4 className="text-left">{data && data.name_service}</h4>
+                <h1 className="text-left">{data && data.detail_title}</h1>
+                <h5 className="my-6 text-left">{data && data.main_content}</h5>
+              </div>
             </div>
           </div>
         </div>

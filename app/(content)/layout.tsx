@@ -2,7 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import CaptivadLogoFooter from "@/public/LogoCaptivAd-01.svg";
 import Header from "@/components/header";
-import { CONTACT_US, HOME, OUR_SERVICES } from "@/utils/router";
+import {
+  BLOG,
+  CONTACT_US,
+  HOME,
+  OUR_SERVICES,
+  OUR_WORK,
+  WHO_WE_ARE,
+} from "@/utils/router";
 import FacebbokIcon from "@/public/facebook-icon.svg";
 import IntagramIcon from "@/public/instagram-icon.svg";
 import XIcon from "@/public/x-icon.svg";
@@ -38,13 +45,20 @@ export default function LayoutContent({
               <Link href={HOME}>
                 <h5>Home</h5>
               </Link>
+              <Link href={WHO_WE_ARE}>
+                <h5>Who We Are</h5>
+              </Link>
+
               <Link href={OUR_SERVICES}>
                 <h5>Our Services</h5>
               </Link>
             </div>
             <div className="col-span-1 text-primary font-semibold flex flex-col gap-2">
-              <Link href={""}>
+              <Link href={OUR_WORK}>
                 <h5>Our Work</h5>
+              </Link>
+              <Link href={BLOG}>
+                <h5>Blog</h5>
               </Link>
               <Link href={CONTACT_US}>
                 <h5>Contact Us</h5>

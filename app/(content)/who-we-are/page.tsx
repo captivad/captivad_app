@@ -112,7 +112,7 @@ export default function WhoWeAre() {
         }}
         initial="hidden"
         animate="show"
-        className="relative w-full min-h-[300px] lg:min-h-[50vh] xl:min-h-[60vh] bg-background flex justify-center pt-32 md:pt-40 md:items-center"
+        className="relative mb-[10%] w-full min-h-[300px] lg:min-h-[50vh] xl:min-h-[60vh] bg-background flex justify-center pt-32 md:pt-40 md:items-center"
       >
         <motion.div
           initial={{ opacity: 0, y: 100 }}
@@ -134,7 +134,7 @@ export default function WhoWeAre() {
           fill
           className="object-cover"
         />
-        <div className="absolute bottom-20 left-0 right-0 w-full grid grid-cols-1 lg:grid-cols-2 z-20 px-[10%] 2xl:px-[20%] gap-4 lg:gap-10">
+        <div className="absolute bottom-20 left-0 right-0 w-full grid grid-cols-1 lg:grid-cols-2 z-20 px-[14%] 2xl:px-[20%] gap-4 lg:gap-14">
           <div className="col-span-1 ">
             <h2 className="w-full text-left">
               Leading The Innovation for The Future
@@ -142,19 +142,23 @@ export default function WhoWeAre() {
           </div>
           <div className="">
             <h3 className="w-full text-left font-bold pb-4">Our Mission</h3>
-            <ul className=" list-disc pl-6">
-              <li className="text-[14px] md:text-[16px] lg:text-[20px] xl:text-[24px]">
-                {`To be a strategic partner that exceeds client's needs with
-                holistic digital solutions`}
+            <ul className="list-disc pl-6">
+              <li className="mb-4">
+                <p>
+                  {`To be a strategic partner that exceeds client's needs with
+                  holistic digital solutions.`}
+                </p>
               </li>
-              <li className="text-[14px] md:text-[16px] lg:text-[20px] xl:text-[24px]">
-                To enhance knowledge and skill for CaptivAd to adapt with
-                digital innovation
+              <li>
+                <p>
+                  To enhance knowledge and skill for CaptivAd to adapt with
+                  digital innovation.
+                </p>
               </li>
             </ul>
           </div>
         </div>
-        <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-background via-black/50 lg:via-transparent to-background z-10"></div>
+        <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-background via-black/30 to-background z-10"></div>
       </section>
 
       <section className="w-full flex flex-wrap justify-center gap-4 lg:gap-10 relative h-full bg-background overflow-hidden p-[10%] lg:p-20 pt-0">

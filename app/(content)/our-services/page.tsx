@@ -95,7 +95,7 @@ export default function OurServices() {
         }}
         initial="hidden"
         animate="show"
-        className="relative w-full md:h-[50vh] lg:h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
+        className="relative w-full md:h-[80vh] lg:h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
       >
         <Image
           // width={500}
@@ -112,12 +112,10 @@ export default function OurServices() {
           transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
           className="w-full md:w-[70%] text-center z-20 px-[10%] md:px-0"
         >
-          <h1 className="text-[22px] text-center lg:text-6xl md:text-left">
-            Complete solutions for your
-            <br />
-            {` brand's transformation`}
+          <h1 className="text-center lg:text-left lg:max-w-[90%]">
+            {`Complete solutions for your brand's transformation`}
           </h1>
-          <h4 className="my-6 text-center md:text-left">
+          <h4 className="my-6 text-center lg:text-left">
             We care for and encourage the growth or development of knowledge,
             help or encourage the development of knowledge and skills of all
             CaptivAd.
@@ -130,6 +128,7 @@ export default function OurServices() {
       <motion.section
         ref={sectionRefs.accordion}
         id="section-accordion"
+        style={{ paddingTop: "10px" }}
         className="w-full h-auto bg-black p-[10%] lg:p-20 flex flex-col justify-center gap-1 md:gap-6"
       >
         {status === "authenticated" && (
