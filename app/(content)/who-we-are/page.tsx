@@ -7,6 +7,7 @@ import Image from "next/image";
 import BgSection1 from "@/public/whoweare-section1.svg";
 import IconLamp from "@/public/emoji_objects.svg";
 import { CldImage } from "next-cloudinary";
+import Cardmember from "./components/card-member";
 interface IOpportunity {
   title: string;
   description: string;
@@ -191,7 +192,8 @@ export default function WhoWeAre() {
           Meet The Team
         </h1>
         <div className="w-full h-full flex flex-wrap gap-10 justify-center">
-          {meetTheTeam.map((item, index) => (
+          <Cardmember />
+          {/* {meetTheTeam.map((item, index) => (
             <div key={index} className="flex flex-col gap-4 lg:gap-10 group">
               <div className="max-w-[400px] aspect-square bg-white/30 relative rounded-box backdrop-blur-sm">
                 <CldImage
@@ -207,7 +209,7 @@ export default function WhoWeAre() {
                 <p className="text-background">{item.role}</p>
               </div>
             </div>
-          ))}
+          ))} */}
         </div>
       </section>
 

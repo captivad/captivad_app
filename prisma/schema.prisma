@@ -251,7 +251,7 @@ model BlogComemnt {
   @@map("blog_comment")
 }
 
-model CompanyProfile {
+model CompanyMember {
   uuid                        String     @id @default(uuid())
   image_url                   String     
   fullname                    String
@@ -263,6 +263,8 @@ model CompanyProfile {
   updated_by                  String?
   deleted_dt                  DateTime?
   deleted_by                  String?
+
+  @@map("company_member")
 }
 
 
