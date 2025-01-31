@@ -13,20 +13,9 @@ import { IPayloadSendEmail } from "@/app/api/email-provider/email-provider.inter
 import React from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useGetCategory } from "@/app/(content)/our-works/our-work.web.service";
-
-const multiselectOptions: IMultiselectOption[] = [
-  { id: 1, value: "option1", label: "Option 1" },
-  { id: 2, value: "option2", label: "Option 2" },
-  { id: 3, value: "option3", label: "Option 3" },
-  { id: 4, value: "option4", label: "Option 4" },
-  { id: 5, value: "option5", label: "Option 5" },
-  { id: 6, value: "option6", label: "Option 6" },
-  { id: 7, value: "option7", label: "Option 7" },
-  { id: 8, value: "option8", label: "Option 8" },
-  { id: 9, value: "option9", label: "Option 9" },
-  { id: 10, value: "option10", label: "Option 10" },
-];
+import { useQuery } from "@tanstack/react-query";
+import { IInterest } from "@/app/api/interest/interest.interface";
+import { SuccessResponse } from "@/helpers/exception.helper";
 
 const validationSchema: Yup.Schema<IPayloadSendEmail> = Yup.object({
   name: Yup.string().required("Name is required"),
@@ -36,20 +25,36 @@ const validationSchema: Yup.Schema<IPayloadSendEmail> = Yup.object({
 });
 
 const FormCustomer: React.FC = () => {
-  //list category options
-  const { data: listCategory } = useGetCategory();
-  const categoryOptions = React.useMemo(() => {
-    if (!listCategory) return [];
-    return listCategory?.map((item, _i) => ({
+  const { data: listInterest } = useQuery({
+    queryKey: ["category-service"],
+    queryFn: async () => {
+      try {
+        const response = await axios<SuccessResponse<IInterest[]>>({
+          url: "/api/interest",
+          method: "GET",
+        });
+        console.log(response, "response");
+        return response.data.payload;
+      } catch (error) {
+        toast.error("Get our services failed!");
+      }
+    },
+    refetchOnWindowFocus: false,
+  });
+
+  const interestOptions = React.useMemo(() => {
+    if (!listInterest) return [];
+    return listInterest?.map((item, _i) => ({
       id: _i,
       value: String(item.id),
       label: item.name,
     }));
-  }, [listCategory]);
+  }, [listInterest]);
 
   const [interestSelected, setInterestSelected] = React.useState<
     IMultiselectOption[]
   >([]);
+
   const {
     handleSubmit,
     handleChange,
@@ -148,7 +153,7 @@ const FormCustomer: React.FC = () => {
         </div>
         <div>
           <MultiSelect
-            options={categoryOptions}
+            options={interestOptions}
             onChange={(selected) => {
               setInterestSelected(selected);
               setFieldValue(

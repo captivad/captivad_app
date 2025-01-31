@@ -251,6 +251,20 @@ model BlogComemnt {
   @@map("blog_comment")
 }
 
+model CompanyProfile {
+  uuid                        String     @id @default(uuid())
+  image_url                   String     
+  fullname                    String
+  position                    String
+
+  created_dt                  DateTime   @default(now())
+  created_by                  String?
+  updated_dt                  DateTime?   @updatedAt
+  updated_by                  String?
+  deleted_dt                  DateTime?
+  deleted_by                  String?
+}
+
 
 enum Status {
   enable
