@@ -8,11 +8,15 @@ import { useFormik } from "formik";
 import { HOME } from "@/utils/router";
 import toast from "react-hot-toast";
 import { useSession } from "next-auth/react";
+import { EyeClosed, EyeIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function AdminLogin() {
   const navigate = useRouter();
   const { status } = useSession();
   if (status === "authenticated") navigate.push(HOME);
+
+  const [showPassword, setShowPassword] = React.useState(false);
 
   const { mutate: handleLogin, isPending } = useLogin({
     onSuccess(data) {
@@ -60,25 +64,36 @@ export default function AdminLogin() {
                 value={values.email}
               />
             </div>
-            <div className="form-control">
+            <div className="form-control relative">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
                 name="password"
                 onChange={handleChange}
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="password"
-                className="input input-bordered"
+                className="input input-bordered pr-14"
                 required
                 value={values.password}
               />
-              {/* <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label> */}
+              <label
+                onClick={() => setShowPassword(!showPassword)}
+                className=" absolute bottom-[12px] right-4 bg-transparent cursor-pointer"
+              >
+                {!showPassword ? (
+                  <EyeIcon size={20} className="" />
+                ) : (
+                  <EyeClosed size={20} className="" />
+                )}
+              </label>
             </div>
+            <Link
+              href={"/admin/forgot-password"}
+              className="w-full text-right mt-2 text-sm hover:text-blue-700"
+            >
+              Forgot Password
+            </Link>
             <div className="form-control mt-6">
               <button disabled={isPending} className="btn btn-primary">
                 Login
