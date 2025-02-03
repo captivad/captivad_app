@@ -8,6 +8,23 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+export function useGetMember() {
+  return useQuery({
+    queryKey: ["company-member"],
+    queryFn: async () => {
+      const response = await axios<IBaseResponse<CompanyMember[]>>({
+        method: "GET",
+        url: "/api/company-member",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return response.data;
+    },
+  });
+}
+
 export function useAddMember({ onSuccess }: IFetchStatus) {
   const queryClient = useQueryClient();
   return useMutation({
@@ -83,23 +100,6 @@ export function useUpdateMember({ onSuccess }: IFetchStatus) {
     },
     onError: (e) => {
       toast.error(e.message);
-    },
-  });
-}
-
-export function useGetMember() {
-  return useQuery({
-    queryKey: ["company-member"],
-    queryFn: async () => {
-      const response = await axios<IBaseResponse<CompanyMember[]>>({
-        method: "GET",
-        url: "/api/company-member",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      return response.data;
     },
   });
 }
