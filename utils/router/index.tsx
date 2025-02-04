@@ -13,7 +13,7 @@ export const OUR_SERVICES = "/our-services";
 export const OUR_WORK = "/our-works";
 export const CONTACT_US = "/contact-us";
 export const WHO_WE_ARE = "/who-we-are";
-export const BLOG = "/blog?category=highlights";
+export const BLOG = "/blog";
 export const MEDIA = "/media";
 export const BLOG_DASHBOARD = "/admin/blog-dashboard?tab=publish";
 
@@ -27,6 +27,7 @@ interface IRouter {
   authenticated: boolean;
 }
 
+//untuk navbar
 export const router: IRouter[] = [
   { path: HOME, label: "Home", icon: <Home size={20} />, authenticated: false },
   {
@@ -51,7 +52,7 @@ export const router: IRouter[] = [
     path: BLOG,
     label: "Blog",
     icon: <Globe size={20} />,
-    authenticated: false,
+    authenticated: true,
   },
   {
     path: CONTACT_US,

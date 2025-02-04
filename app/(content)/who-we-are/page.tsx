@@ -31,27 +31,6 @@ const oportunity: IOpportunity[] = [
   },
 ];
 
-const meetTheTeam = [
-  {
-    name: "Miranti Herwinda",
-    role: "Founder and Chief Executive Officer",
-    image:
-      "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1732983568/profile-1_mznsyp.png",
-  },
-  // {
-  //   name: "Syarief Putra",
-  //   role: "Chief operation officer, co-founder",
-  //   image:
-  //     "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1732983316/profile-2_uca6ib.png",
-  // },
-  {
-    name: "Amelia Yoanita Tham",
-    role: "Chief revenue officer, co-founder",
-    image:
-      "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1733135821/image_16_kovfte.png",
-  },
-];
-
 export default function WhoWeAre() {
   const [visibleSections, setVisibleSections] = React.useState({
     intro: false,
@@ -187,31 +166,14 @@ export default function WhoWeAre() {
         ))}
       </section>
 
-      <section className="w-full flex flex-col justify-centerrelative h-full bg-foreground overflow-hidden p-[10%] lg:p-20">
+      {/* <section className="w-full flex flex-col justify-centerrelative h-full bg-foreground overflow-hidden p-[10%] lg:p-20">
         <h1 className="w-full text-center mb-16 bg-gradient-to-r from-background to-gray-500 bg-clip-text text-transparent">
           Meet The Team
         </h1>
         <div className="w-full h-full flex flex-wrap gap-10 justify-center">
           <Cardmember />
-          {/* {meetTheTeam.map((item, index) => (
-            <div key={index} className="flex flex-col gap-4 lg:gap-10 group">
-              <div className="max-w-[400px] aspect-square bg-white/30 relative rounded-box backdrop-blur-sm">
-                <CldImage
-                  width="1000"
-                  height="1000"
-                  src={item.image}
-                  //   sizes="100vw"
-                  alt={"profile-" + index}
-                />
-              </div>
-              <div>
-                <h4 className="font-bold text-background">{item.name}</h4>
-                <p className="text-background">{item.role}</p>
-              </div>
-            </div>
-          ))} */}
         </div>
-      </section>
+      </section> */}
 
       {/* ###########################  section-form  ############################ */}
       <motion.section
