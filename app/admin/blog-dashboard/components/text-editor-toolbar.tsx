@@ -34,21 +34,20 @@ export default function ToolBar({ editor }: Props) {
   if (!editor) return null;
 
   const fontSizes = [
-    "0.5em",
-    "0.625em",
-    "0.75em",
-    "0.875em",
-    "1em",
-    "1.125em",
-    "1.25em",
-    "1.5em",
-    "1.875em",
-    "2.25em",
-    "3em",
-    "3.75em",
-    "4.5em",
+    { label: "11", value: "0.5em" },
+    { label: "12", value: "0.625em" },
+    { label: "13", value: "0.75em" },
+    { label: "14", value: "0.875em" },
+    { label: "15", value: "1em" },
+    { label: "16", value: "1.125em" },
+    { label: "17", value: "1.25em" },
+    { label: "18", value: "1.5em" },
+    { label: "19", value: "1.875em" },
+    { label: "20", value: "2.25em" },
+    { label: "21", value: "3em" },
+    { label: "22", value: "3.75em" },
+    { label: "23", value: "4.5em" },
   ];
-
   // const getFontSize = () => {
   //   return editor.getAttributes("fontSize").fontSize || "16px";
   // };
@@ -172,8 +171,8 @@ export default function ToolBar({ editor }: Props) {
       >
         <option value="">Font Size</option>
         {fontSizes.map((size) => (
-          <option key={size} value={size}>
-            {size}
+          <option key={size.value} value={size.value}>
+            {size.label}
           </option>
         ))}
       </select>

@@ -7,6 +7,7 @@ import { ChevronsRight, Menu } from "lucide-react";
 import React from "react";
 import { HOME } from "@/utils/router";
 import { Navbar } from "./navbar";
+import { LogoCaptivadWhite } from "@/public";
 
 const Header = () => {
   const [open, setOpen] = React.useState(false);
@@ -17,13 +18,13 @@ const Header = () => {
           <nav className="flex flex-row lg:flex-row w-full justify-between px-[5%]">
             <Link
               href={HOME}
-              className="h-12 w-28 lg:w-32 lg:h-28 overflow-hidden cursor-pointer"
+              className="h-12 w-20 lg:w-32 lg:h-28 overflow-hidden cursor-pointer"
             >
               <Image
                 width={500}
                 height={500}
-                src={CaptivadLogo}
-                className="w-full h-full object-cover"
+                src={LogoCaptivadWhite}
+                className="w-full h-full object-contain"
                 alt="captivad"
               />
             </Link>

@@ -13,6 +13,7 @@ import {
 import FacebbokIcon from "@/public/facebook-icon.svg";
 import IntagramIcon from "@/public/instagram-icon.svg";
 import XIcon from "@/public/x-icon.svg";
+import { LogoCaptivadBlack } from "@/public";
 
 export default function LayoutContent({
   children,
@@ -26,7 +27,7 @@ export default function LayoutContent({
       <main className="h-full">{children}</main>
       <footer className=" h-full w-full bg-foreground px-[10%] py-10 md:px-20">
         <Image
-          src={CaptivadLogoFooter}
+          src={LogoCaptivadBlack.src}
           alt="logo"
           width={130}
           height={130}
@@ -57,9 +58,9 @@ export default function LayoutContent({
               <Link href={OUR_WORK}>
                 <h5>Our Work</h5>
               </Link>
-              <Link href={BLOG}>
+              {/* <Link href={BLOG}>
                 <h5>Blog</h5>
-              </Link>
+              </Link> */}
               <Link href={CONTACT_US}>
                 <h5>Contact Us</h5>
               </Link>
