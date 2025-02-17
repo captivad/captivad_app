@@ -37,8 +37,7 @@ export const metadata: Metadata = {
     locale: "en_ID",
     url: process.env.NEXT_PUBLIC_BASE_URL,
     siteName: "CaptivAd",
-    title:
-      "CaptivAd: Complete Brand Transformation & Knowledge Growth Solutions",
+    title: "CaptivAd",
     description:
       "Boost your advertising success with Captivad. Explore expert media strategies, data-driven insights, and cutting-edge tools to elevate your brand and reach your audience effectively.",
   },
