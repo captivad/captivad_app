@@ -66,12 +66,12 @@ const Header = () => {
                           className="w-6 md:w-12 aspect-square"
                         />
                       </label>
-                      <div className="h-12 w-28 lg:w-32 lg:h-16 xl:w-32 xl:h-28 overflow-hidden">
+                      <div className="h-12 w-20 lg:w-32 lg:h-16 xl:w-32 xl:h-28 overflow-hidden">
                         <Image
                           width={500}
                           height={500}
                           src={LogoCaptivadWhite}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-contain"
                           alt="captivad"
                         />
                       </div>
