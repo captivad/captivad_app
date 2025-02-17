@@ -70,7 +70,7 @@ const Header = () => {
                         <Image
                           width={500}
                           height={500}
-                          src={CaptivadLogo}
+                          src={LogoCaptivadWhite}
                           className="w-full h-full object-cover"
                           alt="captivad"
                         />
