@@ -2,8 +2,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Captivad | Home",
-  description: "Welcome to Captiad",
+  title: "Captivad | Contact Us",
+  description: "Contact us for any inquiries or feedback.",
 };
 
 export default function ContactUsLayout({
