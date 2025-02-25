@@ -7,12 +7,12 @@ import React from "react";
 import Image from "next/image";
 import "./style.css";
 import FormCustomer from "@/components/form-customer";
-import HeroGift from "@/public/Hero.gif";
 import ImgPersonGroup from "@/public/group-image.svg";
 import ImgPerson from "@/public/img-person.svg";
 import HomeSection2 from "@/public/homesection-2.svg";
 import Link from "next/link";
 import { OUR_SERVICES, WHO_WE_ARE } from "@/utils/router";
+import { CircularGif, SpaceGif } from "@/public";
 
 export default function Home() {
   const [visibleSections, setVisibleSections] = React.useState({
@@ -107,7 +107,7 @@ export default function Home() {
         <Image
           // width={500}
           // height={500}
-          src={HeroGift}
+          src={SpaceGif.src}
           fill
           priority
           objectFit="cover"
@@ -461,7 +461,7 @@ export default function Home() {
                 // height={891}
                 priority
                 fill
-                src="/SectionRotation.gif"
+                src={CircularGif.src}
                 alt="Image-Person"
                 objectFit="cover"
               />
