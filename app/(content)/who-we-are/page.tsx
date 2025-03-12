@@ -8,12 +8,6 @@ import BgSection1 from "@/public/whoweare-section1.svg";
 import IconLamp from "@/public/emoji_objects.svg";
 import { Metadata } from "next";
 
-export function generateMetadata(): Metadata {
-  return {
-    title: `Who We Are`,
-  };
-}
-
 interface IOpportunity {
   title: string;
   description: string;
