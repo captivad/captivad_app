@@ -6,8 +6,14 @@ import React from "react";
 import Image from "next/image";
 import BgSection1 from "@/public/whoweare-section1.svg";
 import IconLamp from "@/public/emoji_objects.svg";
-import { CldImage } from "next-cloudinary";
-import Cardmember from "./components/card-member";
+import { Metadata } from "next";
+
+export function generateMetadata(): Metadata {
+  return {
+    title: `Who We Are`,
+  };
+}
+
 interface IOpportunity {
   title: string;
   description: string;

@@ -2,7 +2,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Captivad | Contact Us",
+  title: "Contact Us",
   description: "Contact us for any inquiries or feedback.",
 };
 
