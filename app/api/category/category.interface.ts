@@ -9,3 +9,8 @@ export interface ICategoryService {
   deleted_dt: string | null;
   deleted_by: string | null;
 }
+
+export interface IPayloadAddCategory {
+  name: string;
+  description: string;
+}

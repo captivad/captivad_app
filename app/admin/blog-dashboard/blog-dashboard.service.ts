@@ -5,7 +5,10 @@ import {
   IPayloadUpdateStatusPost,
   IPostDetail,
 } from "@/app/api/admin/blog-dashboard/blog-dashboard.interface";
-import { ICategoryService } from "@/app/api/category/category.interface";
+import {
+  ICategoryService,
+  IPayloadAddCategory,
+} from "@/app/api/category/category.interface";
 import { SuccessResponse } from "@/helpers/exception.helper";
 import {
   IBaseResponse,
@@ -204,6 +207,32 @@ export function useUpdateStatusPostDashboard({ onSuccess }: IFetchStatus) {
         queryKey: ["blog"],
       });
       toast.success("Update status post dashboard success!");
+    },
+    onError: (e) => {
+      toast.error(e.message);
+    },
+  });
+}
+
+export function useCreateCategory() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (payload: IPayloadAddCategory) => {
+      const response = await axios({
+        method: "POST",
+        url: "/api/category",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: payload,
+      });
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["category-service"],
+      });
+      toast.success("Create category success!");
     },
     onError: (e) => {
       toast.error(e.message);

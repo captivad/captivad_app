@@ -2,7 +2,7 @@
 
 import MultiSelect from "@/components/multi-select";
 import { MEDIA } from "@/utils/router";
-import { ChevronLeft, Clipboard, Upload } from "lucide-react";
+import { ChevronLeft, Clipboard, Plus, Upload } from "lucide-react";
 import TextEditor from "./text-editor";
 import { FC } from "react";
 import Link from "next/link";
@@ -15,6 +15,7 @@ import {
 import { StatusContent } from "@/prisma/prisma/client";
 import * as Yup from "yup";
 import {
+  useCreateCategory,
   useCreatePostDashboard,
   useGetCategoryDashboard,
 } from "../blog-dashboard.service";
@@ -35,6 +36,68 @@ const validationSchema = Yup.object({
   status: Yup.string().required("Status is required"),
   optionalContent: Yup.string().nullable(),
 });
+
+const ModalAddCategory: FC = () => {
+  const { mutate, isPending, isSuccess } = useCreateCategory();
+  const [name, setName] = React.useState("");
+  const [description, setDescription] = React.useState("");
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const title = formData.get("name") as string;
+    const description = formData.get("description") as string;
+    mutate({
+      name: title,
+      description,
+    });
+  };
+
+  React.useEffect(() => {
+    if (isSuccess) {
+      setName("");
+      setDescription("");
+    }
+  }, [isSuccess]);
+  return (
+    <>
+      <dialog id="my_modal_add_category" className="modal">
+        <div className="modal-box">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">Add Category</h3>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-10">
+            <input
+              name="name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              type="text"
+              placeholder="Type title category"
+              className="input input-bordered "
+            />
+            <input
+              name="description"
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
+              type="text"
+              placeholder="Type description"
+              className="input input-bordered "
+            />
+            <button
+              disabled={isPending || !name || !description}
+              className="btn btn-primary"
+            >
+              {isPending ? "Processing..." : "Save"}
+            </button>
+          </form>
+        </div>
+      </dialog>
+    </>
+  );
+};
 
 const CreateNewPost: FC = () => {
   const navigate = useRouter();
@@ -168,14 +231,28 @@ const CreateNewPost: FC = () => {
             </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="thumbnailUrl">Category</label>
-              <MultiSelect
-                options={categoryOptions}
-                placeholder="select relevant category"
-                onChange={(selected) => {
-                  setFieldValue("categoryIds", selected);
-                }}
-                value={values.categoryIds}
-              />
+              <div className="flex gap-4 items-center">
+                <MultiSelect
+                  options={categoryOptions}
+                  placeholder="select relevant category"
+                  onChange={(selected) => {
+                    setFieldValue("categoryIds", selected);
+                  }}
+                  value={values.categoryIds}
+                />
+                <label
+                  htmlFor=""
+                  className="btn btn-square"
+                  onClick={() => {
+                    const modal = document.getElementById(
+                      "my_modal_add_category"
+                    ) as HTMLDialogElement;
+                    if (modal) modal.showModal();
+                  }}
+                >
+                  <Plus />
+                </label>
+              </div>
             </div>
           </div>
         </div>
@@ -276,6 +353,7 @@ const CreateNewPost: FC = () => {
         isLoading={isPending}
         color="#17803d"
       />
+      <ModalAddCategory />
     </>
   );
 };

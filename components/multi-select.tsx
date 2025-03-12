@@ -275,7 +275,7 @@ const Multiselect: React.FC<MultiselectProps> = ({
               No options found
             </p>
           ) : (
-            <div className="mt-2 max-h-[200px] overflow-y-auto px-2 z-50">
+            <div className="mt-2 max-h-[400px] overflow-y-auto px-2 z-50">
               <p className="text-background text-[14px]">
                 Please select one or more
               </p>
