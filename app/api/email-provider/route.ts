@@ -5,47 +5,86 @@ import {
 } from "./email-provider.interface";
 import { ResponseError, ResponseSuccess } from "@/helpers/exception.helper";
 import { HttpException } from "@/utils/HttpException";
-import nodemailer from "nodemailer";
 import axios from "axios";
-import { templateGreating } from "@/utils/template/email";
 
 export async function POST(req: NextRequest) {
   try {
     const body: IPayloadSendEmail = await req.json();
-
-    const transporter = nodemailer.createTransport({
-      host: "smtp-relay.brevo.com",
-      port: 587,
-      auth: {
-        user: process.env.BREVO_SMTP_USERNAME,
-        pass: process.env.BREVO_SMTP_PASSWORD,
-      },
-    });
-
     // Transactional operation wrapper
     const transaction = async () => {
       try {
-        // Step 1: Send email to user
-        const userMailResponse = await transporter.sendMail({
-          from: `Captivad <${process.env.BREVO_EMAIL_AUTH}>`,
-          to: body.email,
-          subject: `Terima kasih telah berlangganan Captivad, ${body.name}!`,
-          text: `Terimakasih atas kunjungan anda, kami akan segera membalas email anda`,
-          html: templateGreating(),
-        });
-        console.log("User email sent:", userMailResponse.response);
+        // Step 1: Send email to user using Brevo template
+        const userMailResponse = await axios.post(
+          `${process.env.BREVO_BASE_API}/smtp/email`,
+          {
+            sender: {
+              name: "no-reply@captivad.co",
+              email: process.env.BREVO_EMAIL_AUTH,
+            },
+            to: [
+              {
+                email: body.email,
+                name: body.name,
+              },
+            ],
+            templateId: 1, // Ganti dengan ID template Anda
+          },
+          {
+            headers: {
+              accept: "application/json",
+              "content-type": "application/json",
+              "api-key": process.env.BREVO_API_KEY,
+            },
+          }
+        );
+        console.log("User  email sent:", userMailResponse.data);
 
-        // Step 2: Send email to admin
-        const adminMailResponse = await transporter.sendMail({
-          from: `Captivad Customer <${process.env.BREVO_EMAIL_AUTH}>`,
-          replyTo: body.email,
-          to: process.env.BREVO_EMAIL_AUTH,
-          // cc: ["captivad5@gmail.com"],
-          subject: "Hallo Captivad admin, can you please help me?",
-          text: body.message,
-          html: `<p>${body.message}</p>`,
-        });
-        console.log("Admin email sent:", adminMailResponse.response);
+        // Step 2: Send email to admin using Brevo template
+        const adminMailResponse = await axios.post(
+          `${process.env.BREVO_BASE_API}/smtp/email`,
+          {
+            sender: {
+              name: "Captivad Subcriber - " + body.name,
+              email: process.env.BREVO_EMAIL_AUTH,
+            },
+            replyTo: {
+              name: body.name,
+              email: body.email,
+            },
+            to: [
+              {
+                email: process.env.BREVO_EMAIL_AUTH,
+                name: "Captivad",
+              },
+            ],
+            // templateId: 2, // Ganti dengan ID template Anda
+            subject: "Halo Captivad, bisa anda membantu saya?",
+            htmlContent: `
+            <html>
+              <body>
+                <p>Halo Admin,</p>
+                <p>Anda telah menerima pengisian form baru dari pengguna.</p>
+                <p><strong>Detail Pengguna:</strong></p>
+                <ul>
+                  <li><strong>Nama:</strong> ${body.name}</li>
+                  <li><strong>Email:</strong> ${body.email}</li>
+                  <li><strong>Interests:</strong> ${body.interests}</li>
+                  <li><strong>Pesan:</strong> ${body.message}</li>
+                </ul>
+              </body>
+            </html>
+
+            `,
+          },
+          {
+            headers: {
+              accept: "application/json",
+              "content-type": "application/json",
+              "api-key": process.env.BREVO_API_KEY,
+            },
+          }
+        );
+        console.log("Admin email sent:", adminMailResponse.data);
 
         // Step 3: Create contact in Brevo
         const firstname = body.name.split(" ")[0];
@@ -59,7 +98,7 @@ export async function POST(req: NextRequest) {
           },
           emailBlacklisted: false,
           smsBlacklisted: false,
-          listIds: [4],
+          listIds: [2],
           updateEnabled: false,
           smtpBlacklistSender: ["info@sendinblue.com"],
         };
@@ -75,9 +114,8 @@ export async function POST(req: NextRequest) {
           }
         );
         console.log("Contact created:", contactResponse.data);
-
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (error: any) {
+        console.log(error);
         throw new HttpException(500, error.message);
       }
     };
@@ -86,8 +124,6 @@ export async function POST(req: NextRequest) {
     await transaction();
 
     return ResponseSuccess("Email sent successfully!");
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return ResponseError(error.statusCode, error.message);
   }

@@ -92,7 +92,7 @@ const FormCustomer: React.FC = () => {
     },
   });
 
-  // console.log(values, "values");
+  console.log(values, "values");
 
   return (
     <div className="relative h-full w-full flex flex-col gap-4 lg:gap-10 lg:flex-row bg-background rounded-3xl p-[5%] lg:p-20 pb-0 text-foreground overflow-hidden">
@@ -158,7 +158,7 @@ const FormCustomer: React.FC = () => {
               setInterestSelected(selected);
               setFieldValue(
                 "interests",
-                selected.map((item) => item.value).join(",")
+                selected.map((item) => item.label).join(",")
               );
             }}
             value={interestSelected}
