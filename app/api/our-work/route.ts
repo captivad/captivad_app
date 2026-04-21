@@ -4,6 +4,8 @@ import { HttpException } from "@/utils/HttpException";
 import { getListOurWork, getListOurWorkCategory } from "./our-work.service";
 import { getToken } from "next-auth/jwt";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
   try {
     const urlParams = req.nextUrl.searchParams;
