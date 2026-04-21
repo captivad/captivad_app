@@ -1,7 +1,6 @@
 import { captivadPrisma } from "@/prisma/prisma";
 import { StatusContent } from "@/prisma/prisma/client";
 import { HttpException } from "@/utils/HttpException";
-import { video } from "framer-motion/client";
 
 export async function getListService(token: any) {
   try {
