@@ -121,6 +121,9 @@ export default function Home() {
           muted
           playsInline
           className="absolute z-0 top-0 left-0 w-full h-dvh object-cover"
+          controls={false}
+          disablePictureInPicture
+          controlsList="nodownload nofullscreen noremoteplayback"
         >
           <source
             src="https://res.cloudinary.com/dlvyzfhj2/video/upload/v1776921619/ezgif-8faed357c7756763_cm6xtl.mp4"
