@@ -47,12 +47,12 @@ const CardValueCount = ({
 
   return (
     <div
-      className={`p-[1px] max-w-[250px] lg:max-w-[412px] bg-gradient-to-tl backdrop-blur-md from-white/10 from-40% to-white/10 rounded-3xl shadow-sm shadow-white ${
+      className={`p-[1px] max-w-[250px]  md:max-w-[300px] lg:max-w-[412px] bg-gradient-to-tl backdrop-blur-md from-white/10 from-40% to-white/10 rounded-3xl shadow-sm shadow-white ${
         className && className
       }`}
     >
       <motion.div
-        className="max-w-[300px] md:max-w-[412px] min-h-[90px] lg:min-h-[142px] rounded-3xl bg-[#171717]/10 flex items-center pl-10 lg:pl-20 gap-4 md:gap-10"
+        className="max-w-[300px] md:max-w-[412px] min-h-[90px] md:min-h-[100px] lg:min-h-[142px] rounded-3xl bg-[#171717]/10 flex items-center pl-10 lg:pl-20 gap-4 md:gap-10"
         initial={{ scale: 0.95 }} // Initial scale for a subtle effect
         animate={{ scale: 1 }} // Scale up to 1 (no scale)
         transition={{ duration: 0.3, ease: "easeOut" }} // Scale animation settings

@@ -21,7 +21,7 @@ export default function LayoutContent({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="relative w-full h-full flex justify-between flex-col overflow-scroll">
+    <div className="relative w-full max-w-full 3xl:max-w-[2000px] mx-auto h-full flex justify-between flex-col overflow-scroll">
       <Header />
 
       <main className="h-full">{children}</main>

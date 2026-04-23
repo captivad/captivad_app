@@ -14,6 +14,20 @@ import Link from "next/link";
 import { OUR_SERVICES, WHO_WE_ARE } from "@/utils/router";
 // import { CircularGif, SpaceGif } from "@/public";
 import { CldImage, CldVideoPlayer } from "next-cloudinary";
+import InfiniteMarquee from "@/components/infinite-loop";
+
+// ─────────────────────────────────────────────────────────────────────────────
+// DATA BRANDS
+// Pindahkan definisi brands ke luar komponen agar tidak re-create tiap render
+// ─────────────────────────────────────────────────────────────────────────────
+
+const BRANDS = [
+  { name: "Wuling", logo: "/FrameWuling.svg" },
+  { name: "Tempra", logo: "/Tempra.svg" },
+  { name: "Chery", logo: "/chery.svg" },
+  { name: "Citroën", logo: "/citroen.svg" },
+  { name: "WRP", logo: "/wrp.svg" },
+];
 
 export default function Home() {
   const [visibleSections, setVisibleSections] = React.useState({
@@ -138,10 +152,14 @@ export default function Home() {
           transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
           className="w-full text-center z-20 px-[10%] md:px-0"
         >
-          <h1>{`Transform How You \n Reach Your Audience`}</h1>
-          <h4 className="my-6">
-            {`Providing advanced targeting solutions \n to reach addressable audiences at scale.`}
-          </h4>
+          <h1 className="text-[28px] md:text-[40px] lg:text-[80px]">
+            Where Reach <br />{" "}
+            <span className="text-gray-300">Meets Intelligence</span>
+          </h1>
+          <h5 className="my-6">
+            {/* {`Providing advanced targeting solutions \n to reach addressable audiences at scale.`} */}
+            {`Connecting brands to the right audiences  through a unified  \n network of data, media, and AI-powered  experiences, built \n for scale and measurable impact.`}
+          </h5>
           <div className="w-full flex justify-center gap-2 lg:gap-4 px-10 md:px-0 mt-10">
             <Link
               href={WHO_WE_ARE}
@@ -160,215 +178,7 @@ export default function Home() {
         </motion.div>
         <div className="absolute bottom-0 w-full h-40 bg-gradient-to-t from-background to-transparent z-10"></div>
       </motion.section>
-
-      {/* ###########################  section-testimony  ############################ */}
-      <motion.section
-        id="section-testimony"
-        ref={sectionRefs.testimony}
-        className="relative w-full h-[400px] sm:h-[600px] md:h-[800px] xl:h-full overflow-hidden bg-black lg:pt-40"
-      >
-        {visibleSections.testimony && (
-          <>
-            <div className="absolute z-10 left-[7%] lg:left-[15%] top-10 lg:top-60 w-full flex flex-col gap-4 lg:gap-10">
-              <motion.div
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-              >
-                <CardValueCount
-                  value={22123}
-                  description="Impressions"
-                  icon="thumb_up.svg" //svg path in public
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1, ease: "easeOut" }}
-              >
-                <CardValueCount
-                  className="ml-10"
-                  value={1203}
-                  description="Live Campaigns"
-                  icon="campaign.svg" //svg path in public
-                />
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 1.5, ease: "easeOut" }}
-              >
-                <CardValueCount
-                  className="ml-20"
-                  value={5223}
-                  description="Live Creative"
-                  icon="emoji_objects.svg" //svg path in public
-                />
-              </motion.div>
-            </div>
-            <div className="relative h-full scale-100 overflow-hidden w-full lg:pl-96">
-              <motion.img
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-                src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776923439/successful-executive-asia-young-businesswoman-smart-casual-wear-drawing-writing-using-pen-with-digital-tablet-computer-thinking-inspiration-search-ideas-working-process-modern-office_1_1_bhgo6c.png"
-                alt=""
-                className="z-0 w-full h-full object-cover"
-              />
-              <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-background from-30% lg:from-20%  to-transparent z-10"></div>
-            </div>
-          </>
-        )}
-      </motion.section>
-
-      {/* ###########################  section-brand  ############################ */}
-      <motion.section
-        ref={sectionRefs.brand}
-        id="landing-brand"
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-        className="w-full h-[380px] flex flex-col gap-10 mb-10 items-center justify-center"
-      >
-        {visibleSections.brand && (
-          <>
-            <motion.h2
-              initial={{ opacity: 0, y: 100 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-              className="w-full text-center px-[10%] md:px-0"
-            >
-              Trusted by Our Leading Brands
-            </motion.h2>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
-              className="relative image-slider-wrapper"
-            >
-              <div className="image-slider">
-                {/* side 1 */}
-                <div>
-                  <Image
-                    priority
-                    width={mediaQuery ? 240 : 160}
-                    height={mediaQuery ? 143 : 100}
-                    src="FrameWuling.svg"
-                    alt="FrameWuling"
-                  />
-                </div>
-                <div>
-                  <Image
-                    priority
-                    width={mediaQuery ? 240 : 160}
-                    height={mediaQuery ? 143 : 100}
-                    src="Tempra.svg"
-                    alt="Tempra"
-                  />
-                </div>
-                <div>
-                  <Image
-                    priority
-                    width={mediaQuery ? 240 : 160}
-                    height={mediaQuery ? 143 : 100}
-                    src="chery.svg"
-                    alt="chery"
-                  />
-                </div>
-                <div>
-                  <Image
-                    priority
-                    width={mediaQuery ? 240 : 160}
-                    height={mediaQuery ? 143 : 100}
-                    src="citroen.svg"
-                    alt="citroen"
-                  />
-                </div>
-                <div>
-                  <Image
-                    priority
-                    width={mediaQuery ? 240 : 160}
-                    height={mediaQuery ? 143 : 100}
-                    src="wrp.svg"
-                    alt="wrp"
-                  />
-                </div>
-
-                {/* side 2 */}
-                <div>
-                  <Image
-                    priority
-                    width={mediaQuery ? 240 : 160}
-                    height={mediaQuery ? 143 : 100}
-                    src="FrameWuling.svg"
-                    alt="FrameWuling"
-                  />
-                </div>
-                <div>
-                  <Image
-                    priority
-                    width={mediaQuery ? 240 : 160}
-                    height={mediaQuery ? 143 : 100}
-                    src="Tempra.svg"
-                    alt="Tempra"
-                  />
-                </div>
-                <div>
-                  <Image
-                    priority
-                    width={mediaQuery ? 240 : 160}
-                    height={mediaQuery ? 143 : 100}
-                    src="chery.svg"
-                    alt="chery"
-                  />
-                </div>
-                <div>
-                  <Image
-                    priority
-                    width={mediaQuery ? 240 : 160}
-                    height={mediaQuery ? 143 : 100}
-                    src="citroen.svg"
-                    alt="citroen"
-                  />
-                </div>
-                <div>
-                  <Image
-                    priority
-                    width={mediaQuery ? 240 : 160}
-                    height={mediaQuery ? 143 : 100}
-                    src="wrp.svg"
-                    alt="wrp"
-                  />
-                </div>
-
-                {/* side 3 */}
-                <div>
-                  <Image
-                    priority
-                    width={mediaQuery ? 240 : 160}
-                    height={mediaQuery ? 143 : 100}
-                    src="Tempra.svg"
-                    alt="Tempra"
-                  />
-                </div>
-                <div>
-                  <Image
-                    priority
-                    width={mediaQuery ? 240 : 160}
-                    height={mediaQuery ? 143 : 100}
-                    src="chery.svg"
-                    alt="chery"
-                  />
-                </div>
-              </div>
-              <div className="absolute top-0 left-0 right-0 h-[143px] w-full bg-gradient-to-r from-background via-transparent to-background"></div>
-            </motion.div>
-          </>
-        )}
-      </motion.section>
-
       {/* ###########################  section-greeting  ############################ */}
-
       <motion.section
         id="section-greting"
         ref={sectionRefs.greeting}
@@ -400,7 +210,6 @@ export default function Home() {
                   width={500}
                   height={500}
                   priority
-                  objectFit="cover"
                   alt="Image-Person"
                   className="xl:hidden"
                 />
@@ -411,7 +220,8 @@ export default function Home() {
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
                 className="font-boldtext-left"
               >
-                Welcome to CaptivAd
+                WE DON'T INTERRUPT AUDIENCES. <br />
+                WE INVITE THEM IN
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 100 }}
@@ -419,15 +229,9 @@ export default function Home() {
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
                 className="text-left"
               >
-                is your ultimate partner for dynamic advertising success. With
-                cutting-edge tools and expert media guidance, we handle daily ad
-                operations, navigate the evolving media landscape, and turn data
-                insights into actionable strategies.
-                <br />
-                <br />
-                Let us help you build a nimble digital marketing infrastructure
-                that ensures your brand not only survives but thrives in the
-                competitive world of advertising.
+                Every Captivad campaign is engineered for attention — media
+                placed with precision, creative built to react, and microsites
+                that turn a 30-second visit into a brand story worth sharing.
               </motion.p>
             </div>
 
@@ -435,7 +239,7 @@ export default function Home() {
               initial={{ opacity: 0, x: 100 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-              className="hidden xl:block absolute -right-10 lg:right-20 -bottom-20 md:top-0 lg:-top-16 overflow-hidden rounded-3xl"
+              className="hidden xl:block absolute -right-10 lg:right-20 -bottom-20 md:top-0 lg:-top-0 overflow-hidden rounded-3xl"
             >
               {/* <Image
                 // width={602}
@@ -458,7 +262,120 @@ export default function Home() {
           </>
         )}
       </motion.section>
+      {/* ###########################  section-testimony  ############################ */}
+      <motion.section
+        id="section-testimony"
+        ref={sectionRefs.testimony}
+        className="relative w-full h-[400px] sm:h-[600px] md:h-[800px] xl:h-full overflow-hidden bg-black xl:pt-40"
+      >
+        {visibleSections.testimony && (
+          <>
+            <div className="absolute z-10 sm:left-[7%] lg:left-[15%] top-10 lg:top-60 w-full flex flex-col gap-4 lg:gap-10">
+              <motion.div
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, ease: "easeOut" }}
+              >
+                <CardValueCount
+                  value={22123}
+                  description="Impressions"
+                  icon="thumb_up.svg" //svg path in public
+                  className="mx-auto sm:ml-0 xl:ml-40"
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1, ease: "easeOut" }}
+              >
+                <CardValueCount
+                  className="mx-auto sm:ml-20 lg:ml-40 xl:ml-60"
+                  value={1203}
+                  description="Live Campaigns"
+                  icon="campaign.svg" //svg path in public
+                />
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+              >
+                <CardValueCount
+                  className="mx-auto sm:ml-40 lg:ml-60 xl:ml-96"
+                  value={5223}
+                  description="Live Creative"
+                  icon="emoji_objects.svg" //svg path in public
+                />
+              </motion.div>
+            </div>
+            <div className="relative h-full scale-100 overflow-hidden w-full xl:pl-96">
+              <motion.img
+                initial={{ opacity: 0, y: 100 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+                src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776923439/successful-executive-asia-young-businesswoman-smart-casual-wear-drawing-writing-using-pen-with-digital-tablet-computer-thinking-inspiration-search-ideas-working-process-modern-office_1_1_bhgo6c.png"
+                alt=""
+                className="z-0 w-full h-full object-cover"
+              />
+              <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-background from-30% lg:from-20%  to-transparent z-10"></div>
+            </div>
+          </>
+        )}
+      </motion.section>
 
+      {/* ########################### section-brand ############################
+       */}
+      <motion.section
+        ref={sectionRefs.brand}
+        id="landing-brand"
+        initial={{ opacity: 0, y: 100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+        className="w-full h-[500px] flex flex-col gap-10 pb-10 items-center justify-center bg-background border-white/20 border-t-[1px]"
+      >
+        {visibleSections.brand && (
+          <>
+            {/* ── Judul section ── */}
+            <motion.h2
+              initial={{ opacity: 0, y: 100 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+              className="w-full text-center px-[10%] md:px-0 mt-10"
+            >
+              Trusted by Our Leading Brands
+            </motion.h2>
+
+            {/* ── Infinite Marquee ── */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.6 }}
+              className="w-full"
+            >
+              <InfiniteMarquee
+                brands={BRANDS}
+                /**
+                 * Ukuran logo responsif mengikuti mediaQuery (sama seperti
+                 * implementasi lama yang menggunakan ternary mediaQuery ? 240 : 160)
+                 * logoHeight diset proporsional terhadap aspect ratio asli (240×143)
+                 */
+                logoWidth={mediaQuery ? 200 : 100}
+                logoHeight={mediaQuery ? 150 : 60}
+                gap={mediaQuery ? 64 : 40}
+                duration={28}
+                fadeWidth={mediaQuery ? 180 : 80}
+                pauseOnHover
+                /**
+                 * backgroundColor harus sama dengan CSS variable --background
+                 * agar gradien fade blend in sempurna.
+                 * Ganti value ini sesuai warna bg aktual project Anda.
+                 */
+                backgroundColor="var(--background)"
+              />
+            </motion.div>
+          </>
+        )}
+      </motion.section>
       {/* ###########################  section-transform  ############################ */}
       <motion.section
         id="section-transform"
@@ -466,7 +383,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-        className="relative h-[400px] md:h-[600px] w-full bg-primary flex overflow-hidden"
+        className="relative h-[400px] md:h-[600px] w-full bg-primary flex overflow-hidden  border-white/20 border-y-[1px]"
       >
         {visibleSections.transform && (
           <>
@@ -477,7 +394,7 @@ export default function Home() {
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
                 className="font-bold text-center md:text-left w-full h-full lg:h-auto flex items-end lg:items-start justify-center"
               >
-                Transform How You Reach Your Audience
+                TRANSFORM HOW YOU REACH YOUR AUDIENCE.
               </motion.h1>
               <motion.p
                 initial={{ opacity: 0, y: 100 }}
@@ -485,7 +402,7 @@ export default function Home() {
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
                 className="text-[14px] text-center md:text-left md:text-[18px] lg:text-[24px] w-full h-full flex items-start lg:items-end"
               >
-                That’s why we offer tailored support to meet your unique needs.
+                That's why we offer tailored support to meet your unique needs.
                 Our team sails alongside you, exploring the uncharted waters of
                 your challenges and opportunities to develop bespoke solutions.
               </motion.p>
@@ -502,8 +419,8 @@ export default function Home() {
               /> */}
               <CldImage
                 src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922254/Circular_x2dlfj.gif"
-                width={891}
-                height={891}
+                width={800}
+                height={800}
                 priority
                 alt="Image-Person"
                 objectFit="cover"
@@ -512,7 +429,6 @@ export default function Home() {
           </>
         )}
       </motion.section>
-
       {/* ###########################  form  ############################ */}
       <motion.section
         initial={{ opacity: 0, y: 100 }}

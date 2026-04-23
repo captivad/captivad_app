@@ -75,7 +75,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${dmSans.className} ${dmSans.className} antialiased`}>
+      <body
+        className={`${dmSans.className} ${dmSans.className} bg-white antialiased`}
+      >
         <Toaster position="top-center" reverseOrder={false} />
         <ClientProviders>{children}</ClientProviders>
       </body>
