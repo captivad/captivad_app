@@ -4,9 +4,10 @@ import FormCustomer from "@/components/form-customer";
 import { motion } from "framer-motion";
 import React from "react";
 import Image from "next/image";
-import BgSection1 from "@/public/whoweare-section1.svg";
+// import BgSection1 from "@/public/whoweare-section1.svg";
 import IconLamp from "@/public/emoji_objects.svg";
-import { Metadata } from "next";
+// import { Metadata } from "next";
+import { CldImage } from "next-cloudinary";
 
 interface IOpportunity {
   title: string;
@@ -108,8 +109,14 @@ export default function WhoWeAre() {
       </motion.section>
 
       <section className="w-full relative min-h-[350px] xl:min-h-[70vh] bg-background overflow-hidden">
-        <Image
-          src={BgSection1}
+        {/* <Image
+          src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922025/whoweare-section1_xruu0i.svg"
+          alt="Who We Are"
+          fill
+          className="object-cover"
+        /> */}
+        <CldImage
+          src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922025/whoweare-section1_xruu0i.svg"
           alt="Who We Are"
           fill
           className="object-cover"

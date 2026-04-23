@@ -7,12 +7,13 @@ import React from "react";
 import Image from "next/image";
 import "./style.css";
 import FormCustomer from "@/components/form-customer";
-import ImgPersonGroup from "@/public/group-image.svg";
-import ImgPerson from "@/public/img-person.svg";
-import HomeSection2 from "@/public/homesection-2.svg";
+// import ImgPersonGroup from "@/public/group-image.svg";
+// import ImgPerson from "@/public/img-person.svg";
+// import HomeSection2 from "@/public/homesection-2.svg";
 import Link from "next/link";
 import { OUR_SERVICES, WHO_WE_ARE } from "@/utils/router";
-import { CircularGif, SpaceGif } from "@/public";
+// import { CircularGif, SpaceGif } from "@/public";
+import { CldImage, CldVideoPlayer } from "next-cloudinary";
 
 export default function Home() {
   const [visibleSections, setVisibleSections] = React.useState({
@@ -104,16 +105,29 @@ export default function Home() {
         animate="show"
         className="relative w-full min-h-[600px] xl:h-dvh bg-primary flex justify-center pt-44 md:pt-0 md:items-center"
       >
-        <Image
+        {/*<Image
           // width={500}
           // height={500}
-          src={SpaceGif.src}
+          src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776920685/Space_ds6knk.gif"
           fill
           priority
           objectFit="cover"
           alt="Hero"
           className="absolute z-0 top-0 left-0 w-full h-dvh object-cover"
-        />
+        />*/}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute z-0 top-0 left-0 w-full h-dvh object-cover"
+        >
+          <source
+            src="https://res.cloudinary.com/dlvyzfhj2/video/upload/v1776921619/ezgif-8faed357c7756763_cm6xtl.mp4"
+            type="video/mp4"
+          />
+        </video>
+
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
@@ -193,7 +207,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-                src={HomeSection2.src}
+                src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776923439/successful-executive-asia-young-businesswoman-smart-casual-wear-drawing-writing-using-pen-with-digital-tablet-computer-thinking-inspiration-search-ideas-working-process-modern-office_1_1_bhgo6c.png"
                 alt=""
                 className="z-0 w-full h-full object-cover"
               />
@@ -368,12 +382,21 @@ export default function Home() {
                 transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
                 className="w-full flex justify-center"
               >
-                <Image
+                {/* <Image
                   width={500}
                   height={500}
                   priority
                   objectFit="cover"
-                  src={ImgPersonGroup}
+                  src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922030/img-person_swvbxu.svg"
+                  alt="Image-Person"
+                  className="xl:hidden"
+                /> */}
+                <CldImage
+                  src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922024/group-image_ynogwi.svg"
+                  width={500}
+                  height={500}
+                  priority
+                  objectFit="cover"
                   alt="Image-Person"
                   className="xl:hidden"
                 />
@@ -410,12 +433,20 @@ export default function Home() {
               transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
               className="hidden xl:block absolute -right-10 lg:right-20 -bottom-20 md:top-0 lg:-top-16 overflow-hidden rounded-3xl"
             >
-              <Image
+              {/* <Image
                 // width={602}
                 priority
                 width={mediaQuery ? 602 : 602}
                 height={mediaQuery ? 602 : 602}
                 src={ImgPerson.src}
+                alt="Image-Person"
+                className="hidden xl:block opacity-100 "
+              /> */}
+              <CldImage
+                src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922030/img-person_swvbxu.svg"
+                width={602}
+                height={602}
+                priority
                 alt="Image-Person"
                 className="hidden xl:block opacity-100 "
               />
@@ -456,12 +487,20 @@ export default function Home() {
               </motion.p>
             </div>
             <div className="z-0 absolute inset-0 m-auto w-full lg:w-[891px] aspect-square lg:my-auto lg:mr-0 lg:-left-0 overflow-hidden opacity-30">
-              <Image
+              {/* <Image
                 // width={891}
                 // height={891}
                 priority
                 fill
-                src={CircularGif.src}
+                src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922254/Circular_x2dlfj.gif"
+                alt="Image-Person"
+                objectFit="cover"
+              /> */}
+              <CldImage
+                src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922254/Circular_x2dlfj.gif"
+                width={891}
+                height={891}
+                priority
                 alt="Image-Person"
                 objectFit="cover"
               />
