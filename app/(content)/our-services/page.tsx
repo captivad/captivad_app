@@ -21,7 +21,7 @@ import { IListGetService } from "@/app/api/our-services/our-service.interface";
 import ModalConfirmAlert from "@/components/modal-confirm";
 // import toast from "react-hot-toast";
 import { IPayloadUpdateOurService } from "@/app/api/admin/our-services/our-service.interface";
-import { CldImage } from "next-cloudinary";
+// import { CldImage } from "next-cloudinary";
 
 export default function OurServices() {
   const { status } = useSession();
@@ -98,7 +98,7 @@ export default function OurServices() {
         animate="show"
         className="relative w-full md:h-[80vh] lg:h-dvh bg-background flex justify-center pt-44 md:pt-0 md:items-center"
       >
-        {/* <Image
+        <Image
           // width={500}
           // height={500}
           src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922026/our-service-section1_prbih7.svg"
@@ -106,15 +106,14 @@ export default function OurServices() {
           objectFit="cover"
           alt="bg-section1"
           className="absolute z-0 top-0 left-0 w-full h-dvh object-cover"
-        /> */}
-        <CldImage
+        />
+        {/* <CldImage
           src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922026/our-service-section1_prbih7.svg"
-          width={500}
-          height={500}
-          // fill
+          // width={500}
+          // height={500}
           alt="bg-section1"
           className="absolute z-0 top-0 left-0 w-full h-dvh object-cover"
-        />
+        /> */}
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}

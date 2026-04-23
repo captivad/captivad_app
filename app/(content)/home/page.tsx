@@ -103,9 +103,9 @@ export default function Home() {
         }}
         initial="hidden"
         animate="show"
-        className="relative w-full min-h-[600px] xl:h-dvh bg-primary flex justify-center pt-44 md:pt-0 md:items-center"
+        className="relative w-full min-h-dvh xl:h-dvh bg-primary flex justify-center pt-44 md:pt-0 md:items-center"
       >
-        {/*<Image
+        <Image
           // width={500}
           // height={500}
           src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776920685/Space_ds6knk.gif"
@@ -114,8 +114,9 @@ export default function Home() {
           objectFit="cover"
           alt="Hero"
           className="absolute z-0 top-0 left-0 w-full h-dvh object-cover"
-        />*/}
-        <video
+        />
+
+        {/*<video
           autoPlay
           loop
           muted
@@ -129,7 +130,7 @@ export default function Home() {
             src="https://res.cloudinary.com/dlvyzfhj2/video/upload/v1776921619/ezgif-8faed357c7756763_cm6xtl.mp4"
             type="video/mp4"
           />
-        </video>
+        </video>*/}
 
         <motion.div
           initial={{ opacity: 0, y: 100 }}
