@@ -10,7 +10,7 @@ export async function getListService(token: any) {
     }
     const services = await captivadPrisma.service.findMany({
       where: whereCondition,
-      orderBy: { created_dt: "desc" },
+      orderBy: { created_dt: "asc" },
     });
 
     return services;
