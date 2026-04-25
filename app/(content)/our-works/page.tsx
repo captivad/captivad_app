@@ -338,7 +338,7 @@ function PortfolioSlideshow({
   if (isEmpty) {
     return (
       <div
-        className="relative w-full h-[40vh] lg:h-[80vh] flex flex-col items-center justify-center overflow-hidden"
+        className="relative w-full h-[50vh] lg:h-[80vh] flex flex-col items-center justify-center overflow-hidden"
         style={{ border: "1px solid rgba(255,255,255,0.06)" }}
       >
         {/* Dot grid background — konsisten dengan halaman lain */}
@@ -467,7 +467,7 @@ function PortfolioSlideshow({
 
   return (
     <div
-      className="relative w-full aspect-[16/9] md:aspect-[16/7] h-[40vh] lg:h-[80vh] overflow-hidden cursor-default"
+      className="relative w-full aspect-[16/9] md:aspect-[16/7] h-[500px] lg:h-[80vh] overflow-hidden cursor-default"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
@@ -749,7 +749,7 @@ export default function PortfolioPage() {
           }}
         />
 
-        <div className="relative z-10 w-full max-w-[90%] mx-auto px-[8%] mt-[10%] xl:px-12 flex flex-col gap-5">
+        <div className="relative z-10 w-full max-w-[90%] mx-auto mt-[10%] xl:px-12 flex flex-col gap-5">
           {/* Headline — 2-tone seperti referensi */}
           <h1
             className="leading-[1.0] tracking-tight font-bold uppercase"
@@ -799,7 +799,7 @@ export default function PortfolioPage() {
         id="portfolio-slideshow"
         className="relative w-full bg-background"
       >
-        <div className="w-full min-h-[60vh] max-w-[90%] mx-auto px-[8%] xl:px-12 flex flex-col gap-4 pb-16">
+        <div className="w-full min-h-[60vh] max-w-[90%] mx-auto xl:px-12 flex flex-col gap-4 pb-16">
           {/*filter service */}
           <ServiceFilter
             items={FILTERS}

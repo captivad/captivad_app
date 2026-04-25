@@ -190,7 +190,7 @@ export default function WhoWeAre() {
         />
 
         {/* ── 2-column layout ──────────────────────────────────── */}
-        <div className="relative z-20 w-full max-w-[80%] px-[8%] xl:px-12 flex flex-col xl:flex-row gap-16 xl:gap-20 items-start">
+        <div className="relative z-20 w-full max-w-[80%] xl:px-12 flex flex-col xl:flex-row gap-16 xl:gap-20 items-start">
           {/* ── LEFT: Headline + Description ── */}
           <div className="flex flex-col gap-6 xl:gap-8 flex-1 min-w-0">
             {/* Label editorial */}
@@ -221,7 +221,7 @@ export default function WhoWeAre() {
                   text="OF MEDIA, CRAFT AND"
                   delay={0.75}
                   stagger={0.07}
-                />{" "}
+                />
                 <span style={{ display: "inline-block", overflow: "hidden" }}>
                   <motion.span
                     style={{ display: "inline-block" }}
