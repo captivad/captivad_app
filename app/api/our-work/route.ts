@@ -10,11 +10,15 @@ export async function GET(req: NextRequest) {
   try {
     const urlParams = req.nextUrl.searchParams;
     const acction = urlParams.get("action");
+    const serviceId = urlParams.get("serviceId");
     const token = await getToken({ req, secret: process.env.SECRET_KEY });
 
     switch (acction) {
       case "list":
-        const responseList = await getListOurWork(token);
+        const responseList = await getListOurWork({
+          token,
+          serviceId: serviceId || "",
+        });
         return ResponseSuccess(responseList);
       case "category-work":
         const responseCategoryWork = await getListOurWorkCategory(token);

@@ -63,36 +63,36 @@ export async function POST(req: NextRequest) {
       }
 
       //create portfolio category
-      if (body.categoryIds) {
-        const categoryIds = body.categoryIds.split(",");
-        await Promise.all(
-          categoryIds.map(async (categoryId) => {
-            const category = await tx.category.findUnique({
-              where: { id: Number(categoryId), deleted_dt: null },
-            });
+      // if (body.categoryIds) {
+      //   const categoryIds = body.categoryIds.split(",");
+      //   await Promise.all(
+      //     categoryIds.map(async (categoryId) => {
+      //       const category = await tx.category.findUnique({
+      //         where: { id: Number(categoryId), deleted_dt: null },
+      //       });
 
-            const portfolioCategoryValidation =
-              await tx.portfolioCategory.findFirst({
-                where: {
-                  portfolio_uuid: portfolioId,
-                  category_id: Number(categoryId),
-                  deleted_dt: null,
-                },
-              });
-            if (category && !portfolioCategoryValidation) {
-              await tx.portfolioCategory.create({
-                data: {
-                  uuid: uuidv4(),
-                  portfolio_uuid: portfolioId,
-                  category_id: Number(categoryId),
-                  created_dt: moment().toISOString(),
-                  updated_dt: moment().toISOString(),
-                },
-              });
-            }
-          })
-        );
-      }
+      //       const portfolioCategoryValidation =
+      //         await tx.portfolioCategory.findFirst({
+      //           where: {
+      //             portfolio_uuid: portfolioId,
+      //             category_id: Number(categoryId),
+      //             deleted_dt: null,
+      //           },
+      //         });
+      //       if (category && !portfolioCategoryValidation) {
+      //         await tx.portfolioCategory.create({
+      //           data: {
+      //             uuid: uuidv4(),
+      //             portfolio_uuid: portfolioId,
+      //             category_id: Number(categoryId),
+      //             created_dt: moment().toISOString(),
+      //             updated_dt: moment().toISOString(),
+      //           },
+      //         });
+      //       }
+      //     })
+      //   );
+      // }
     });
 
     return ResponseSuccess("Request create portfolio success");

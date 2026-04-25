@@ -1,8 +1,7 @@
 "use client";
 
-import ButtonNavigation from "@/components/button-navigation";
 import { ChevronDown, Plus } from "lucide-react";
-import { useGetOurWork } from "../our-work.web.service";
+import { useGetOurWorkCategory } from "../our-work.web.service";
 import React from "react";
 import { motion } from "framer-motion";
 import CardContent from "@/components/card-content";
@@ -10,12 +9,12 @@ import SkeletonWorkCard from "./skeleton-work-card";
 import { IResponseListCategoryWork } from "@/app/api/our-work/our-work.interface";
 import { useSession } from "next-auth/react";
 import ModalAddWork from "./ModalAddWork";
-import { CldVideoPlayer } from "next-cloudinary";
 
 const OurWorkList = () => {
   const { status } = useSession();
 
-  const { data, isLoading } = useGetOurWork();
+  const { data, isLoading } = useGetOurWorkCategory();
+
   const [showMore, setShowMore] = React.useState<Map<number, number>>(
     new Map()
   );
@@ -66,7 +65,7 @@ const OurWorkList = () => {
           data &&
           data?.length > 0 &&
           data.map((category: IResponseListCategoryWork, index) => {
-            if (category.portfolios.length === 0) return null;
+            if (category.portfolios?.length === 0) return null;
             return (
               <motion.div
                 key={index}

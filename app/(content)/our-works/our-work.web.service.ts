@@ -5,7 +5,9 @@ import {
 } from "@/app/api/admin/our-work/our-work.interface";
 import { ICategoryService } from "@/app/api/category/category.interface";
 import {
+  IGetListOurWorkParams,
   IResponseListCategoryWork,
+  IResponseListOurWork,
   IResponseOurWorkDetail,
 } from "@/app/api/our-work/our-work.interface";
 import { SuccessResponse } from "@/helpers/exception.helper";
@@ -15,7 +17,7 @@ import axios from "axios";
 import { param } from "framer-motion/m";
 import toast from "react-hot-toast";
 
-export function useGetOurWork() {
+export function useGetOurWorkCategory() {
   return useQuery({
     queryKey: ["list-our-work"],
     queryFn: async () => {
@@ -27,6 +29,27 @@ export function useGetOurWork() {
           method: "GET",
           params: {
             action: "category-work",
+          },
+        });
+        return response.data.payload;
+      } catch (error) {
+        toast.error("Get our services failed!");
+      }
+    },
+  });
+}
+
+export function useGetOurWorkByService(param: IGetListOurWorkParams) {
+  return useQuery({
+    queryKey: ["list-our-work-by-service", param],
+    queryFn: async () => {
+      try {
+        const response = await axios<SuccessResponse<IResponseListOurWork[]>>({
+          url: "/api/our-work",
+          method: "GET",
+          params: {
+            action: "list",
+            ...param,
           },
         });
         return response.data.payload;
@@ -69,6 +92,9 @@ export function useCreateOurWork({ onSuccess }: IFetchStatus) {
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: ["list-our-work"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["list-our-work-by-service"],
       });
       onSuccess && onSuccess(data);
     },
@@ -133,6 +159,9 @@ export function useDeleteOurWork({ onSuccess }: IFetchStatus) {
       queryClient.invalidateQueries({
         queryKey: ["list-our-work"],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["list-our-work-by-service"],
+      });
       onSuccess && onSuccess(data);
     },
     onError: (e) => {
@@ -179,6 +208,9 @@ export function useEditStatusOurWork({ onSuccess }: IFetchStatus) {
     onSuccess: (data) => {
       queryClient.invalidateQueries({
         queryKey: ["list-our-work"],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["list-our-work-by-service"],
       });
       toast.success("Edit Status Our Work Success");
       onSuccess && onSuccess(data);

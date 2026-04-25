@@ -4,7 +4,7 @@ import { useFormik } from "formik";
 import { FC, useMemo } from "react";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
-import { Clipboard, X } from "lucide-react";
+import { Clipboard, Plus, X } from "lucide-react";
 import {
   useCreateService,
   useGetListService,
@@ -30,7 +30,7 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
     thumbnailUrl: Yup.string().url().required("Thumbnail is required"),
     videoImageUrl: Yup.string().url().required("Video is required"),
     serviceIds: Yup.string().required("Service is required"),
-    categoryIds: Yup.string().required("Category is required"),
+    // categoryIds: Yup.string().required("Category is required"),
   });
 
   //list service options
@@ -95,7 +95,7 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
       thumbnailUrl: "",
       videoImageUrl: "",
       serviceIds: "",
-      categoryIds: "",
+      // categoryIds: "",
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
@@ -110,8 +110,6 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
       setFieldValue(payload, clipboardText);
     }
   };
-
-  console.log(errors.videoImageUrl, "videoImageUrl");
 
   return (
     <dialog id="my_modal_add_ourwork" className="modal">
@@ -221,31 +219,8 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
               <div>
                 <label className="label">
                   <span className="label-text text-foreground font-bold">
-                    Category
-                  </span>
-                </label>
-                <MultiSelect
-                  options={categoryOptions}
-                  placeholder="select category"
-                  onChange={(selected) => {
-                    setFieldValue(
-                      "categoryIds",
-                      selected.map((item) => item.value).join(",")
-                    );
-                    setValueSelectedCategory(selected);
-                  }}
-                  value={valueSelectedCategory}
-                  errors={
-                    errors.categoryIds && touched.categoryIds
-                      ? errors.categoryIds
-                      : ""
-                  }
-                />
-              </div>
-              <div>
-                <label className="label">
-                  <span className="label-text text-foreground font-bold">
-                    Profolion relate service
+                    Profolion relate service{" "}
+                    <span className="text-error">*</span>
                   </span>
                 </label>
                 <MultiSelect
@@ -266,6 +241,30 @@ const ModalAddWork: FC<IProps> = ({ refetch }) => {
                   }
                 />
               </div>
+              {/* <div>
+                <label className="label">
+                  <span className="label-text text-foreground font-bold">
+                    Category
+                  </span>
+                </label>
+                <MultiSelect
+                  options={categoryOptions}
+                  placeholder="select category"
+                  onChange={(selected) => {
+                    setFieldValue(
+                      "categoryIds",
+                      selected.map((item) => item.value).join(",")
+                    );
+                    setValueSelectedCategory(selected);
+                  }}
+                  value={valueSelectedCategory}
+                  errors={
+                    errors.categoryIds && touched.categoryIds
+                      ? errors.categoryIds
+                      : ""
+                  }
+                />
+              </div> */}
             </div>
 
             <div className="divider divider-horizontal"></div>

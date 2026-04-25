@@ -1,13 +1,60 @@
 import { captivadPrisma } from "@/prisma/prisma";
-import { PortfolioCategory, StatusContent } from "@/prisma/prisma/client";
+import {
+  Portfolio,
+  PortfolioCategory,
+  StatusContent,
+} from "@/prisma/prisma/client";
 import { HttpException } from "@/utils/HttpException";
 import { IResponseListCategoryWork } from "./our-work.interface";
 
-export const getListOurWork = async (token: any) => {
+export const getListOurWork = async ({
+  token,
+  serviceId,
+}: {
+  token: any;
+  serviceId: string;
+}) => {
   try {
-    const whereCondition = { deleted_dt: null, status: StatusContent.publish };
+    const whereCondition: any = {
+      deleted_dt: null,
+      ...(!token && { status: StatusContent.publish }),
+    };
+
+    console.log("service id", serviceId);
+
+    // Tambahkan filter serviceId di level utama
+    if (serviceId) {
+      whereCondition.portfolio_service = {
+        some: {
+          service_uuid: serviceId,
+        },
+      };
+    }
+
     const services = await captivadPrisma.portfolio.findMany({
       where: whereCondition,
+      include: {
+        portfolio_category: {
+          select: {
+            category: {
+              select: {
+                id: true,
+                name: true,
+              },
+            },
+          },
+        },
+        portfolio_service: {
+          select: {
+            service: {
+              select: {
+                uuid: true,
+                name_service: true,
+              },
+            },
+          },
+        },
+      },
       orderBy: { created_dt: "asc" },
     });
 

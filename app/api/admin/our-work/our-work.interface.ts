@@ -9,7 +9,7 @@ export interface IPayloadCreateOurWork {
   thumbnailUrl: string;
   videoImageUrl: string;
   serviceIds: string;
-  categoryIds: string;
+  // categoryIds: string;
 }
 export interface IPayloadEditOurWorkFormik {
   title: string;

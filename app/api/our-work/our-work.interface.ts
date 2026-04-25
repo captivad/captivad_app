@@ -21,6 +21,11 @@ export interface IOurWork {
   portfolio_service: IOurWorkService[];
 }
 
+export interface IGetListOurWorkParams {
+  serviceId?: string;
+  categoryId?: string;
+}
+
 export interface IResponseListCategoryWork {
   id: number;
   category_name: string;
@@ -51,5 +56,31 @@ export interface IResponseOurWorkDetail {
   updated_by: string | null;
   deleted_dt: string | null;
   deleted_by: string | null;
+  portfolio_category: IPortfolioCategory[];
+}
+
+interface IPortfolioService {
+  service: {
+    uuid: string;
+    name_service: string;
+  };
+}
+
+export interface IResponseListOurWork {
+  uuid: string;
+  title: string;
+  description: string;
+  objectiv_content: string;
+  key_result_content: string;
+  thumbnail_url: string;
+  video_image_url: string;
+  status: "publish" | "draft" | "archived";
+  created_dt: string; // ISO Date String
+  created_by: string | null;
+  updated_dt: string; // ISO Date String
+  updated_by: string | null;
+  deleted_dt: string | null;
+  deleted_by: string | null;
+  portfolio_service: IPortfolioService[];
   portfolio_category: IPortfolioCategory[];
 }

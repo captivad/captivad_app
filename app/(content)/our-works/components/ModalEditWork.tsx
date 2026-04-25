@@ -19,9 +19,10 @@ import MultiSelect, { IMultiselectOption } from "@/components/multi-select";
 import React from "react";
 import { IOurWork } from "@/app/api/our-work/our-work.interface";
 import "next-cloudinary/dist/cld-video-player.css";
+import { IPortfolio } from "../page";
 interface IProps {
   refetch?: () => void;
-  data: IOurWork;
+  data: IPortfolio;
 }
 
 const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
@@ -112,33 +113,33 @@ const ModalEditWork: FC<IProps> = ({ refetch, data }) => {
 
   React.useEffect(() => {
     setValues({
-      title: data.title,
-      description: data.description,
-      objective: data.objectiv_content,
-      keyResult: data.key_result_content,
-      thumbnailUrl: data.thumbnail_url,
-      videoImageUrl: data.video_image_url,
+      title: data?.title,
+      description: data?.description,
+      objective: data?.objectiv_content,
+      keyResult: data?.key_result_content,
+      thumbnailUrl: data?.thumbnail_url,
+      videoImageUrl: data?.video_image_url,
       serviceIds:
-        data.portfolio_service && data.portfolio_service.length > 0
-          ? data.portfolio_service.map((item, _i) => ({
+        data?.portfolio_service && data?.portfolio_service.length > 0
+          ? data?.portfolio_service.map((item, _i) => ({
               id: _i,
-              value: item.service_uuid,
-              label: item.service_name,
+              value: item.service.uuid,
+              label: item.service.name_service,
             }))
           : [],
       categoryIds:
-        data.portfolio_category && data.portfolio_category.length > 0
+        data?.portfolio_category && data.portfolio_category.length > 0
           ? data.portfolio_category.map((item, _i) => ({
               id: _i,
-              value: String(item.category_id),
-              label: item.category_name,
+              value: String(item.category.id),
+              label: item.category.name,
             }))
           : [],
     });
   }, [data, setValues]);
 
   return (
-    <dialog id={`my_modal_edit_work_${data.uuid}`} className="modal">
+    <dialog id={`my_modal_edit_work_${data?.uuid}`} className="modal">
       <div className="modal-box w-11/12 max-w-7xl">
         <div className="flex justify-between">
           <h3 className="font-bold">Edit Porfolio</h3>
