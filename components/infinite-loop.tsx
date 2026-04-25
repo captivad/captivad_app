@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useRef, useEffect, useState } from "react";
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -44,6 +45,13 @@ interface InfiniteMarqueeProps {
   pauseOnHover?: boolean;
   /** Warna background untuk menyesuaikan gradien fade. Default: "#0a0a0a" */
   backgroundColor?: string;
+  /**
+   * Arah pergerakan marquee.
+   * - "left"  : logo bergerak ke kiri (default) — forward scroll
+   * - "right" : logo bergerak ke kanan — reverse scroll
+   * Default: "left"
+   */
+  direction?: "left" | "right";
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -69,11 +77,12 @@ const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
   brands,
   duration = 30,
   logoWidth = 120,
-  logoHeight = 60,
+  logoHeight = 48,
   gap = 64,
   fadeWidth = 160,
   pauseOnHover = true,
   backgroundColor = "#0a0a0a",
+  direction = "left",
 }) => {
   // Ref ke element track utama (berisi item asli + clone)
   const trackRef = useRef<HTMLDivElement>(null);
@@ -96,6 +105,15 @@ const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
   // ── Kita pakai CSS custom property untuk steuerung pause/play ──
   const animationPlayState = isPaused ? "paused" : "running";
 
+  /**
+   * Pilih keyframe berdasarkan direction:
+   * - "left"  → marquee-scroll-left  (translateX 0 → negatif)
+   * - "right" → marquee-scroll-right (translateX 0 → positif)
+   * Keduanya didefinisikan di dalam <style> di bawah.
+   */
+  const animationName =
+    direction === "right" ? "marquee-scroll-right" : "marquee-scroll-left";
+
   return (
     <section
       className="marquee-section"
@@ -110,6 +128,7 @@ const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
           "--duration": `${adjustedDuration}s`,
           "--total-width": `${totalSetWidth}px`,
           "--play-state": animationPlayState,
+          "--animation-name": animationName,
         } as React.CSSProperties
       }
       aria-label="Brand partners"
@@ -202,14 +221,15 @@ const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
 
         /* ──────────────────────────────────────────────
            TRACK: barisan semua item (asli + clone)
-           Animasi CSS keyframe menggeser ke kiri
+           Animasi CSS keyframe menggeser ke kiri atau kanan
+           tergantung --animation-name yang dikirim dari JS.
         ────────────────────────────────────────────── */
         .marquee-track {
           display: flex;
           align-items: center;
           /* width: fit-content agar track tidak wrap */
           width: fit-content;
-          animation: marquee-scroll var(--duration) linear infinite;
+          animation: var(--animation-name) var(--duration) linear infinite;
           animation-play-state: var(--play-state);
           /* Optimasi GPU compositing */
           will-change: transform;
@@ -285,14 +305,28 @@ const InfiniteMarquee: React.FC<InfiniteMarqueeProps> = ({
         }
 
         /* ──────────────────────────────────────────────
-           KEYFRAME ANIMASI
-           Geser track ke kiri sejauh total lebar 1 set (asli).
-           Karena ada clone, posisi akhir = posisi awal set clone,
-           sehingga reset ke 0 tidak terlihat.
+           KEYFRAME ANIMASI — 2 varian arah
+
+           marquee-scroll-left (default):
+             Geser track ke KIRI sejauh totalSetWidth.
+             Clone menyambung seamless karena posisi akhir
+             identik dengan posisi awal clone set.
+
+           marquee-scroll-right:
+             Mulai dari posisi negatif (totalSetWidth),
+             geser ke kanan hingga 0.
+             Untuk arah kanan, track dimulai dari translateX(-totalSetWidth)
+             agar clone set yang terlihat pertama kali,
+             kemudian bergerak ke posisi 0 (set asli tampil terakhir).
         ────────────────────────────────────────────── */
-        @keyframes marquee-scroll {
+        @keyframes marquee-scroll-left {
           0%   { transform: translateX(0); }
           100% { transform: translateX(calc(var(--total-width) * -1)); }
+        }
+
+        @keyframes marquee-scroll-right {
+          0%   { transform: translateX(calc(var(--total-width) * -1)); }
+          100% { transform: translateX(0); }
         }
 
         /* ──────────────────────────────────────────────
@@ -344,7 +378,7 @@ const BrandItem: React.FC<BrandItemProps> = ({
       justifyContent: "center",
     }}
   >
-    <img
+    <Image
       src={brand.logo}
       alt={brand.name}
       className="marquee-logo"

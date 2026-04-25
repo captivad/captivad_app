@@ -29,7 +29,8 @@ const Cardmember: React.FC = () => {
                 key={index}
                 className="relative flex flex-col gap-4 lg:gap-10 group"
               >
-                <div className="max-w-[400px] aspect-square bg-white/30 relative rounded-box overflow-hidden backdrop-blur-sm">
+                <div className="max-w-[400px] w-full aspect-square relative rounded-box overflow-hidden group cursor-pointer">
+                  {/* IMAGE */}
                   <CldImage
                     width="1000"
                     height="1000"
@@ -39,11 +40,58 @@ const Cardmember: React.FC = () => {
                     onError={(e) => {
                       e.currentTarget.src = DefaultImage.src;
                     }}
+                    className="
+                      object-cover
+                      grayscale
+                      scale-100
+                      transition-all duration-700 ease-[cubic-bezier(0.4,0,0.2,1)]
+                      group-hover:grayscale-0
+                      group-hover:scale-110
+                    "
+                  />
+
+                  {/* AI GRADIENT GLOW */}
+                  <div
+                    className="
+                      absolute inset-0
+                      bg-gradient-to-tr from-cyan-500/0 via-blue-500/0 to-purple-500/0
+                      group-hover:from-cyan-500/20
+                      group-hover:via-blue-500/20
+                      group-hover:to-purple-500/20
+                      transition-all duration-700
+                    "
+                  />
+
+                  {/* SCAN LINE EFFECT */}
+                  <div
+                    className="
+                      absolute inset-0
+                      opacity-0 group-hover:opacity-100
+                      transition duration-700
+                      before:content-['']
+                      before:absolute before:inset-0
+                      before:bg-[linear-gradient(transparent_95%,rgba(255,255,255,0.2)_100%)]
+                      before:bg-[length:100%_6px]
+                      before:animate-[scan_2s_linear_infinite]
+                    "
+                  />
+
+                  {/* GLOW BORDER */}
+                  <div
+                    className="
+                      absolute inset-0 rounded-box
+                      border border-transparent
+                      group-hover:border-cyan-400/50
+                      group-hover:shadow-[0_0_30px_rgba(34,211,238,0.4)]
+                      transition-all duration-700
+                    "
                   />
                 </div>
                 <div>
-                  <h4 className="font-bold text-background">{item.fullname}</h4>
-                  <p className="text-background">{item.position}</p>
+                  <h4 className="font-bold text-background text-white">
+                    {item.fullname}
+                  </h4>
+                  <p className="text-background text-white">{item.position}</p>
                 </div>
                 <div className="flex gap-2 justify-end absolute top-4 right-4">
                   {status === "authenticated" && (

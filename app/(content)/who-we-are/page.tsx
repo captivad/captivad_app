@@ -1,197 +1,362 @@
 "use client";
 
 import FormCustomer from "@/components/form-customer";
-import { motion } from "framer-motion";
-import React from "react";
-import Image from "next/image";
-// import BgSection1 from "@/public/whoweare-section1.svg";
-import IconLamp from "@/public/emoji_objects.svg";
-// import { Metadata } from "next";
+import { motion, useInView, useScroll, useTransform } from "framer-motion";
+import React, { useRef } from "react";
 import { CldImage } from "next-cloudinary";
+import Cardmember from "./components/card-member";
 
-interface IOpportunity {
-  title: string;
-  description: string;
-}
+// ─────────────────────────────────────────────────────────────────────────────
+// STATIC DATA
+// ─────────────────────────────────────────────────────────────────────────────
 
-const oportunity: IOpportunity[] = [
+const PRINCIPLES = [
+  { no: "01", text: "ATTENTION IS EARNED, NEVER STOLEN." },
+  { no: "02", text: "MEDIA AND CREATIVE ARE ONE SYSTEM." },
+  { no: "03", text: "IF IT CAN'T BE MEASURED, IT CAN'T BE IMPROVED." },
   {
-    title: "Dinamic",
-    description:
-      "We are agile, flexible, adaptive, versatile, movement, always move forward, adaptable in agile environment, resilience, hands on and open to changes.",
-  },
-  {
-    title: "Nurtune",
-    description:
-      "We care for and encourage the growth or development of knowledge, help or encourage the development of knowledge and skills of all CaptivAd.",
-  },
-  {
-    title: "Amplify",
-    description:
-      "We enhance, accelerate our potential performance upgrading our capacity and value in facing dynamic challenges.",
+    no: "04",
+    text: "USE AI WHERE IT ADDS A NEW DIMENSION — NOT TO SAVE FIVE MINUTES.",
   },
 ];
 
-export default function WhoWeAre() {
-  const [visibleSections, setVisibleSections] = React.useState({
-    intro: false,
-    category: false,
-    form: false,
-  });
+// ─────────────────────────────────────────────────────────────────────────────
+// ANIMATION PRIMITIVES
+// ─────────────────────────────────────────────────────────────────────────────
 
-  const sectionRefs = React.useMemo(
-    () => ({
-      intro: React.createRef<HTMLDivElement>(),
-      category: React.createRef<HTMLDivElement>(),
-      form: React.createRef<HTMLDivElement>(),
-    }),
-    []
+/**
+ * SplitWords — staggered per-kata reveal dengan blur-to-sharp.
+ * Trigger saat elemen masuk viewport.
+ */
+function SplitWords({
+  text,
+  className,
+  delay = 0,
+  stagger = 0.07,
+}: {
+  text: string;
+  className?: string;
+  delay?: number;
+  stagger?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+
+  return (
+    <span ref={ref} className={className} aria-label={text}>
+      {text.split(" ").map((word, i) => (
+        <span
+          key={i}
+          style={{
+            display: "inline-block",
+            overflow: "hidden",
+            marginRight: "0.28em",
+          }}
+        >
+          <motion.span
+            style={{ display: "inline-block" }}
+            initial={{ y: "110%", opacity: 0, filter: "blur(6px)" }}
+            animate={
+              isInView
+                ? { y: "0%", opacity: 1, filter: "blur(0px)" }
+                : { y: "110%", opacity: 0, filter: "blur(6px)" }
+            }
+            transition={{
+              duration: 0.65,
+              ease: [0.16, 1, 0.3, 1],
+              delay: delay + i * stagger,
+            }}
+          >
+            {word}
+          </motion.span>
+        </span>
+      ))}
+    </span>
   );
+}
 
-  React.useEffect(() => {
-    const observers = Object.entries(sectionRefs).map(([key, ref]) => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setVisibleSections((prev) => ({ ...prev, [key]: true }));
-          }
-        },
-        { threshold: 0.2 }
-      );
+/**
+ * GlitchLine — scan line horizontal tipis.
+ * Nuansa HUD / AI terminal.
+ */
+function GlitchLine({
+  delay = 0,
+  className = "",
+}: {
+  delay?: number;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true });
 
-      if (ref.current) {
-        observer.observe(ref.current);
-      }
+  return (
+    <div
+      ref={ref}
+      className={`w-full h-px bg-white/10 relative overflow-hidden ${className}`}
+    >
+      <motion.div
+        className="absolute inset-y-0 left-0 h-full bg-gradient-to-r from-transparent via-white/50 to-transparent"
+        style={{ width: "30%" }}
+        initial={{ x: "-100%" }}
+        animate={isInView ? { x: "450%" } : { x: "-100%" }}
+        transition={{ duration: 1.2, ease: "easeInOut", delay }}
+      />
+    </div>
+  );
+}
 
-      return observer;
-    });
+/**
+ * PrincipleItem — satu baris prinsip dengan animasi stagger dari kanan.
+ * Hover: nomor & teks terang, garis kiri muncul sebagai aksen.
+ */
+function PrincipleItem({
+  no,
+  text,
+  index,
+}: {
+  no: string;
+  text: string;
+  index: number;
+}) {
+  const ref = useRef<HTMLLIElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-5% 0px" });
 
-    return () => {
-      observers.forEach((observer) => observer.disconnect());
-    };
-  }, [sectionRefs]);
+  return (
+    <motion.li
+      ref={ref}
+      initial={{ opacity: 0, x: 28 }}
+      animate={isInView ? { opacity: 1, x: 0 } : {}}
+      transition={{
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1],
+        delay: 0.85 + index * 0.13,
+      }}
+      className="group relative flex items-start gap-4 py-[14px] border-b border-white/[0.07] last:border-none cursor-default select-none"
+    >
+      {/* Aksen garis kiri — muncul saat hover */}
+      <span
+        aria-hidden
+        className="absolute left-0 top-0 bottom-0 w-px bg-white/0 group-hover:bg-white/30 transition-colors duration-300"
+      />
 
-  React.useEffect(() => {
-    if (typeof window !== "undefined" && sectionRefs.intro.current) {
-      sectionRefs.intro.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [sectionRefs.intro]);
+      {/* Nomor */}
+      <span className="font-mono text-[14px] text-white/20 mt-[1px] tabular-nums flex-shrink-0 group-hover:text-white/40 transition-colors duration-300">
+        {no}
+      </span>
+
+      {/* Teks */}
+      <p className="text-[11px] md:text-[16px] leading-snug tracking-[0.06em] font-semibold text-white/40 uppercase group-hover:text-white/80 transition-colors duration-300">
+        {text}
+      </p>
+    </motion.li>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PAGE
+// ─────────────────────────────────────────────────────────────────────────────
+
+export default function WhoWeAre() {
+  const formRef = useRef<HTMLDivElement>(null);
+  const isFormVisible = useInView(formRef, { once: true, margin: "-20% 0px" });
+
+  const teamSectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: teamSectionRef,
+    offset: ["start end", "end start"],
+  });
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+
   return (
     <>
-      {/* ###########################  section-1  ############################ */}
+      {/* ################################################################
+          SECTION 1 — HERO: A CREATIVE STUDIO + PRINCIPLES
+      ################################################################ */}
       <motion.section
-        ref={sectionRefs.intro}
         id="section-intro"
-        variants={{
-          hidden: { opacity: 0 },
-          show: {
-            opacity: 1,
-            transition: {
-              staggerChildren: 0.25,
-            },
-          },
-        }}
-        initial="hidden"
-        animate="show"
-        className="relative mb-[10%] w-full min-h-[300px] lg:min-h-[50vh] xl:min-h-[60vh] bg-background flex justify-center pt-32 md:pt-40 md:items-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="relative w-full min-h-screen bg-background flex flex-col justify-center items-center pt-28 md:pt-36 pb-24 overflow-hidden"
       >
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-          className="w-full md:w-[70%] text-center z-20 px-[10%] md:px-0"
-        >
-          <h4 className="my-6 text-center md:text-left">We are CaptivAd</h4>
-          <h1 className="text-center md:text-left">
-            We Shape Digital Brilliance Through Creativity and Innovation
-          </h1>
-        </motion.div>
+        {/* Ambient glow — centre-bottom */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 50% at 50% 65%, rgba(255,255,255,0.03) 0%, transparent 70%)",
+          }}
+        />
+
+        {/* ── 2-column layout ──────────────────────────────────── */}
+        <div className="relative z-20 w-full max-w-[80%] px-[8%] xl:px-12 flex flex-col xl:flex-row gap-16 xl:gap-20 items-start">
+          {/* ── LEFT: Headline + Description ── */}
+          <div className="flex flex-col gap-6 xl:gap-8 flex-1 min-w-0">
+            {/* Label editorial */}
+            <motion.p
+              initial={{ opacity: 0, letterSpacing: "0.5em" }}
+              animate={{ opacity: 1, letterSpacing: "0.25em" }}
+              transition={{ duration: 1.2, delay: 0.1 }}
+              className="text-[10px] text-white/25 uppercase tracking-[0.25em] font-mono"
+            >
+              Who We Are — Est. 2024
+            </motion.p>
+
+            {/* Headline */}
+            <h1
+              className="leading-[1.05] tracking-tight text-left"
+              style={{ fontSize: "clamp(1.9rem, 4vw, 4.25rem)" }}
+            >
+              <SplitWords text="A CREATIVE STUDIO" delay={0.2} stagger={0.08} />
+              <br />
+              <SplitWords
+                text="AT THE INTERSECTION"
+                delay={0.5}
+                stagger={0.07}
+              />
+              <br />
+              <span className="inline-flex flex-wrap gap-x-[0.28em]">
+                <SplitWords
+                  text="OF MEDIA, CRAFT AND"
+                  delay={0.75}
+                  stagger={0.07}
+                />{" "}
+                <span style={{ display: "inline-block", overflow: "hidden" }}>
+                  <motion.span
+                    style={{ display: "inline-block" }}
+                    initial={{ y: "110%", opacity: 0 }}
+                    animate={{ y: "0%", opacity: 1 }}
+                    transition={{
+                      duration: 0.7,
+                      ease: [0.16, 1, 0.3, 1],
+                      delay: 1.05,
+                    }}
+                    className="text-white/50 italic"
+                  >
+                    AI
+                  </motion.span>
+                </span>
+              </span>
+            </h1>
+
+            {/* Scan line */}
+            <GlitchLine delay={1.1} className="my-0" />
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: "easeOut", delay: 1.1 }}
+              className="text-white/80 text-sm md:text-lg leading-relaxed max-w-[520px]"
+            >
+              Captivad was founded on a simple belief: the best advertising is
+              indistinguishable from content people actively seek out. We bring
+              together media planners, creative technologists, filmmakers and AI
+              engineers under one roof — so strategy, craft and technology stay
+              in constant conversation.
+            </motion.p>
+          </div>
+
+          {/* ── RIGHT: Principles ── */}
+          <aside
+            aria-label="Our principles"
+            className="w-full xl:w-[320px] 2xl:w-[360px] flex-shrink-0 flex flex-col"
+          >
+            {/* Label */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.8, delay: 0.7 }}
+              className="text-lg font-mono text-white/25 uppercase tracking-[0.3em] mb-4"
+            >
+              Principles
+            </motion.p>
+
+            {/* Top separator */}
+            <GlitchLine delay={0.75} />
+
+            {/* List */}
+            <ul role="list" className="flex flex-col pl-2">
+              {PRINCIPLES.map((p, i) => (
+                <PrincipleItem key={p.no} no={p.no} text={p.text} index={i} />
+              ))}
+            </ul>
+          </aside>
+        </div>
+
+        {/* Bottom fade ke section berikutnya */}
+        <div
+          aria-hidden
+          className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(to bottom, transparent, var(--background, #0a0a0a))",
+          }}
+        />
       </motion.section>
 
-      <section className="w-full relative min-h-[350px] xl:min-h-[70vh] bg-background overflow-hidden">
-        {/* <Image
-          src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922025/whoweare-section1_xruu0i.svg"
-          alt="Who We Are"
-          fill
-          className="object-cover"
-        /> */}
-        <CldImage
-          src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922025/whoweare-section1_xruu0i.svg"
-          alt="Who We Are"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute bottom-20 left-0 right-0 w-full grid grid-cols-1 lg:grid-cols-2 z-20 px-[14%] 2xl:px-[20%] gap-4 lg:gap-14">
-          <div className="col-span-1 ">
-            <h2 className="w-full text-left">
-              Leading The Innovation for The Future
-            </h2>
-          </div>
-          <div className="">
-            <h3 className="w-full text-left font-bold pb-4">Our Mission</h3>
-            <ul className="list-disc pl-6">
-              <li className="mb-4">
-                <p>
-                  {`To be a strategic partner that exceeds client's needs with
-                  holistic digital solutions.`}
-                </p>
-              </li>
-              <li>
-                <p>
-                  To enhance knowledge and skill for CaptivAd to adapt with
-                  digital innovation.
-                </p>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div className="absolute bottom-0 w-full h-full bg-gradient-to-t from-background via-black/30 to-background z-10"></div>
-      </section>
-
-      <section className="w-full flex flex-wrap justify-center gap-4 lg:gap-10 relative h-full bg-background overflow-hidden p-[10%] lg:p-20 pt-0">
-        {oportunity.map((item, index) => (
+      {/* ################################################################
+          SECTION 2 — MEET THE TEAM
+      ################################################################ */}
+      <section
+        ref={teamSectionRef}
+        className="w-full relative min-h-screen bg-background overflow-hidden"
+      >
+        {/* Background image dengan parallax */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-0 scale-110"
+          style={{ y: bgY }}
+        >
+          <CldImage
+            src="https://res.cloudinary.com/dlvyzfhj2/image/upload/v1776922025/whoweare-section1_xruu0i.svg"
+            alt=""
+            fill
+            className="object-cover"
+          />
           <div
-            key={index}
-            className="max-w-[400px] min-h-[20vh] py-[1px] pr-[2px]  bg-white/30 rounded-box backdrop-blur-sm group"
-          >
-            <div className="h-full w-full bg-black/80 rounded-l-none rounded-box p-10 flex flex-col justify-start gap-6 z-10">
-              <span className="w-[54px] aspect-square rounded-full bg-white flex justify-center items-center">
-                <Image
-                  src={IconLamp}
-                  alt="icons"
-                  width={30}
-                  height={30}
-                  className=" object-contain"
-                />
-              </span>
-              <div className="flex flex-col w-full gap-4">
-                <h4 className="font-bold">{item.title}</h4>
-                <p>{item.description}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </section>
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.85) 100%)",
+            }}
+          />
+        </motion.div>
 
-      {/* <section className="w-full flex flex-col justify-centerrelative h-full bg-foreground overflow-hidden p-[10%] lg:p-20">
-        <h1 className="w-full text-center mb-16 bg-gradient-to-r from-background to-gray-500 bg-clip-text text-transparent">
-          Meet The Team
-        </h1>
-        <div className="w-full h-full flex flex-wrap gap-10 justify-center">
+        {/* Konten */}
+        <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-[8%] lg:px-20 py-32">
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="w-full text-[10px] md:text-xl text-white/50 uppercase tracking-[0.25em] font-mono flex justify-between"
+          >
+            <span>The Team</span>
+            <span>Jakarta, ID</span>
+          </motion.div>
+
+          <div className="w-full mb-16">
+            <GlitchLine delay={0.4} />
+          </div>
+
           <Cardmember />
         </div>
-      </section> */}
+      </section>
 
-      {/* ###########################  section-form  ############################ */}
+      {/* ################################################################
+          SECTION 3 — FORM
+      ################################################################ */}
       <motion.section
-        initial={{ opacity: 0, y: 100 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-        ref={sectionRefs.form}
+        ref={formRef}
         id="form"
+        initial={{ opacity: 0, y: 60 }}
+        animate={isFormVisible ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.9, ease: "easeOut" }}
         className="lg:h-full p-[5%] lg:p-20 bg-foreground"
       >
-        {visibleSections.form && <FormCustomer />}
+        {isFormVisible && <FormCustomer />}
       </motion.section>
     </>
   );

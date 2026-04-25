@@ -1,7 +1,96 @@
+// "use client";
+
+// import React from "react";
+// import { motion } from "framer-motion"; // Import motion from Framer Motion
+// import Image from "next/image";
+
+// interface ICardValueCount extends React.HTMLProps<HTMLDivElement> {
+//   icon: string;
+//   value: number;
+//   description: string;
+//   className?: string;
+// }
+
+// const CardValueCount = ({
+//   description,
+//   value,
+//   icon,
+//   className,
+// }: ICardValueCount) => {
+//   const [currentValue, setCurrentValue] = React.useState(0);
+
+//   // Format number with commas
+//   const formatNumber = (num: number) =>
+//     new Intl.NumberFormat("en-US").format(num);
+
+//   React.useEffect(() => {
+//     // Increment the value from 1 to the target value
+//     let startValue = 0;
+//     const duration = 1000; // Duration for the animation in milliseconds
+//     const stepTime = Math.max(Math.floor(duration / value), 20); // Time between increments
+
+//     const increment = () => {
+//       startValue += Math.ceil(value / (duration / stepTime));
+//       if (startValue >= value) {
+//         setCurrentValue(value); // Set to final value when reached
+//         clearInterval(interval);
+//       } else {
+//         setCurrentValue(startValue); // Incrementally update the value
+//       }
+//     };
+
+//     const interval = setInterval(increment, stepTime);
+
+//     // Clean up the interval when the component is unmounted or value changes
+//     return () => clearInterval(interval);
+//   }, [value]);
+
+//   return (
+//     <div
+//       className={`p-[1px] max-w-[250px]  md:max-w-[300px] lg:max-w-[412px] bg-gradient-to-tl backdrop-blur-md from-white/10 from-40% to-white/10 rounded-3xl shadow-sm shadow-white ${
+//         className && className
+//       }`}
+//     >
+//       <motion.div
+//         className="max-w-[300px] md:max-w-[412px] min-h-[90px] md:min-h-[100px] lg:min-h-[142px] rounded-3xl bg-[#171717]/10 flex items-center pl-10 lg:pl-20 gap-4 md:gap-10"
+//         initial={{ scale: 0.95 }} // Initial scale for a subtle effect
+//         animate={{ scale: 1 }} // Scale up to 1 (no scale)
+//         transition={{ duration: 0.3, ease: "easeOut" }} // Scale animation settings
+//       >
+//         <span className="w-[54px] aspect-square rounded-full bg-white flex justify-center items-center">
+//           <Image
+//             src={icon}
+//             alt="icons"
+//             width={30}
+//             height={30}
+//             className=" object-contain"
+//           />
+//         </span>
+
+//         {/* Animate the number changing */}
+//         <div className="flex flex-col gap-1">
+//           <motion.h3
+//             className="md:text-xl lg:text-3xl font-bold text-white"
+//             key={currentValue} // Key forces a re-render on value change
+//             initial={{ opacity: 0, y: -10 }} // Start with hidden number
+//             animate={{ opacity: 1, y: 0 }} // Animate number into view
+//             transition={{ duration: 0.3, ease: "easeOut" }} // Smooth transition
+//           >
+//             {formatNumber(currentValue)}
+//           </motion.h3>
+//           <p className="text-white">{description}</p>
+//         </div>
+//       </motion.div>
+//     </div>
+//   );
+// };
+
+// export { CardValueCount };
+
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion"; // Import motion from Framer Motion
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 interface ICardValueCount extends React.HTMLProps<HTMLDivElement> {
@@ -11,6 +100,8 @@ interface ICardValueCount extends React.HTMLProps<HTMLDivElement> {
   className?: string;
 }
 
+const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
 const CardValueCount = ({
   description,
   value,
@@ -19,43 +110,43 @@ const CardValueCount = ({
 }: ICardValueCount) => {
   const [currentValue, setCurrentValue] = React.useState(0);
 
-  // Format number with commas
   const formatNumber = (num: number) =>
-    new Intl.NumberFormat("en-US").format(num);
+    new Intl.NumberFormat("en-US").format(Math.floor(num));
 
   React.useEffect(() => {
-    // Increment the value from 1 to the target value
-    let startValue = 0;
-    const duration = 1000; // Duration for the animation in milliseconds
-    const stepTime = Math.max(Math.floor(duration / value), 20); // Time between increments
+    let startTime: number | null = null;
+    const duration = 2000; // lebih lama = lebih smooth
 
-    const increment = () => {
-      startValue += Math.ceil(value / (duration / stepTime));
-      if (startValue >= value) {
-        setCurrentValue(value); // Set to final value when reached
-        clearInterval(interval);
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      const easedProgress = easeOutCubic(progress);
+
+      const current = value * easedProgress;
+      setCurrentValue(current);
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
       } else {
-        setCurrentValue(startValue); // Incrementally update the value
+        setCurrentValue(value); // ensure exact final value
       }
     };
 
-    const interval = setInterval(increment, stepTime);
-
-    // Clean up the interval when the component is unmounted or value changes
-    return () => clearInterval(interval);
+    requestAnimationFrame(animate);
   }, [value]);
 
   return (
     <div
-      className={`p-[1px] max-w-[250px]  md:max-w-[300px] lg:max-w-[412px] bg-gradient-to-tl backdrop-blur-md from-white/10 from-40% to-white/10 rounded-3xl shadow-sm shadow-white ${
-        className && className
+      className={`p-[1px] max-w-[250px] md:max-w-[300px] lg:max-w-[412px] bg-gradient-to-tl backdrop-blur-md from-white/10 from-40% to-white/10 rounded-3xl shadow-sm shadow-white ${
+        className || ""
       }`}
     >
       <motion.div
         className="max-w-[300px] md:max-w-[412px] min-h-[90px] md:min-h-[100px] lg:min-h-[142px] rounded-3xl bg-[#171717]/10 flex items-center pl-10 lg:pl-20 gap-4 md:gap-10"
-        initial={{ scale: 0.95 }} // Initial scale for a subtle effect
-        animate={{ scale: 1 }} // Scale up to 1 (no scale)
-        transition={{ duration: 0.3, ease: "easeOut" }} // Scale animation settings
+        initial={{ scale: 0.95 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
       >
         <span className="w-[54px] aspect-square rounded-full bg-white flex justify-center items-center">
           <Image
@@ -63,20 +154,13 @@ const CardValueCount = ({
             alt="icons"
             width={30}
             height={30}
-            className=" object-contain"
+            className="object-contain"
           />
         </span>
 
-        {/* Animate the number changing */}
         <div className="flex flex-col gap-1">
-          <motion.h3
-            className="md:text-xl lg:text-3xl font-bold text-white"
-            key={currentValue} // Key forces a re-render on value change
-            initial={{ opacity: 0, y: -10 }} // Start with hidden number
-            animate={{ opacity: 1, y: 0 }} // Animate number into view
-            transition={{ duration: 0.3, ease: "easeOut" }} // Smooth transition
-          >
-            {formatNumber(currentValue)}
+          <motion.h3 className="md:text-xl lg:text-3xl font-bold text-white tabular-nums">
+            {formatNumber(currentValue)}+
           </motion.h3>
           <p className="text-white">{description}</p>
         </div>

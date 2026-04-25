@@ -30,3 +30,13 @@ export const handleCopyLink = (link: string) => {
   navigator.clipboard.writeText(link);
   toast.success("Link copied to clipboard");
 };
+
+export const splitArrayInHalf = (data: any[]): [any[], any[]] => {
+  // Mencari titik tengah (menggunakan Math.ceil agar jika ganjil, bagian pertama lebih banyak)
+  const middleIndex = Math.ceil(data.length / 2);
+
+  const firstHalf = data.slice(0, middleIndex);
+  const secondHalf = data.slice(middleIndex);
+
+  return [firstHalf, secondHalf];
+};

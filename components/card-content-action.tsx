@@ -113,7 +113,7 @@ const CardContentAction: FC<IProps> = ({ data }) => {
               <Trash2 size={20} color="white" />
             </label>
           </div>
-          {data && <ModalEditWork data={data as IOurWork} />}
+          {data && <ModalEditWork data={data as any} />}
           {data && isOpen === "delete" && (
             <ModalConfirmAlert
               id={data.uuid}
