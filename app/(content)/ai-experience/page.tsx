@@ -265,8 +265,8 @@ export default function AIExperiencePage() {
               className="text-background leading-relaxed"
               style={{ fontSize: "clamp(1rem, 1vw, 1.2rem)" }}
             >
-              Rupa.AI AI Xperience is more than just an API, it's a bespoke AI
-              solution for your brand. We build fully interactive microsites
+              Rupa.AI AI Xperience is more than just an API, it&apos;s a bespoke
+              AI solution for your brand. We build fully interactive microsites
               from scratch, featuring seamless generative AI integration across
               text, visuals, and audio through expert prompt engineering.
               Together with Moyo Tech, we deliver comprehensive, end-to-end
@@ -334,9 +334,9 @@ export default function AIExperiencePage() {
                 style={{ fontSize: "clamp(1rem, 1vw, 1.2rem)" }}
                 className="text-white leading-relaxed"
               >
-                From ordinary to extraordinary: See how Indonesia's top brands
-                are leveraging AI Xperience to build campaigns that define the
-                future.
+                From ordinary to extraordinary: See how Indonesia&apos;s top
+                brands are leveraging AI Xperience to build campaigns that
+                define the future.
               </p>
             </div>
             {/* <FadeUp delay={0.3}>
@@ -444,7 +444,7 @@ export default function AIExperiencePage() {
             <FadeUp delay={0.2}>
               <p className="text-white">
                 The Rupa.AI team integrates the best AI models to create unique
-                experiences tailored to your brand's needs:
+                experiences tailored to your brand&apos;s needs:
               </p>
             </FadeUp>
           </div>
