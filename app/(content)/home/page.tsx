@@ -12,374 +12,14 @@ import { OUR_SERVICES, WHO_WE_ARE } from "@/utils/router";
 import { CldImage } from "next-cloudinary";
 import InfiniteMarquee from "@/components/infinite-loop";
 import { splitArrayInHalf } from "@/utils/general";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// STATIC DATA — di luar komponen agar tidak re-create tiap render
-// ─────────────────────────────────────────────────────────────────────────────
-
-const BRANDS = [
-  // { name: "Wuling", logo: "/FrameWuling.svg" },
-  // { name: "Tempra", logo: "/Tempra.svg" },
-  // { name: "Chery", logo: "/chery.svg" },
-  // { name: "Citroën", logo: "/citroen.svg" },
-  // { name: "WRP", logo: "/wrp.svg" },
-  {
-    name: "GoPay",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113552/gopay_qa0wuf.png",
-  },
-  {
-    name: "Samsung",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113553/samsung_zmpqmb.png",
-  },
-  {
-    name: "KFC",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113552/kfc_e7cxso.png",
-  },
-  {
-    name: "Pizza Hut",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113552/pizzahut_xmeibj.png",
-  },
-  {
-    name: "Uni Qlo",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777112224/uniqlo_ytdcnf.png",
-  },
-  {
-    name: "WPP",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113555/wpp_bevexx.png",
-  },
-  {
-    name: "SHARP",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113553/sharp_hhrifa.png",
-  },
-  {
-    name: "Apple",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113554/apple_nifcnt.png",
-  },
-  {
-    name: "XL",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113551/xl_w3mrrs.png",
-  },
-  {
-    name: "BCA",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113551/bca_onowvz.png",
-  },
-  {
-    name: "Genki",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113552/genki_gv632x.png",
-  },
-  {
-    name: "KIA",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113552/kn_sryggg.png",
-  },
-  {
-    name: "Molto",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113552/molto_en5ho6.png",
-  },
-  {
-    name: "MCD",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113552/mcd_hci0dl.png",
-  },
-  {
-    name: "Vinfast",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113552/vinfast_zcaifz.png",
-  },
-  {
-    name: "By.U",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113552/byU_azqcjm.png",
-  },
-  {
-    name: "Caffino",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113552/caffino_gydol8.png",
-  },
-  {
-    name: "BTN",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113553/btn_kifydr.png",
-  },
-  {
-    name: "Regen",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113553/regen_lo8srn.png",
-  },
-  {
-    name: "Telkomsel",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113553/telkomsel_psp5cn.png",
-  },
-  {
-    name: "Danamont",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113553/danamon_q4eq1n.png",
-  },
-  {
-    name: "Avian",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113553/avian_gbdxcd.png",
-  },
-  {
-    name: "MSGlow",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113553/msglow_kwvv3v.png",
-  },
-  {
-    name: "POLITRON",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113553/politron_br8xpq.png",
-  },
-  {
-    name: "PRONAS",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113554/pronas_lfp1bl.png",
-  },
-  {
-    name: "Djarum",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113554/djarum_im88iz.png",
-  },
-  {
-    name: "Mondial",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113554/mondial_oicmpp.png",
-  },
-  {
-    name: "SmartFrend",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113554/smartfrend_wvlnbe.png",
-  },
-  {
-    name: "Frank & Co",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113554/frank_co_bl4if3.png",
-  },
-  {
-    name: "EMC Health Care",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113555/emc_p1gur9.png",
-  },
-  {
-    name: "Hyundai",
-    logo: "https://res.cloudinary.com/dlvyzfhj2/image/upload/v1777113554/hyundai_iexavk.png",
-  },
-];
-
-const METRICS = [
-  {
-    value: 1000,
-    description: "Campaign Delivered",
-    icon: "thumb_up.svg",
-    indent: "mx-10 sm:ml-16 xl:ml-40",
-  },
-  {
-    value: 10000,
-    description: "Creative Executed",
-    icon: "campaign.svg",
-    indent: "mx-20 sm:ml-32 lg:ml-40 xl:ml-60",
-  },
-];
-
-// ─────────────────────────────────────────────────────────────────────────────
-// ANIMATION PRIMITIVES
-// ─────────────────────────────────────────────────────────────────────────────
-
-/**
- * SplitWords — staggered per-kata reveal dengan blur-to-sharp.
- * Viewport-triggered: animasi hanya berjalan saat elemen masuk layar.
- */
-function SplitWords({
-  text,
-  className,
-  delay = 0,
-  stagger = 0.07,
-  once = true,
-}: {
-  text: string;
-  className?: string;
-  delay?: number;
-  stagger?: number;
-  once?: boolean;
-}) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once, margin: "-8% 0px" });
-
-  return (
-    <span ref={ref} className={className} aria-label={text}>
-      {text.split(" ").map((word, i) => (
-        <span
-          key={i}
-          style={{
-            display: "inline-block",
-            overflow: "hidden",
-            marginRight: "0.3em",
-          }}
-        >
-          <motion.span
-            style={{ display: "inline-block" }}
-            initial={{ y: "110%", opacity: 0, filter: "blur(8px)" }}
-            animate={
-              isInView
-                ? { y: "0%", opacity: 1, filter: "blur(0px)" }
-                : { y: "110%", opacity: 0, filter: "blur(8px)" }
-            }
-            transition={{
-              duration: 0.7,
-              ease: [0.16, 1, 0.3, 1],
-              delay: delay + i * stagger,
-            }}
-            className="pr-2"
-          >
-            {word}
-          </motion.span>
-        </span>
-      ))}
-    </span>
-  );
-}
-
-/**
- * ScanLine — garis horizontal tipis yang sweep kiri→kanan.
- * Nuansa HUD / AI terminal tanpa berlebihan.
- */
-function ScanLine({
-  delay = 0,
-  className = "",
-}: {
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
-
-  return (
-    <div
-      ref={ref}
-      className={`relative w-full h-px bg-white/10 overflow-hidden ${className}`}
-    >
-      <motion.div
-        className="absolute inset-y-0 left-0 h-full w-[25%] bg-gradient-to-r from-transparent via-white/50 to-transparent"
-        initial={{ x: "-100%" }}
-        animate={isInView ? { x: "500%" } : { x: "-100%" }}
-        transition={{ duration: 1.4, ease: "easeInOut", delay }}
-      />
-    </div>
-  );
-}
-
-/**
- * FadeUp — generic fade + slide up, viewport-triggered.
- */
-function FadeUp({
-  children,
-  delay = 0,
-  className = "",
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-5% 0px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 32 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-/**
- * NodeGrid — grid titik-titik dekoratif ala neural network.
- * Pure CSS, performa tinggi.
- */
-function NodeGrid() {
-  return (
-    <div
-      aria-hidden
-      className="absolute inset-0 pointer-events-none opacity-[0.06]"
-      style={{
-        backgroundImage:
-          "radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1px)",
-        backgroundSize: "48px 48px",
-      }}
-    />
-  );
-}
-
-/**
- * GlowOrb — ambient glow bulat, untuk variasi visual antar section.
- */
-function GlowOrb({
-  x = "50%",
-  y = "50%",
-  size = "60%",
-  opacity = 0.04,
-  color = "255,255,255",
-}: {
-  x?: string;
-  y?: string;
-  size?: string;
-  opacity?: number;
-  color?: string;
-}) {
-  return (
-    <div
-      aria-hidden
-      className="absolute pointer-events-none"
-      style={{
-        inset: 0,
-        background: `radial-gradient(ellipse ${size} ${size} at ${x} ${y}, rgba(${color},${opacity}) 0%, transparent 70%)`,
-      }}
-    />
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// HOOK — media query
-// ─────────────────────────────────────────────────────────────────────────────
-
-function useMediaQuery(query: string): boolean {
-  const [matches, setMatches] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mq = window.matchMedia(query);
-    setMatches(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setMatches(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, [query]);
-
-  return matches;
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
-// HOOK — intersection observer untuk lazy-render section
-// ─────────────────────────────────────────────────────────────────────────────
-
-function useSectionVisibility(keys: string[], threshold = 0.2) {
-  const [visible, setVisible] = useState<Record<string, boolean>>(() =>
-    Object.fromEntries(keys.map((k) => [k, false]))
-  );
-
-  const refs = React.useMemo(
-    () =>
-      Object.fromEntries(
-        keys.map((k) => [k, React.createRef<HTMLDivElement>()])
-      ),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
-
-  useEffect(() => {
-    const observers = Object.entries(refs).map(([key, ref]) => {
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting)
-            setVisible((prev) => ({ ...prev, [key]: true }));
-        },
-        { threshold }
-      );
-      if (ref.current) observer.observe(ref.current);
-      return observer;
-    });
-
-    return () => observers.forEach((obs) => obs.disconnect());
-  }, [refs, threshold]);
-
-  return { visible, refs };
-}
+import { BRANDS, METRICS } from "./data/home-data";
+import NodeGrid from "@/components/node-grid";
+import SplitWords from "@/components/split-words";
+import GlowOrb from "@/components/glow-orb";
+import FadeUp from "@/components/fade-up";
+import ScanLine from "@/components/scan-line";
+import useMediaQuery from "./hooks/use-media-query";
+import useSectionVisibility from "./hooks/use-section-visibility";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PAGE
@@ -473,7 +113,7 @@ export default function Home() {
             />
             <br />
             <motion.span
-              className="text-white italic"
+              className="text-white"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.7 }}
@@ -493,7 +133,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, delay: 1.1 }}
-            className="text-white/80 text-sm md:text-lg max-w-[580px] leading-relaxed"
+            className="text-white/80 max-w-[580px] leading-relaxed"
           >
             Connecting brands to the right audiences through a unified network
             of data, media, and AI-powered experiences — built for scale and
@@ -585,7 +225,7 @@ export default function Home() {
               <ScanLine delay={0.9} className="max-w-[420px]" />
 
               <FadeUp delay={0.8}>
-                <p className="text-black text-sm md:text-lg leading-relaxed max-w-[480px]">
+                <p className="text-black leading-relaxed max-w-[480px]">
                   Every Captivad campaign is engineered for attention — media
                   placed with precision, creative built to react, and microsites
                   that turn a 30-second visit into a brand story worth sharing.
@@ -839,7 +479,7 @@ export default function Home() {
                 delay={0.6}
                 className="w-full flex items-start lg:items-end"
               >
-                <p className="text-white/80 text-[14px] md:text-[18px] lg:text-lg leading-relaxed text-center lg:text-left">
+                <p className="text-white/80 leading-relaxed text-center lg:text-left">
                   That&apos;s why we offer tailored support to meet your unique
                   needs. Our team sails alongside you, exploring the uncharted
                   waters of your challenges and opportunities to develop bespoke
