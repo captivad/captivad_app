@@ -5,152 +5,10 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 import { CldImage } from "next-cloudinary";
 import Cardmember from "./components/card-member";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// STATIC DATA
-// ─────────────────────────────────────────────────────────────────────────────
-
-const PRINCIPLES = [
-  { no: "01", text: "ATTENTION IS EARNED, NEVER STOLEN." },
-  { no: "02", text: "MEDIA AND CREATIVE ARE ONE SYSTEM." },
-  { no: "03", text: "IF IT CAN'T BE MEASURED, IT CAN'T BE IMPROVED." },
-  {
-    no: "04",
-    text: "USE AI WHERE IT ADDS A NEW DIMENSION — NOT TO SAVE FIVE MINUTES.",
-  },
-];
-
-// ─────────────────────────────────────────────────────────────────────────────
-// ANIMATION PRIMITIVES
-// ─────────────────────────────────────────────────────────────────────────────
-
-/**
- * SplitWords — staggered per-kata reveal dengan blur-to-sharp.
- * Trigger saat elemen masuk viewport.
- */
-function SplitWords({
-  text,
-  className,
-  delay = 0,
-  stagger = 0.07,
-}: {
-  text: string;
-  className?: string;
-  delay?: number;
-  stagger?: number;
-}) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
-
-  return (
-    <span ref={ref} className={className} aria-label={text}>
-      {text.split(" ").map((word, i) => (
-        <span
-          key={i}
-          style={{
-            display: "inline-block",
-            overflow: "hidden",
-            marginRight: "0.28em",
-          }}
-        >
-          <motion.span
-            style={{ display: "inline-block" }}
-            initial={{ y: "110%", opacity: 0, filter: "blur(6px)" }}
-            animate={
-              isInView
-                ? { y: "0%", opacity: 1, filter: "blur(0px)" }
-                : { y: "110%", opacity: 0, filter: "blur(6px)" }
-            }
-            transition={{
-              duration: 0.65,
-              ease: [0.16, 1, 0.3, 1],
-              delay: delay + i * stagger,
-            }}
-          >
-            {word}
-          </motion.span>
-        </span>
-      ))}
-    </span>
-  );
-}
-
-/**
- * GlitchLine — scan line horizontal tipis.
- * Nuansa HUD / AI terminal.
- */
-function GlitchLine({
-  delay = 0,
-  className = "",
-}: {
-  delay?: number;
-  className?: string;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
-
-  return (
-    <div
-      ref={ref}
-      className={`w-full h-px bg-white/10 relative overflow-hidden ${className}`}
-    >
-      <motion.div
-        className="absolute inset-y-0 left-0 h-full bg-gradient-to-r from-transparent via-white/50 to-transparent"
-        style={{ width: "30%" }}
-        initial={{ x: "-100%" }}
-        animate={isInView ? { x: "450%" } : { x: "-100%" }}
-        transition={{ duration: 1.2, ease: "easeInOut", delay }}
-      />
-    </div>
-  );
-}
-
-/**
- * PrincipleItem — satu baris prinsip dengan animasi stagger dari kanan.
- * Hover: nomor & teks terang, garis kiri muncul sebagai aksen.
- */
-function PrincipleItem({
-  no,
-  text,
-  index,
-}: {
-  no: string;
-  text: string;
-  index: number;
-}) {
-  const ref = useRef<HTMLLIElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-5% 0px" });
-
-  return (
-    <motion.li
-      ref={ref}
-      initial={{ opacity: 0, x: 28 }}
-      animate={isInView ? { opacity: 1, x: 0 } : {}}
-      transition={{
-        duration: 0.6,
-        ease: [0.16, 1, 0.3, 1],
-        delay: 0.85 + index * 0.13,
-      }}
-      className="group relative flex items-start gap-4 py-[14px] border-b border-white/[0.07] last:border-none cursor-default select-none"
-    >
-      {/* Aksen garis kiri — muncul saat hover */}
-      <span
-        aria-hidden
-        className="absolute left-0 top-0 bottom-0 w-px bg-white/0 group-hover:bg-white/30 transition-colors duration-300"
-      />
-
-      {/* Nomor */}
-      <span className="font-mono text-[14px] text-white/20 mt-[1px] tabular-nums flex-shrink-0 group-hover:text-white/40 transition-colors duration-300">
-        {no}
-      </span>
-
-      {/* Teks */}
-      <p className="text-[11px] md:text-[16px] leading-snug tracking-[0.06em] font-semibold text-white/40 uppercase group-hover:text-white/80 transition-colors duration-300">
-        {text}
-      </p>
-    </motion.li>
-  );
-}
+import SplitWords from "@/components/split-words";
+import { PRINCIPLES } from "./data/whe-we-are-data";
+import GlitchLine from "./components/glitch-line";
+import PrincipleItem from "./components/principle-item";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // PAGE
@@ -198,7 +56,7 @@ export default function WhoWeAre() {
               initial={{ opacity: 0, letterSpacing: "0.5em" }}
               animate={{ opacity: 1, letterSpacing: "0.25em" }}
               transition={{ duration: 1.2, delay: 0.1 }}
-              className="text-[10px] text-white/25 uppercase tracking-[0.25em] font-mono"
+              className="text-sm text-white/50 uppercase tracking-[0.25em] font-mono"
             >
               Who We Are — Est. 2024
             </motion.p>
@@ -232,7 +90,7 @@ export default function WhoWeAre() {
                       ease: [0.16, 1, 0.3, 1],
                       delay: 1.05,
                     }}
-                    className="text-white/50 italic"
+                    className="text-white/50 italic pr-2"
                   >
                     AI
                   </motion.span>
@@ -248,7 +106,7 @@ export default function WhoWeAre() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: "easeOut", delay: 1.1 }}
-              className="text-white/80 text-sm md:text-lg leading-relaxed max-w-[520px]"
+              className="text-white/80 leading-relaxed max-w-[520px]"
             >
               Captivad was founded on a simple belief: the best advertising is
               indistinguishable from content people actively seek out. We bring
