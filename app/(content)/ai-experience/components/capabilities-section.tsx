@@ -91,7 +91,7 @@ export default function CapabilitiesSection() {
           <FadeUp delay={0.2}>
             <p className="text-white">
               The Rupa.AI team integrates the best AI models to create unique
-              experiences tailored to your brand's needs:
+              experiences tailored to your brand&apos;s needs:
             </p>
           </FadeUp>
         </div>
