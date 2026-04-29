@@ -1,5 +1,6 @@
 import {
   BookOpen,
+  Bot,
   BriefcaseBusiness,
   Globe,
   HandHelping,
@@ -52,7 +53,7 @@ export const router: IRouter[] = [
   {
     path: AI_EXPERIENCE,
     label: "AI Experience",
-    icon: <Headset size={20} />,
+    icon: <Bot size={20} />,
     authenticated: false,
   },
   {

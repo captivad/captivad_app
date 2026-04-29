@@ -41,6 +41,7 @@ function SplitWords({
               ease: [0.16, 1, 0.3, 1],
               delay: delay + i * stagger,
             }}
+            className="pb-1"
           >
             {word}
           </motion.span>

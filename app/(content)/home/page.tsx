@@ -372,13 +372,6 @@ export default function Home() {
 
           {visible.brand && (
             <>
-              {/* Label */}
-              <FadeUp delay={0.1}>
-                <p className="text-[10px] text-white/25 uppercase tracking-[0.3em] font-mono text-center">
-                  Our Partners
-                </p>
-              </FadeUp>
-
               {/* Heading */}
               <h2 className="w-full text-center px-[8%] md:px-0">
                 <SplitWords

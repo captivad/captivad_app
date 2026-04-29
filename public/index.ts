@@ -9,3 +9,6 @@ export { default as MultiMediaIcon } from "./multi-media.svg";
 export { default as Camera } from "./camera.svg";
 export { default as Images } from "./image.svg";
 export { default as Interactive } from "./interactive.svg";
+export { default as IndonesiaMap } from "./indonesia-map.svg";
+export { default as AiPhotobooth } from "./ai-photobooth.png";
+export { default as RupaAiLogo } from "./RUPA_AI.webp";
