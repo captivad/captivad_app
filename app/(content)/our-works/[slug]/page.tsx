@@ -2,14 +2,12 @@ import FormCustomer from "@/components/form-customer";
 import React from "react";
 import Image from "next/image";
 import bgSectionContent from "@/public/Picture-Hover.svg";
-import Contentlaptop from "@/public/content-laptop.svg";
 import BackButton from "@/components/button-back";
 import { fetchDataDetailWorkById } from "../our-work.web.service";
 import { Metadata } from "next";
 import { metadata } from "@/app/layout";
-import VideoComponent from "../components/VIdeoComponent";
-import { DefaultImage } from "@/public";
 import ImageRender from "../components/image-render";
+import VideoComponent from "../components/vIdeo-component";
 
 async function generateStaticData({
   searchParams,

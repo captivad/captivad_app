@@ -232,7 +232,7 @@ function FilterBadge({
       className={`
         relative inline-flex items-center
         ${s.gap} ${s.padding} ${s.fontSize}
-        font-mono uppercase tracking-widest
+        uppercase tracking-widest
         transition-colors duration-200 select-none outline-none
         focus-visible:ring-1 focus-visible:ring-white/40
         disabled:pointer-events-none
@@ -244,6 +244,7 @@ function FilterBadge({
         background: isActive ? "rgba(255,255,255,1)" : "rgba(255,255,255,0.03)",
         color: isActive ? "#000" : "rgba(255,255,255,0.45)",
         backdropFilter: "blur(8px)",
+        borderRadius: "999px",
       }}
       aria-pressed={isActive}
     >

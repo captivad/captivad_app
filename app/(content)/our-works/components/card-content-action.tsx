@@ -1,6 +1,6 @@
 "use client";
 
-import ModalEditWork from "@/app/(content)/our-works/components/ModalEditWork";
+import ModalEditWork from "@/app/(content)/our-works/components/modal-edit-work";
 import { Pencil, Trash2, Upload } from "lucide-react";
 import { useSession } from "next-auth/react";
 import React from "react";

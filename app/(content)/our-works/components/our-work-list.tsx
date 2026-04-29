@@ -8,7 +8,7 @@ import CardContent from "@/components/card-content";
 import SkeletonWorkCard from "./skeleton-work-card";
 import { IResponseListCategoryWork } from "@/app/api/our-work/our-work.interface";
 import { useSession } from "next-auth/react";
-import ModalAddWork from "./ModalAddWork";
+import ModalAddWork from "./modal-add-work";
 
 const OurWorkList = () => {
   const { status } = useSession();

@@ -1,5 +1,6 @@
 import {
   BookOpen,
+  Bot,
   BriefcaseBusiness,
   Globe,
   HandHelping,
@@ -16,6 +17,7 @@ export const WHO_WE_ARE = "/who-we-are";
 export const BLOG = "/blog";
 export const MEDIA = "/media";
 export const BLOG_DASHBOARD = "/admin/blog-dashboard?tab=publish";
+export const AI_EXPERIENCE = "/ai-experience";
 
 //admin
 export const LOGIN = "/admin/login";
@@ -46,6 +48,12 @@ export const router: IRouter[] = [
     path: OUR_WORK,
     label: "Our Work",
     icon: <BriefcaseBusiness size={20} />,
+    authenticated: false,
+  },
+  {
+    path: AI_EXPERIENCE,
+    label: "AI Experience",
+    icon: <Bot size={20} />,
     authenticated: false,
   },
   {

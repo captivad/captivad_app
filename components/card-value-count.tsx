@@ -159,7 +159,7 @@ const CardValueCount = ({
         </span>
 
         <div className="flex flex-col gap-1">
-          <motion.h3 className="md:text-xl lg:text-3xl font-bold text-white tabular-nums">
+          <motion.h3 className="md:text-xl lg:text-3xl font-bold text-white tabular-nums font-mono">
             {formatNumber(currentValue)}+
           </motion.h3>
           <p className="text-white">{description}</p>
