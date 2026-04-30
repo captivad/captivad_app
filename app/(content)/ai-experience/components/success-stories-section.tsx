@@ -116,7 +116,7 @@ export default function SuccessStoriesSection() {
 
               {/* Content */}
               <div className="relative z-10 px-7 flex flex-col gap-4">
-                <div className="flex flex-col">
+                <div className="flex flex-col gap-2">
                   <Image
                     src={s.logoBrand}
                     alt={s.brand}

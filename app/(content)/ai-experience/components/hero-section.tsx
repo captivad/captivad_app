@@ -29,7 +29,7 @@ export default function HeroSection() {
     offset: ["start start", "end start"],
   });
   const heroY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
+  // const heroOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
     <motion.section
@@ -95,7 +95,7 @@ export default function HeroSection() {
       </svg> */}
 
       <motion.div
-        style={{ y: heroY, opacity: heroOpacity }}
+        style={{ y: heroY }}
         className="relative z-10 flex flex-col items-center gap-7 w-full max-w-[80%] mx-auto text-center"
       >
         <div className="flex flex-col gap-6 items-center">

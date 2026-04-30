@@ -86,7 +86,7 @@ export default function PartnershipSection() {
         </div>
 
         {/* Kanan — feature badges */}
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid lg:grid-cols-2 gap-3">
           {PARTNERSHIP_FEATURES.map((f, i) => (
             <FadeUp
               key={f.label}
