@@ -54,10 +54,17 @@ function getUniqueCategories(posts: Post[]): string[] {
 function HighlightCard({ post, index }: { post: Post; index: number }) {
   return (
     <FadeUp delay={index * 0.1}>
-      <Link href={`/blog-v2/${post.slug.current}`} className="group block h-full">
-        <article className="relative overflow-hidden h-full min-h-[320px] flex flex-col justify-end rounded-xl"
-          style={{ border: "1px solid rgba(255,255,255,0.08)", background: "#111" }}>
-
+      <Link
+        href={`/blog-v2/${post.slug.current}`}
+        className="group block h-full"
+      >
+        <article
+          className="relative overflow-hidden h-full min-h-[320px] flex flex-col justify-end rounded-xl"
+          style={{
+            border: "1px solid rgba(255,255,255,0.08)",
+            background: "#111",
+          }}
+        >
           {/* Thumbnail */}
           {post.imageUrl ? (
             <div className="absolute inset-0">
@@ -66,8 +73,13 @@ function HighlightCard({ post, index }: { post: Post; index: number }) {
                 alt={post.title}
                 className="w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700"
               />
-              <div className="absolute inset-0"
-                style={{ background: "linear-gradient(to top, rgba(8,8,8,0.98) 10%, rgba(8,8,8,0.5) 60%, rgba(8,8,8,0.15) 100%)" }} />
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(8,8,8,0.98) 10%, rgba(8,8,8,0.5) 60%, rgba(8,8,8,0.15) 100%)",
+                }}
+              />
             </div>
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent" />
@@ -85,19 +97,25 @@ function HighlightCard({ post, index }: { post: Post; index: number }) {
 
           {/* Content */}
           <div className="relative z-10 p-5 flex flex-col gap-2">
-            <h2 className="font-bold leading-snug text-white/90 group-hover:text-white transition-colors duration-200"
-              style={{ fontSize: "clamp(1rem, 1.8vw, 1.25rem)" }}>
+            <h2
+              className="font-bold leading-snug text-white/90 group-hover:text-white transition-colors duration-200"
+              style={{ fontSize: "clamp(1rem, 1.8vw, 1.25rem)" }}
+            >
               {post.title}
             </h2>
             {post.excerpt && (
-              <p className="text-white/40 text-xs leading-relaxed line-clamp-2">{post.excerpt}</p>
+              <p className="text-white/40 text-xs leading-relaxed line-clamp-2">
+                {post.excerpt}
+              </p>
             )}
             <div className="flex items-center gap-2 mt-1">
               <span className="text-sm text-white/80">
                 {post.author ?? "CaptivAd Team"}
               </span>
               <span className="text-white/15">·</span>
-              <span className="text-sm text-white/80">{formatDate(post.publishedAt)}</span>
+              <span className="text-sm text-white/80">
+                {formatDate(post.publishedAt)}
+              </span>
             </div>
           </div>
         </article>
@@ -113,10 +131,17 @@ function HighlightCard({ post, index }: { post: Post; index: number }) {
 function SmallCard({ post, index }: { post: Post; index: number }) {
   return (
     <FadeUp delay={index * 0.08}>
-      <Link href={`/blog-v2/${post.slug.current}`} className="group block h-full">
-        <article className="flex flex-col overflow-hidden h-full rounded-xl"
-          style={{ border: "1px solid rgba(255,255,255,0.08)", background: "#111" }}>
-
+      <Link
+        href={`/blog-v2/${post.slug.current}`}
+        className="group block h-full"
+      >
+        <article
+          className="flex flex-col overflow-hidden h-full rounded-xl"
+          style={{
+            border: "1px solid rgba(255,255,255,0.08)",
+            background: "#111",
+          }}
+        >
           {/* Thumbnail */}
           <div className="relative w-full aspect-[16/9] overflow-hidden flex-shrink-0 bg-white/[0.03]">
             {post.imageUrl ? (
@@ -127,7 +152,9 @@ function SmallCard({ post, index }: { post: Post; index: number }) {
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center">
-                <span className="text-[9px] font-mono text-white/10 uppercase tracking-widest">No image</span>
+                <span className="text-[9px] font-mono text-white/10 uppercase tracking-widest">
+                  No image
+                </span>
               </div>
             )}
           </div>
@@ -142,7 +169,9 @@ function SmallCard({ post, index }: { post: Post; index: number }) {
                 {post.author ?? "CaptivAd Team"}
               </span>
               <span className="text-white/15">·</span>
-              <span className="text-sm text-white/80">{formatDate(post.publishedAt)}</span>
+              <span className="text-sm text-white/80">
+                {formatDate(post.publishedAt)}
+              </span>
             </div>
           </div>
         </article>
@@ -156,33 +185,49 @@ function SmallCard({ post, index }: { post: Post; index: number }) {
 // ─────────────────────────────────────────────────────────────────────────────
 
 function Pagination({
-  current, total, onChange,
-}: { current: number; total: number; onChange: (p: number) => void }) {
+  current,
+  total,
+  onChange,
+}: {
+  current: number;
+  total: number;
+  onChange: (p: number) => void;
+}) {
   if (total <= 1) return null;
 
   const pages = Array.from({ length: total }, (_, i) => i + 1);
 
   return (
     <div className="flex items-center gap-2 justify-center pt-4">
-      <button onClick={() => onChange(current - 1)} disabled={current === 1}
-        className="w-8 h-8 flex items-center justify-center border border-white/10 hover:border-white/30 disabled:opacity-20 disabled:pointer-events-none transition-colors duration-200">
+      <button
+        onClick={() => onChange(current - 1)}
+        disabled={current === 1}
+        className="w-8 h-8 flex items-center justify-center border border-white/10 hover:border-white/30 disabled:opacity-20 disabled:pointer-events-none transition-colors duration-200"
+      >
         <ChevronLeft size={13} className="text-white/50" />
       </button>
 
       {pages.map((p) => (
-        <button key={p} onClick={() => onChange(p)}
+        <button
+          key={p}
+          onClick={() => onChange(p)}
           className="w-8 h-8 flex items-center justify-center text-[11px] font-mono border transition-colors duration-200"
           style={{
-            borderColor: p === current ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.1)",
+            borderColor:
+              p === current ? "rgba(255,255,255,0.5)" : "rgba(255,255,255,0.1)",
             background: p === current ? "rgba(255,255,255,1)" : "transparent",
             color: p === current ? "#000" : "rgba(255,255,255,0.4)",
-          }}>
+          }}
+        >
           {p}
         </button>
       ))}
 
-      <button onClick={() => onChange(current + 1)} disabled={current === total}
-        className="w-8 h-8 flex items-center justify-center border border-white/10 hover:border-white/30 disabled:opacity-20 disabled:pointer-events-none transition-colors duration-200">
+      <button
+        onClick={() => onChange(current + 1)}
+        disabled={current === total}
+        className="w-8 h-8 flex items-center justify-center border border-white/10 hover:border-white/30 disabled:opacity-20 disabled:pointer-events-none transition-colors duration-200"
+      >
         <ChevronRight size={13} className="text-white/50" />
       </button>
     </div>
@@ -244,32 +289,45 @@ export default function BlogIndexClient({ posts }: { posts: Post[] }) {
   const gridPosts = isHighlights ? filtered.slice(2) : filtered;
 
   const totalPages = Math.ceil(gridPosts.length / POSTS_PER_PAGE);
-  const pagedGridPosts = gridPosts.slice((page - 1) * POSTS_PER_PAGE, page * POSTS_PER_PAGE);
+  const pagedGridPosts = gridPosts.slice(
+    (page - 1) * POSTS_PER_PAGE,
+    page * POSTS_PER_PAGE
+  );
 
   return (
     <div className="relative w-full bg-background min-h-screen pt-[5%] overflow-hidden">
       <NodeGrid opacity={0.04} />
 
       {/* Ambient glow */}
-      <div aria-hidden className="absolute inset-0 pointer-events-none"
-        style={{ background: "radial-gradient(ellipse 70% 40% at 50% 10%, rgba(255,255,255,0.025) 0%, transparent 70%)" }} />
+      <div
+        aria-hidden
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 40% at 50% 10%, rgba(255,255,255,0.025) 0%, transparent 70%)",
+        }}
+      />
 
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-[6%] xl:px-12 pt-28 md:pt-36 pb-24 flex flex-col gap-10">
-
         {/* ── Hero header ── */}
         <div className="flex flex-col gap-2 max-w-[700px]">
           <h1 className="tracking-tight">
             <SplitWords text="Stay Ahead with" delay={0.25} stagger={0.08} />
             <br />
             <span className="">
-              <SplitWords text="Digital Marketing & AI Updates" delay={0.6} stagger={0.07} />
+              <SplitWords
+                text="Digital Marketing & AI Updates"
+                delay={0.6}
+                stagger={0.07}
+              />
             </span>
           </h1>
 
           <FadeUp delay={0.7}>
             <p className="text-white/50 leading-relaxed">
-              Explore your potential with CaptivAd&apos;s mindful insights and inspiring stories on
-              marketing, AI, and the future of brand engagement.
+              Explore your potential with CaptivAd&apos;s mindful insights and
+              inspiring stories on marketing, AI, and the future of brand
+              engagement.
             </p>
           </FadeUp>
         </div>
@@ -277,23 +335,38 @@ export default function BlogIndexClient({ posts }: { posts: Post[] }) {
         <ScanLine delay={0.9} />
 
         {/* ── Search + Filter row ── */}
-        <FadeUp delay={0.4} className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+        <FadeUp
+          delay={0.4}
+          className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between"
+        >
           {/* Filter tabs */}
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter posts">
+          <div
+            className="flex flex-wrap gap-2"
+            role="group"
+            aria-label="Filter posts"
+          >
             {filterTabs.map((tab) => (
               <button
                 key={tab}
                 onClick={() => handleFilterChange(tab)}
                 className="inline-flex rounded-full items-center gap-1.5 px-3.5 py-1.5 text-sm font-mono uppercase tracking-widest transition-all duration-200"
                 style={{
-                  border: tab === activeFilter ? "1px solid rgba(255,255,255,0.6)" : "1px solid rgba(255,255,255,0.1)",
-                  background: tab === activeFilter ? "#fff" : "rgba(255,255,255,0.02)",
-                  color: tab === activeFilter ? "#000" : "rgba(255,255,255,0.4)",
+                  border:
+                    tab === activeFilter
+                      ? "1px solid rgba(255,255,255,0.6)"
+                      : "1px solid rgba(255,255,255,0.1)",
+                  background:
+                    tab === activeFilter ? "#fff" : "rgba(255,255,255,0.02)",
+                  color:
+                    tab === activeFilter ? "#000" : "rgba(255,255,255,0.4)",
                   backdropFilter: "blur(8px)",
                 }}
               >
                 {tab === activeFilter && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-black flex-shrink-0" aria-hidden />
+                  <span
+                    className="w-1.5 h-1.5 rounded-full bg-black flex-shrink-0"
+                    aria-hidden
+                  />
                 )}
                 {tab}
               </button>
@@ -302,7 +375,10 @@ export default function BlogIndexClient({ posts }: { posts: Post[] }) {
 
           {/* Search input */}
           <div className="relative w-full md:w-64">
-            <Search size={12} className="absolute left-3 top-1/2 -translate-y-1/2 text-white/25 pointer-events-none" />
+            <Search
+              size={12}
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-white/25 pointer-events-none"
+            />
             <input
               type="text"
               value={search}
@@ -339,8 +415,11 @@ export default function BlogIndexClient({ posts }: { posts: Post[] }) {
                 Try a different search term or filter.
               </p>
               <button
-                onClick={() => { handleSearch(""); handleFilterChange("All"); }}
-                className="text-[10px] font-mono uppercase tracking-widest text-white/30 border border-white/10 px-4 py-2 hover:border-white/30 hover:text-white/60 transition-colors duration-200"
+                onClick={() => {
+                  handleSearch("");
+                  handleFilterChange("All");
+                }}
+                className="text-[10px] rounded-full font-mono uppercase tracking-widest text-white/30 border border-white/10 px-4 py-2 hover:border-white/30 hover:text-white/60 transition-colors duration-200"
               >
                 Clear filters
               </button>
@@ -348,13 +427,21 @@ export default function BlogIndexClient({ posts }: { posts: Post[] }) {
           )}
 
           {filtered.length > 0 && (
-            <motion.div key="content" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-
+            <motion.div
+              key="content"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
               {/* ── Highlights: 2 big cards ── */}
               {isHighlights && highlightPosts.length > 0 && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                   {highlightPosts.map((post, i) => (
-                    <HighlightCard key={post._id} post={post as Post} index={i} />
+                    <HighlightCard
+                      key={post._id}
+                      post={post as Post}
+                      index={i}
+                    />
                   ))}
                 </div>
               )}
@@ -380,13 +467,17 @@ export default function BlogIndexClient({ posts }: { posts: Post[] }) {
               {/* ── Pagination ── */}
               {totalPages > 1 && (
                 <FadeUp delay={0.2} className="mt-10">
-                  <Pagination current={page} total={totalPages} onChange={setPage} />
+                  <Pagination
+                    current={page}
+                    total={totalPages}
+                    onChange={setPage}
+                  />
                 </FadeUp>
               )}
 
               {/* ── Result count ── */}
               <FadeUp delay={0.1} className="mt-6 text-center">
-                <span className="text-[10px] font-mono text-white/15 uppercase tracking-widest">
+                <span className="text-sm font-mono text-white uppercase tracking-widest">
                   {filtered.length} article{filtered.length !== 1 ? "s" : ""}
                   {search ? ` for "${search}"` : ""}
                 </span>

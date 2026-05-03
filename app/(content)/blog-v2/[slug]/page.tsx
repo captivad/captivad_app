@@ -1,5 +1,8 @@
 import { PortableText, type SanityDocument } from "next-sanity";
-import { createImageUrlBuilder, type SanityImageSource } from "@sanity/image-url";
+import {
+  createImageUrlBuilder,
+  type SanityImageSource,
+} from "@sanity/image-url";
 import { client } from "@/sanity/client";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -63,7 +66,7 @@ export default async function PostPage({
 
   const postImageUrl = post.mainImage
     ? urlFor(post.mainImage)?.width(1200).height(675).url()
-    : null ;
+    : null;
 
   return (
     <BlogDetailClient

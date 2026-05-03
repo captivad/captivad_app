@@ -10,27 +10,44 @@ import { ArrowLeft, ArrowRight, Calendar, User, Tag } from "lucide-react";
 // ANIMATION PRIMITIVES
 // ─────────────────────────────────────────────────────────────────────────────
 
-function FadeUp({ children, delay = 0, className = "" }: {
-  children: React.ReactNode; delay?: number; className?: string;
+function FadeUp({
+  children,
+  delay = 0,
+  className = "",
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-5% 0px" });
   return (
-    <motion.div ref={ref}
+    <motion.div
+      ref={ref}
       initial={{ opacity: 0, y: 24 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1], delay }}
-      className={className}>
+      className={className}
+    >
       {children}
     </motion.div>
   );
 }
 
-function ScanLine({ delay = 0, className = "" }: { delay?: number; className?: string }) {
+function ScanLine({
+  delay = 0,
+  className = "",
+}: {
+  delay?: number;
+  className?: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true });
   return (
-    <div ref={ref} className={`w-full h-px bg-white/10 relative overflow-hidden ${className}`}>
+    <div
+      ref={ref}
+      className={`w-full h-px bg-white/10 relative overflow-hidden ${className}`}
+    >
       <motion.div
         className="absolute inset-y-0 left-0 h-full w-[28%] bg-gradient-to-r from-transparent via-white/50 to-transparent"
         initial={{ x: "-100%" }}
@@ -43,12 +60,16 @@ function ScanLine({ delay = 0, className = "" }: { delay?: number; className?: s
 
 function NodeGrid({ opacity = 0.04 }: { opacity?: number }) {
   return (
-    <div aria-hidden className="absolute inset-0 pointer-events-none"
+    <div
+      aria-hidden
+      className="absolute inset-0 pointer-events-none"
       style={{
         opacity,
-        backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px)",
+        backgroundImage:
+          "radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px)",
         backgroundSize: "52px 52px",
-      }} />
+      }}
+    />
   );
 }
 
@@ -71,13 +92,19 @@ function formatDate(iso: string) {
 const ptComponents = {
   block: {
     normal: ({ children }: { children?: React.ReactNode }) => (
-      <p className="text-white/60 text-sm md:text-base leading-relaxed mb-5">{children}</p>
+      <p className="text-white/60 text-sm md:text-base leading-relaxed mb-5">
+        {children}
+      </p>
     ),
     h1: ({ children }: { children?: React.ReactNode }) => (
-      <h1 className="text-2xl md:text-3xl font-bold text-white/90 mt-10 mb-4 leading-tight">{children}</h1>
+      <h1 className="text-2xl md:text-3xl font-bold text-white/90 mt-10 mb-4 leading-tight">
+        {children}
+      </h1>
     ),
     h2: ({ children }: { children?: React.ReactNode }) => (
-      <h2 className="text-xl md:text-2xl font-bold text-white/85 mt-8 mb-3 leading-tight">{children}</h2>
+      <h2 className="text-xl md:text-2xl font-bold text-white/85 mt-8 mb-3 leading-tight">
+        {children}
+      </h2>
     ),
     h3: ({ children }: { children?: React.ReactNode }) => (
       <h3 className="text-lg font-bold text-white/80 mt-6 mb-2">{children}</h3>
@@ -114,7 +141,13 @@ const ptComponents = {
     em: ({ children }: { children?: React.ReactNode }) => (
       <em className="text-white/70 italic">{children}</em>
     ),
-    link: ({ value, children }: { value?: { href: string }; children?: React.ReactNode }) => (
+    link: ({
+      value,
+      children,
+    }: {
+      value?: { href: string };
+      children?: React.ReactNode;
+    }) => (
       <a
         href={value?.href}
         target="_blank"
@@ -131,29 +164,38 @@ const ptComponents = {
 // SIDEBAR: Latest Posts
 // ─────────────────────────────────────────────────────────────────────────────
 
-function LatestPostSidebar({ posts, currentId }: { posts: SanityDocument[]; currentId: string }) {
+function LatestPostSidebar({
+  posts,
+  currentId,
+}: {
+  posts: SanityDocument[];
+  currentId: string;
+}) {
   const filtered = posts.filter((p) => p._id !== currentId).slice(0, 4);
 
   return (
     <aside className="w-full lg:w-[300px] xl:w-[320px] flex-shrink-0 flex flex-col gap-5">
       <FadeUp delay={0.5}>
-        <p className="text-lg text-white mb-1">
-          Latest Blog
-        </p>
+        <p className="text-lg text-white mb-1">Latest Blog</p>
         <ScanLine delay={0.6} />
       </FadeUp>
 
       <div className="flex flex-col gap-3">
         {filtered.map((post, i) => (
           <FadeUp key={post._id} delay={0.6 + i * 0.08}>
-            <Link href={`/blog/${post.slug.current}`}
+            <Link
+              href={`/blog/${post.slug.current}`}
               className="group flex gap-3 items-start p-3 border border-white/[0.06] hover:border-white/20 transition-colors duration-200"
-              style={{ background: "rgba(255,255,255,0.015)" }}>
+              style={{ background: "rgba(255,255,255,0.015)" }}
+            >
               {/* Thumbnail */}
               {post.imageUrl && (
                 <div className="w-14 h-14 flex-shrink-0 overflow-hidden bg-white/[0.04]">
-                  <img src={post.imageUrl} alt={post.title}
-                    className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-300" />
+                  <img
+                    src={post.imageUrl}
+                    alt={post.title}
+                    className="w-full h-full object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-300"
+                  />
                 </div>
               )}
               <div className="flex flex-col gap-1 min-w-0">
@@ -191,7 +233,10 @@ export default function BlogDetailClient({
 }: BlogDetailClientProps) {
   // Parallax hero image
   const heroRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
   const heroImgY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
@@ -200,7 +245,10 @@ export default function BlogDetailClient({
       <NodeGrid opacity={0.03} />
 
       {/* ── Hero image ── */}
-      <div ref={heroRef} className="relative w-full h-[45vh] md:h-[55vh] overflow-hidden">
+      <div
+        ref={heroRef}
+        className="relative w-full h-[45vh] md:h-[55vh] overflow-hidden"
+      >
         {postImageUrl ? (
           <>
             <motion.img
@@ -209,23 +257,28 @@ export default function BlogDetailClient({
               style={{ y: heroImgY }}
               className="absolute inset-0 w-full h-full object-cover scale-110"
             />
-            <div className="absolute inset-0"
+            <div
+              className="absolute inset-0"
               style={{
                 background:
                   "linear-gradient(to bottom, rgba(8,8,8,0.4) 0%, rgba(8,8,8,0.2) 40%, rgba(8,8,8,0.95) 100%)",
-              }} />
+              }}
+            />
           </>
         ) : (
-          <div className="w-full h-full bg-white/[0.02]"
-            style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+          <div
+            className="w-full h-full bg-white/[0.02]"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+          />
         )}
-
-       
       </div>
 
       {/* ── Content wrapper ── */}
       <div className="relative z-10 w-full max-w-[1200px] mx-auto px-[6%] xl:px-12 -mt-16 pb-24 flex flex-col gap-10">
-
         {/* ── Post header ── */}
         <FadeUp delay={0.1}>
           <div className="flex flex-col gap-4 max-w-[760px]">
@@ -236,18 +289,28 @@ export default function BlogDetailClient({
               </span>
             )}
 
-             {/* Back button */}
+            {/* Back button */}
             <motion.div style={{ opacity: heroOpacity }}>
-                <Link href="/blog-v2"
-                    className="rounded-full h-12 w-12 inline-flex items-center gap-2 text-sm text-white transition-colors duration-200 group border-2 border-white/50 hover:border-white px-3 py-2"
-                    style={{ background: "rgba(0,0,0,0.5)", backdropFilter: "blur(8px)" }}>
-                    <ArrowLeft size={20} className="group-hover:-translate-x-0.5 transition-transform duration-200 text-white" />
-                </Link>
+              <Link
+                href="/blog-v2"
+                className="rounded-full h-12 w-12 inline-flex items-center gap-2 text-sm text-white transition-colors duration-200 group border-2 border-white/50 hover:border-white px-3 py-2"
+                style={{
+                  background: "rgba(0,0,0,0.5)",
+                  backdropFilter: "blur(8px)",
+                }}
+              >
+                <ArrowLeft
+                  size={20}
+                  className="group-hover:-translate-x-0.5 transition-transform duration-200 text-white"
+                />
+              </Link>
             </motion.div>
 
             {/* Title */}
-            <h1 className="font-bold leading-tight text-white/95"
-              style={{ fontSize: "clamp(1.75rem, 4vw, 3.25rem)" }}>
+            <h1
+              className="font-bold leading-tight text-white/95"
+              style={{ fontSize: "clamp(1.75rem, 4vw, 3.25rem)" }}
+            >
               {post.title}
             </h1>
 
@@ -257,12 +320,14 @@ export default function BlogDetailClient({
                 { icon: Tag, label: post.category },
                 { icon: User, label: post.author ?? "CaptivAd" },
                 { icon: Calendar, label: formatDate(post.publishedAt) },
-              ].filter((m) => m.label).map((meta, i) => (
-                <div key={i} className="flex items-center gap-1.5">
-                  <meta.icon size={20} className="text-white" />
-                  <span className="text-lg text-white">{meta.label}</span>
-                </div>
-              ))}
+              ]
+                .filter((m) => m.label)
+                .map((meta, i) => (
+                  <div key={i} className="flex items-center gap-1.5">
+                    <meta.icon size={20} className="text-white" />
+                    <span className="text-lg text-white">{meta.label}</span>
+                  </div>
+                ))}
             </div>
 
             <ScanLine delay={0.3} className="mt-2" />
@@ -271,7 +336,6 @@ export default function BlogDetailClient({
 
         {/* ── Main layout: body + sidebar ── */}
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-start">
-
           {/* Article body */}
           <FadeUp delay={0.3} className="flex-1 min-w-0">
             <article>
@@ -281,10 +345,18 @@ export default function BlogDetailClient({
             </article>
 
             {/* Back link at bottom */}
-            <div className="mt-12 pt-6" style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-              <Link href="/blog-v2"
-                className="inline-flex items-center gap-2 text-sm font-mono uppercase tracking-widest text-white transition-colors duration-200 group">
-                <ArrowLeft size={12} className="group-hover:-translate-x-0.5 transition-transform duration-200" />
+            <div
+              className="mt-12 pt-6"
+              style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
+            >
+              <Link
+                href="/blog-v2"
+                className="inline-flex items-center gap-2 text-sm font-mono uppercase tracking-widest text-white transition-colors duration-200 group"
+              >
+                <ArrowLeft
+                  size={12}
+                  className="group-hover:-translate-x-0.5 transition-transform duration-200"
+                />
                 All articles
               </Link>
             </div>
