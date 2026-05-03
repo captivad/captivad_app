@@ -2,7 +2,7 @@ import { getToken } from "next-auth/jwt";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { ResponseUnauthorized } from "./helpers/exception.helper";
-import { HOME, LOGIN, router } from "./utils/router";
+import { BLOG, HOME, LOGIN, router } from "./utils/router";
 
 function authorizedApi(pathname: string) {
   return pathname.startsWith("/api/admin");
@@ -14,6 +14,10 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
 
   if (pathname == "/") {
     return NextResponse.redirect(new URL(HOME, req.nextUrl));
+  }
+
+  if (pathname == "/blog") {
+    return NextResponse.redirect(new URL(BLOG, req.nextUrl));
   }
 
   const token = await getToken({ req, secret: process.env.SECRET_KEY });

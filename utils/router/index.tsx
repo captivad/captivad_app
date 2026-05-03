@@ -14,7 +14,7 @@ export const OUR_SERVICES = "/our-services";
 export const OUR_WORK = "/our-works";
 export const CONTACT_US = "/contact-us";
 export const WHO_WE_ARE = "/who-we-are";
-export const BLOG = "/blog";
+export const BLOG = "/blog-v2";
 export const MEDIA = "/media";
 export const BLOG_DASHBOARD = "/admin/blog-dashboard?tab=publish";
 export const AI_EXPERIENCE = "/ai-experience";
